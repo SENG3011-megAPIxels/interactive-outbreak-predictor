@@ -22,23 +22,9 @@ def lambda_handler(event, context):
 
     # did not provide start/end date
     if any(input is '' for input in (start_date, end_date)):
-        res = {
-            "statusCode": 500,
-            "headers": {
-                "Content-Type": "application/json"
-            },
-            "body": "Missing start_date or end_date"
-        }
-        return res
+        raise Exception("\nMissing start_date or end_date\n")
     elif end_date < start_date:
-        res = {
-            "statusCode": 500,
-            "headers": {
-                "Content-Type": "application/json"
-            },
-            "body": "end_date before start_date"
-        }
-        return res
+        raise Exception("\nend_date before start_date\n")
 
     terms = event["key_terms"].split(',')
 
@@ -51,17 +37,16 @@ def lambda_handler(event, context):
             where article_date
             between '{start_date}' and '{end_date}'
             """
+        curr.execute(sql)
     else:
         sql=f"""
             select *
             from articles
             where article_date
             between '{start_date}' and '{end_date}'
-            and ({(terms,)}) && key_terms
+            and (%s) && key_terms
             """
-
-    
-    curr.execute(sql)
+        curr.execute(sql,(terms,))
 
     article_objects = curr.fetchall()
 
