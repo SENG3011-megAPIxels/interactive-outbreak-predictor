@@ -16,13 +16,17 @@ def lambda_handler(event, context):
         port=db_port
     )
 
+    terms = event["key_terms"].split(',')
+
     curr = conn.cursor()
-    curr.execute(f"""
+    sql=f"""
     select *
     from articles
     where article_date
     between '{event["start_date"]}' and '{event["end_date"]}'
-    """)
+    and (%s) && key_terms
+    """
+    curr.execute(sql,(terms,))
 
     article_objects = curr.fetchall()
 
@@ -33,12 +37,11 @@ def lambda_handler(event, context):
             "url": article[1],
             "date_of_publication": f"{article[3]}",
             "headline": article[2],
-            "main_text": article[4]
-            # "reports": article[5]
+            "key_terms": article[4],
+            "main_text": article[5]
         }
         articles_list.append(article_json)
 
-    #terms = event["key_terms"].split(',')
     res = {
         "statusCode": 200,
         "headers": {
