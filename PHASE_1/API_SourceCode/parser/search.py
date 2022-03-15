@@ -15,18 +15,53 @@ def lambda_handler(event, context):
         dbname=db_name,
         port=db_port
     )
+    curr = conn.cursor()
+
+    start_date = event["start_date"]
+    end_date = event["end_date"]
+
+    # did not provide start/end date
+    if any(input is '' for input in (start_date, end_date)):
+        res = {
+            "statusCode": 500,
+            "headers": {
+                "Content-Type": "application/json"
+            },
+            "body": "Missing start_date or end_date"
+        }
+        return res
+    elif end_date < start_date:
+        res = {
+            "statusCode": 500,
+            "headers": {
+                "Content-Type": "application/json"
+            },
+            "body": "end_date before start_date"
+        }
+        return res
 
     terms = event["key_terms"].split(',')
 
-    curr = conn.cursor()
-    sql=f"""
-    select *
-    from articles
-    where article_date
-    between '{event["start_date"]}' and '{event["end_date"]}'
-    and (%s) && key_terms
-    """
-    curr.execute(sql,(terms,))
+    sql = ""
+    # no key terms used in search
+    if any("null" in terms for term in terms):
+        sql=f"""
+            select *
+            from articles
+            where article_date
+            between '{start_date}' and '{end_date}'
+            """
+    else:
+        sql=f"""
+            select *
+            from articles
+            where article_date
+            between '{start_date}' and '{end_date}'
+            and ({(terms,)}) && key_terms
+            """
+
+    
+    curr.execute(sql)
 
     article_objects = curr.fetchall()
 
