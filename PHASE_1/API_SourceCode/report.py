@@ -24,12 +24,12 @@ def lambda_handler(event, context):
     where report_id = '{event["report_id"]}'
     """)
 
-    article = curr.fetchone()
+    report = curr.fetchone()
 
-    article_json = {
-        "report_id": article[0],
-        "article_id": article[1],
-        "report": article[2],
+    report_json = {
+        "report_id": report[0],
+        "article_id": report[1],
+        "report": report[2],
     }
 
     res = {
@@ -37,7 +37,7 @@ def lambda_handler(event, context):
         "headers": {
             "Content-Type": "application/json"
         },
-        "body": json.dumps(article_json)
+        "body": json.dumps(report_json)
     }
     
     return res
