@@ -1,6 +1,5 @@
 import json
 import psycopg2
-import requests
 
 def lambda_handler(event, context):
     db_host = "database-2.cjcukgskbtyu.ap-southeast-2.rds.amazonaws.com"
