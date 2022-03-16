@@ -1,5 +1,6 @@
 import json
 import psycopg2
+import re
 
 def lambda_handler(event, context):
     db_host = "database-2.cjcukgskbtyu.ap-southeast-2.rds.amazonaws.com"
@@ -15,7 +16,11 @@ def lambda_handler(event, context):
         dbname=db_name,
         port=db_port
     )
-
+    
+    article_id = event["article_id"]
+    if not re.match(r"^[0-9]{7}$", article_id):
+        raise Exception("Error: invalid article_id")
+    
     # print(f"Running article query for {event["article_id"]}")
     curr = conn.cursor()
     curr.execute(f"""

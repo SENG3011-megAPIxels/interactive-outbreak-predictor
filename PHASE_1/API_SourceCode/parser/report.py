@@ -16,12 +16,15 @@ def lambda_handler(event, context):
         port=db_port
     )
 
-    # print(f"Running report query for {event["report_id"]}")
+    report_id = event["report_id"]
+    if not report_id.isdigit():
+        raise Exception("Error: invalid report_id")
+    
     curr = conn.cursor()
     curr.execute(f"""
     select *
     from reports
-    where report_id = '{event["report_id"]}'
+    where report_id = '{report_id}'
     """)
 
     report = curr.fetchone()
