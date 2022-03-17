@@ -21,17 +21,21 @@ def lambda_handler(event, context):
     if not re.match(r"^[0-9]{7}$", article_id):
         raise Exception("Error: invalid article_id")
     
+
     # print(f"Running article query for {event["article_id"]}")
     curr = conn.cursor()
     curr.execute(f"""
     select *
     from articles a
     join reports r on a.article_id=r.article_id
-    where a.article_id = '{event["article_id"]}'
+    where a.article_id = '{article_id}'
     """)
 
     articles = curr.fetchall()
 
+    if not articles:
+        raise Exception("Error: not a valid article ID")
+        
     reports_list = []
 
     for article in articles:
@@ -40,7 +44,10 @@ def lambda_handler(event, context):
             "report": article[8]
         }
         reports_list.append(report)
-
+    
+    if not reports_list:
+        raise Exception("Error: not a valid article ID")
+        
     article_json = {
         "url": articles[0][1],
         "date_of_publication": f"{articles[0][3]}",

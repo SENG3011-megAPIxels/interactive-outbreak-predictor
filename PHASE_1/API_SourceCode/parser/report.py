@@ -28,6 +28,9 @@ def lambda_handler(event, context):
     """)
 
     report = curr.fetchone()
+    
+    if not report:
+        raise Exception("Error: not a valid report ID")
 
     report_json = {
         "report_id": report[0],

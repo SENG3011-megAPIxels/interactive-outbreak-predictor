@@ -20,17 +20,10 @@ def lambda_handler(event, context):
 
     start_date = event["start_date"]
     end_date = event["end_date"]
-    r_format = r"^[0-9]{4}-[0-9]{2}-[0-9]{2}$"
-
-    # did not provide start/end date
-    if any(input is '' for input in (start_date, end_date)):
-        raise Exception("Error: incorrect input")
-    elif not re.match(r_format, start_date) or not re.match(r_format, end_date):
-        raise Exception("Error: invalid date format")
-    elif end_date < start_date:
-        raise Exception("Error: end_date before start_date")
-
     terms = event["key_terms"].split(',')
+    location = event["location"]
+    
+    handleInput(start_date, end_date, terms, location)
 
     sql=f"""
         select *
@@ -39,7 +32,7 @@ def lambda_handler(event, context):
         between '{start_date}' and '{end_date}'
         """
     # no key terms used in search
-    if any("null" in terms for term in terms) or terms == ['']:
+    if any("null" in terms for term in terms):
         curr.execute(sql)
     else:
         sql = sql + "and (%s) && key_terms"
@@ -59,6 +52,9 @@ def lambda_handler(event, context):
         }
         articles_list.append(article_json)
 
+    if not articles_list:
+        raise Exception("Error: not a valid search")
+
     res = {
         "statusCode": 200,
         "headers": {
@@ -68,3 +64,14 @@ def lambda_handler(event, context):
     }
     
     return res
+
+def handleInput(start_date, end_date, key_terms, location):
+    r_format = r"^[0-9]{4}-[0-9]{2}-[0-9]{2}$"
+    # did not provide start/end date
+    if any(input is '' for input in (start_date, end_date, key_terms, location)):
+        raise Exception("Error: incorrect input")
+    elif not re.match(r_format, start_date) or not re.match(r_format, end_date):
+        raise Exception("Error: invalid date format")
+    elif end_date < start_date:
+        raise Exception("Error: end_date before start_date")
+    
