@@ -23,13 +23,15 @@ def lambda_handler(event, context):
     terms = event["key_terms"].split(',')
     location = event["location"]
     
-    handleInput(start_date, end_date, terms, location)
+    terms = handleInput(start_date, end_date, terms, location)
 
     sql=f"""
         select *
-        from articles
+        from articles a
+        join reports r on a.article_id=r.article_id
         where article_date
         between '{start_date}' and '{end_date}'
+        and location = '{location}'
         """
     # no key terms used in search
     if any("null" in terms for term in terms):
@@ -39,28 +41,45 @@ def lambda_handler(event, context):
         curr.execute(sql,(terms,))
 
     article_objects = curr.fetchall()
+    
+    if not article_objects:
+        raise Exception("Error: not a valid search")
 
-    articles_list = []
+    articles_dict = {}
+
+    reports_dict = {}
 
     for article in article_objects:
+        article_id = article[0]
+        if article_id not in reports_dict:        
+            reports_dict[article_id] = []
+        reports_dict[article_id].append({
+            "report_id": article[6],
+            "report": article[8]
+        })
+
+    for article in article_objects:
+        article_id = article[0]
+        if article_id in articles_dict:
+            continue
+        
         article_json = {
             "url": article[1],
             "date_of_publication": f"{article[3]}",
             "headline": article[2],
             "key_terms": article[4],
-            "main_text": article[5]
+            "main_text": article[5],
+            "reports": reports_dict[article_id]
         }
-        articles_list.append(article_json)
+        articles_dict[article_id] = article_json
 
-    if not articles_list:
-        raise Exception("Error: not a valid search")
 
     res = {
         "statusCode": 200,
         "headers": {
             "Content-Type": "application/json"
         },
-        "body": json.dumps(articles_list)
+        "body": json.dumps(list(articles_dict.values()))
     }
     
     return res
@@ -74,4 +93,10 @@ def handleInput(start_date, end_date, key_terms, location):
         raise Exception("Error: invalid date format")
     elif end_date < start_date:
         raise Exception("Error: end_date before start_date")
-    
+    try:
+        terms = []
+        for term in key_terms:
+            terms.append(term.lower())
+        return terms
+    except Exception as e:
+        raise Exception("Error: incorrect input")
