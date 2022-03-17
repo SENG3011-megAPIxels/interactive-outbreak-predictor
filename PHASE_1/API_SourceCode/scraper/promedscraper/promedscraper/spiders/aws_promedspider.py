@@ -4,6 +4,8 @@ import json
 import re
 from datetime import date
 import psycopg2
+import spacy
+from dateutil.parser import parse 
 #from scrapy.crawler import CrawlerProcess
 
 # usage: scrapy crawl awspromed
@@ -11,6 +13,12 @@ class AWSProMedSpider(scrapy.Spider):
     name = 'awspromed'
     start_urls = ['https://promedmail.org/']
     url = 'https://promedmail.org/wp-admin/admin-ajax.php'
+
+    keyTerms = ['Outbreak', 'Infection', 'Fever', 'Virus', 'Epidemic', 'Infectious', 'Illness', 'Bacteria', 'Emerging', 'Unknown virus', 'Mystery disease', 'Mysterious disease', 'Zika', 'MERS', 'Salmonella', 'Legionnaire', 'Measles', 'Hantavirus', 'Rift Valley Fever', 'Crimean Congo Hemorrhagic Fever Dengue', 'Ebola', 'Marburg', 'Tularemia', 'Junin Fever', 'Machupo Fever', 'Guanarito Fever', 'Chapare Fever', 'Lassa Fever', 'Lujo Fever', 'Anthrax', 'Botulism', 'Plague', 'Smallpox', 'Pox']
+    diseaseList = ["anthrax cutaneous" , "anthrax gastrointestinous",  "anthrax inhalation" , "botulism", "brucellosis", "chikungunya", "chole", "cryptococcosis", "cryptosporidiosis", "crimean-congo haemorrhagic fever", "dengue", "diphteria", "ebola haemorrhagic fever", "ehec (e.coli)", "enterovirus 71 infection", "influenza a/h5n1", "influenza a/h7n9", "influenza a/h9n2", "influenza a/h1n1", "influenza a/h1n2", "influenza a/h3n5", "influenza a/h3n2", "influenza a/h2n2", "hand, foot and mouth disease", "hantavirus", "hepatitis a", "hepatitis b", "hepatitis c", "hepatitis d", "hepatitis e", "histoplasmosis", "hiv/aids", "lassa fever", "malaria", "marburg virus disease", "measles", "mers-cov", "mumps", "nipah virus", "norovirus infection", "pertussis", "plague", "pneumococcus pneumonia", "poliomyelitis", "q fever", "rabies", "rift valley fever", "rotavirus infection", "rubella", "salmonellosis", "sars", "shigellosis", "smallpox", "staphylococcal enterotoxin b", "thypoid fever", "tuberculosis", "tularemia", "vaccinia and cowpox", "varicella", "west nile virus", "yellow fever", "yersiniosis", "zika", "listeriosis", "monkeypox", "COVID-19"]
+    syndromeList = ["Haemorrhagic Fever", "Acute Flacid Paralysis", "Acute gastroenteritis", "Acute respiratory syndrome", "Influenza-like illness", "Acute fever and rash", "Fever of unknown Origin", "Encephalitis", "Meningitis"]
+
+    nlp = spacy.load('en_core_web_sm')
 
     headers = {
         "authority": "promedmail.org",
@@ -69,6 +77,12 @@ class AWSProMedSpider(scrapy.Spider):
         content = re.sub('\'', '\\\'', content)
         data['content'] = content
 
+        matches = findKeyTerms(content)
+        locations = findLocations(content)
+        dates = findDates(content)
+        diseases = findDiseases(content)
+        syndromes = findSyndromes(content) 
+
         db_host = "database-2.cjcukgskbtyu.ap-southeast-2.rds.amazonaws.com"
         db_user = "postgres"
         db_password = "sengpsql" # Please don't hack us
@@ -95,6 +109,52 @@ class AWSProMedSpider(scrapy.Spider):
         
         with open('response.json', 'a') as outfile:
             json.dump(data, outfile)
+
+    def findKeyTerms(rawText):
+        keyTermMatches = []
+        for keyTerm in keyTerms:
+            match = re.findall(keyTerm, rawText, re.IGNORECASE)
+            if match:
+                keyTermMatches.append(keyTerm)
+        return keyTermMatches
+
+    def findDiseases(rawText):
+        keyTermMatches = []
+        for keyTerm in diseaseList:
+            match = re.findall(keyTerm, rawText, re.IGNORECASE)
+            if match:
+                keyTermMatches.append(keyTerm)
+        return keyTermMatches
+
+    def findSyndromes(rawText):
+        keyTermMatches = []
+        for keyTerm in syndromeList:
+            match = re.findall(keyTerm, rawText, re.IGNORECASE)
+            if match:
+                keyTermMatches.append(keyTerm)
+        return keyTermMatches
+
+    def findLocations(rawText):
+        locations = []
+        doc = nlp(rawText)
+        for ent in doc.ents:
+            if ent.label_ == "GPE":
+                if ent.text not in locations:
+                    locations.append(ent.text)
+        return locations
+
+    def findDates(rawText):
+        dates = []
+        doc = nlp(rawText)
+        for ent in doc.ents:
+            if ent.label_ == "DATE":
+                if ent.text not in dates:
+                    try:
+                        dates.append(parse(ent.text))
+                    except:
+                        continue
+        return dates
+
 
 #process = CrawlerProcess()
 #process.crawl(ProMedSpider)

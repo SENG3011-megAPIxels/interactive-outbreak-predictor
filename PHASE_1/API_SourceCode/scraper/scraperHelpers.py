@@ -42,5 +42,8 @@ testString = "For the past 20 years, Amy Kuenzi has Salmonella in New Zealand. s
 matches = findKeyTerms(testString)
 locations = findLocations(testString)
 
+print(matches)
+print(locations)
 for date in findDates(testString):
     print(date.strftime('%Y-%m-%d')) # This only gets date, not the time too
+
