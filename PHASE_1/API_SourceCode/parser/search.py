@@ -23,7 +23,7 @@ def lambda_handler(event, context):
     terms = event["key_terms"].split(',')
     location = event["location"].lower()
     
-    terms = handleInput(start_date, end_date, terms, location)
+    handleInput(start_date, end_date, terms, location)
 
     sql=f"""
         select *
@@ -33,13 +33,11 @@ def lambda_handler(event, context):
         between '{start_date}' and '{end_date}'
         and array_to_string(location, ',') like '%{location}%'
         """
-    # no key terms used in search
-    if any("null" in terms for term in terms):
-        curr.execute(sql)
-    else:
-        sql = sql + "and (%s) && key_terms"
-        curr.execute(sql,(terms,))
+    # key terms used in search
+    if not (any("null" in terms for term in terms) or terms == ['']):
+        sql = sql + f"and ARRAY{terms} <@ key_terms"
 
+    curr.execute(sql)
     article_objects = curr.fetchall()
     
     if not article_objects:
@@ -87,7 +85,7 @@ def lambda_handler(event, context):
 def handleInput(start_date, end_date, key_terms, location):
     r_format = r"^[0-9]{4}-[0-9]{2}-[0-9]{2}$"
     # did not provide start/end date
-    if any(input is '' for input in (start_date, end_date, key_terms, location)):
+    if any(input is '' for input in (start_date, end_date, location)):
         raise Exception("Error: incorrect input")
     elif not re.match(r_format, start_date) or not re.match(r_format, end_date):
         raise Exception("Error: invalid date format")
