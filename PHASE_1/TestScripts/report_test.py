@@ -5,7 +5,7 @@ import json
 url_report = 'https://p5t20q9fz6.execute-api.ap-southeast-2.amazonaws.com/ProMedApi/report?'
 
 def test_success_report():
-        report_id = 1
+        report_id = 26
         response = requests.get(f'{url_report}report_id={report_id}')
         assert response.status_code == 200
         body = get_body(response)
