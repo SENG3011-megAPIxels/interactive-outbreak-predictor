@@ -9,8 +9,8 @@ from dateutil.parser import parse
 #from scrapy.crawler import CrawlerProcess
 
 # usage: scrapy crawl awspromed
-class AWSProMedSpider(scrapy.Spider):
-    name = 'awspromed'
+class ProMedSpider(scrapy.Spider):
+    name = 'promed'
     start_urls = ['https://promedmail.org/']
     url = 'https://promedmail.org/wp-admin/admin-ajax.php'
 
@@ -43,9 +43,11 @@ class AWSProMedSpider(scrapy.Spider):
     def parse(self, response):
         today = date.today()
         year = today.year
+        month = today.month
+        day = today.day
         
-        while year >= 1995:
-            body = f'action=get_latest_posts&edate={year}&return_map=1&feed_id=1&seltype=latest'
+        while day >= 11:
+            body = f'action=get_latest_posts&edate={day}-{month}-{year}&return_map=1&feed_id=1&seltype=latest'
 
             yield scrapy.Request(self.url, callback=self.parse_list, method='POST', headers=self.headers, body=body, dont_filter=True)
 
