@@ -21,7 +21,7 @@ def lambda_handler(event, context):
     start_date = event["start_date"]
     end_date = event["end_date"]
     terms = event["key_terms"].split(',')
-    location = event["location"]
+    location = event["location"].lower()
     
     terms = handleInput(start_date, end_date, terms, location)
 
@@ -31,7 +31,7 @@ def lambda_handler(event, context):
         join reports r on a.article_id=r.article_id
         where article_date
         between '{start_date}' and '{end_date}'
-        and location = '{location}'
+        and array_to_string(location, ',') like '%{location}%'
         """
     # no key terms used in search
     if any("null" in terms for term in terms):
