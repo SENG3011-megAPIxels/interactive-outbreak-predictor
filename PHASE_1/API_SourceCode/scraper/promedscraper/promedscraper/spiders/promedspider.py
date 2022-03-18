@@ -51,7 +51,7 @@ class ProMedSpider(scrapy.Spider):
 
             yield scrapy.Request(self.url, callback=self.parse_list, method='POST', headers=self.headers, body=body, dont_filter=True)
 
-            year = year - 1
+            day = day - 1
     
         
     def parse_list(self, response):
@@ -62,7 +62,6 @@ class ProMedSpider(scrapy.Spider):
             body = f'action=get_latest_post_data&alertId={id}'
 
             yield scrapy.Request(self.url, callback=self.parse_info, method='POST', headers=self.headers, body=body, dont_filter=True)
-    
         
 
     def parse_info(self, response):
