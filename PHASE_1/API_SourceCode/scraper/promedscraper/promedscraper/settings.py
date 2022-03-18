@@ -18,7 +18,7 @@ USER_AGENT = "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTM
 # Obey robots.txt rules
 ROBOTSTXT_OBEY = True
 
-RETRY_TIMES = 1
+RETRY_TIMES = 3
 RETRY_HTTP_CODES = [500, 502, 503, 504, 400, 403, 404, 408]
 
 # Configure maximum concurrent requests performed by Scrapy (default: 16)
