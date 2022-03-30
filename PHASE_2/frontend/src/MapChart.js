@@ -8,6 +8,7 @@ import {
   Sphere,
   Graticule
 } from "react-simple-maps";
+import { StoreContext } from './Store';
 
 const geoUrl =
   "https://raw.githubusercontent.com/zcreativelabs/react-simple-maps/master/topojson-maps/world-110m.json";
@@ -27,6 +28,7 @@ const colorScale = scaleLinear()
   .range(["#ffedea", "#ff5233"]);
 
 const MapChart = ({ setTooltipContent }) => {
+  const { sliderVal } = React.useContext(StoreContext);
   const [data, setData] = useState([]);
 
   useEffect(() => {
@@ -61,7 +63,7 @@ const MapChart = ({ setTooltipContent }) => {
                   onMouseLeave={() => {
                     setTooltipContent("");
                   }}
-                  fill={d ? colorScale(d["2017"]) : "#F5F4F6"}
+                  fill={d ? colorScale(d[sliderVal.sliderVal]) : "#F5F4F6"}
                   style={{
                     default: {
                       outline: "none"
