@@ -1,34 +1,37 @@
-import React, { useState } from "react";
-import ReactTooltip from "react-tooltip";
-import Slider from '@mui/material/Slider';
+import React from 'react';
+import Home from './screens/Home';
+import Country from './screens/Country';
+import { BrowserRouter as Switch, Route } from 'react-router-dom';
 import { StoreContext } from './Store';
 
 import "./styles.css";
 
-import MapChart from "./MapChart";
+/* setPage values:
+  Home = setPage(0);
+  Country = setPage(1);
+*/
 
-function App() {
-  const { sliderVal } = React.useContext(StoreContext);
-  const [content, setContent] = useState("");
-  const [value, setValue] = useState(2017);
+function App () {
+  <Switch>
+    <Route exact path="/" component={Home}/>
+    <Route path="/country" component={Country}/>
+  </Switch>
 
-  return (
-    <div>
-      <MapChart setTooltipContent={setContent} />
-      <ReactTooltip>{content}</ReactTooltip>
-      <Slider
-        aria-label="Timeline"
-        defaultValue={2017}
-        valueLabelDisplay="auto"
-        step={1}
-        marks
-        min={1995}
-        max={2017}
-        value={sliderVal.sliderVal}
-        onChange={(_, value) => sliderVal.setSliderVal(value)}
-      />
-    </div>
-  );
+  React.useContext(StoreContext);
+  const route = window.location.pathname;
+  if (route === '/') {
+    return (
+      <Home/>
+    );
+  } else if (route.includes('/country')) {
+    return (
+      <Country/>
+    );
+  } else {
+    return (
+      <h1>Page Not Found!</h1>
+    )
+  }
 }
 
 export default App;

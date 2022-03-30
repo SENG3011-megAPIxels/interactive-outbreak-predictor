@@ -8,7 +8,7 @@ import {
   Sphere,
   Graticule
 } from "react-simple-maps";
-import { StoreContext } from './Store';
+import { StoreContext } from '../Store';
 
 const geoUrl =
   "https://raw.githubusercontent.com/zcreativelabs/react-simple-maps/master/topojson-maps/world-110m.json";
