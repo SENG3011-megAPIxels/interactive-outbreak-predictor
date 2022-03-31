@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { StoreContext } from '../Store';
 import { LinkButton } from '../components/LinkButton';
+import { GraphGrid } from '../components/GraphGrid';
 import { Container, Header, Footer, CountryMain } from '../components/StyledComponents'
 
 function Country () {
@@ -13,7 +14,7 @@ function Country () {
       </Header>
       <CountryMain>
         <h1>{country.country}</h1>
-        All Stats and Graphs Here (tabs?)
+        <GraphGrid />
         <LinkButton to={'/'} onClick={() => {modal.setModal(2); page.setPage(0)}} value="Back"/>
       </CountryMain>
       <Footer>

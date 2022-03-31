@@ -24,6 +24,7 @@ const Footer = styled.div`
   align-items: center;
   justify-content: center;
   color: white;
+  bottom: 0;
 `
 
 const Main = styled.div`
@@ -81,6 +82,27 @@ const ModalContent = styled.div`
   pointer-events: all;
 `
 
+const GridContainer = styled.div`
+  display: flex;
+  padding: 20px;
+  border-style: dotted;
+  height: 80%;
+  width: 85%;
+  overflow: hidden;
+`
+const GridElement = styled.div`
+  border-style: solid;
+  border-width: medium;
+  border-color: red;
+  border-radius: 10px;
+  display: flex;
+  flex: 1;
+  overflow: hidden;
+  flex-direction: column;
+  text-align: center;
+  padding: 2px;
+`
+
 export { Container,
          Header,
          Footer,
@@ -89,5 +111,7 @@ export { Container,
          MapContainer,
          StyledSlider,
          ModalContainer,
-         ModalContent
+         ModalContent,
+         GridContainer,
+         GridElement
        }
