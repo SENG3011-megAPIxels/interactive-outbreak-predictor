@@ -10,6 +10,7 @@ Store.propTypes = {
 function Store ({ children }) {
   const [page, setPage] = React.useState(0);
   const [modal, setModal] = React.useState(false);
+  const [country, setCountry] = React.useState('');
   const [sliderVal, setSliderVal] = React.useState(2017);
 
   const store = {
@@ -17,6 +18,8 @@ function Store ({ children }) {
     page: { page, setPage },
     // The modal is hidden or shown
     modal: { modal, setModal },
+    // The country being displayed
+    country: { country, setCountry },
     // The slider value
     sliderVal: { sliderVal, setSliderVal }
   }

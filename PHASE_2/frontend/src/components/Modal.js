@@ -26,14 +26,14 @@ const ModalContent = styled.div`
 `
 
 function Modal () {
-  const { page, modal } = React.useContext(StoreContext);
+  const { page, modal, country } = React.useContext(StoreContext);
 
   if (modal.modal) {
     return (
       <ModalContainer>
         <ModalContent>
-            <h2 className="modal-title">Country Modal</h2>
-            <LinkButton to={'/country'} onClick={() => {modal.setModal(false); page.setPage(1)}} value="See More"/>
+            <h2 className="modal-title">{country.country} Modal</h2>
+            <LinkButton to={`/country/${country.country}`} onClick={() => {modal.setModal(false); page.setPage(1)}} value="See More"/>
             <LinkButton to={'.'} onClick={() => modal.setModal(false)} value="Back"/>
         </ModalContent>
       </ModalContainer>
