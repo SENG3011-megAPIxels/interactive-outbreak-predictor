@@ -9,7 +9,7 @@ Store.propTypes = {
 
 function Store ({ children }) {
   const [page, setPage] = React.useState(0);
-  const [modal, setModal] = React.useState(false);
+  const [modal, setModal] = React.useState(1);
   const [country, setCountry] = React.useState('');
   const [sliderVal, setSliderVal] = React.useState(2017);
 

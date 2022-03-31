@@ -45,8 +45,8 @@ const MapChart = ({ setTooltipContent }) => {
         scale: 147
       }}
     >
-      <Sphere stroke="#E4E5E6" strokeWidth={0.5} />
-      <Graticule stroke="#E4E5E6" strokeWidth={0.5} />
+      <Sphere stroke="#E4E5E6" strokeWidth={0.5} preserveAspectRatio="none"/>
+      <Graticule stroke="#E4E5E6" strokeWidth={0.5} preserveAspectRatio="none"/>
       {data.length > 0 && (
         <Geographies geography={geoUrl}>
           {({ geographies }) =>
@@ -65,7 +65,7 @@ const MapChart = ({ setTooltipContent }) => {
                   }}
                   onClick={() => {
                     country.setCountry(geo.properties.NAME);
-                    modal.setModal(true);
+                    modal.setModal(2);
                   }}
                   fill={d ? colorScale(d[sliderVal.sliderVal]) : "#F5F4F6"}
                   style={{
