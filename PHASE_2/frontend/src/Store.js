@@ -9,11 +9,14 @@ Store.propTypes = {
 
 function Store ({ children }) {
   const [page, setPage] = React.useState(0);
+  const [modal, setModal] = React.useState(false);
   const [sliderVal, setSliderVal] = React.useState(2017);
 
   const store = {
     // The page number
     page: { page, setPage },
+    // The modal is hidden or shown
+    modal: { modal, setModal },
     // The slider value
     sliderVal: { sliderVal, setSliderVal }
   }

@@ -3,14 +3,16 @@ import ReactTooltip from "react-tooltip";
 import Slider from '@mui/material/Slider';
 import { StoreContext } from '../Store';
 import MapChart from "../components/MapChart";
+import Modal from "../components/Modal";
 
 function Home () {
-  const { sliderVal } = React.useContext(StoreContext);
+  const { modal, sliderVal } = React.useContext(StoreContext);
   const [content, setContent] = useState("");
   const [value2, setValue2] = useState(2017);
 
   return (
     <div>
+      <Modal/>
       <MapChart setTooltipContent={setContent} />
       <ReactTooltip>{content}</ReactTooltip>
       <Slider

@@ -28,7 +28,7 @@ const colorScale = scaleLinear()
   .range(["#ffedea", "#ff5233"]);
 
 const MapChart = ({ setTooltipContent }) => {
-  const { sliderVal } = React.useContext(StoreContext);
+  const { page, modal, sliderVal } = React.useContext(StoreContext);
   const [data, setData] = useState([]);
 
   useEffect(() => {
@@ -62,6 +62,11 @@ const MapChart = ({ setTooltipContent }) => {
                   }}
                   onMouseLeave={() => {
                     setTooltipContent("");
+                  }}
+                  onClick={() => {
+                    const { NAME } = geo.properties;
+                    console.log(`clicked ${NAME}`);
+                    modal.setModal(true);
                   }}
                   fill={d ? colorScale(d[sliderVal.sliderVal]) : "#F5F4F6"}
                   style={{

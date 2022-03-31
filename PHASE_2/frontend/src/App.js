@@ -4,8 +4,6 @@ import Country from './screens/Country';
 import { BrowserRouter as Switch, Route } from 'react-router-dom';
 import { StoreContext } from './Store';
 
-import "./styles.css";
-
 /* setPage values:
   Home = setPage(0);
   Country = setPage(1);
