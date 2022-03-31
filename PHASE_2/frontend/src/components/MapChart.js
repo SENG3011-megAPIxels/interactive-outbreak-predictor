@@ -74,8 +74,9 @@ const MapChart = ({ setTooltipContent }) => {
                     },
                     hover: {
                       fill: "#aaa",
-                      outline: "none"
-                    }
+                      outline: "none",
+                      cursor: "pointer"
+                    },
                   }}
                 />
               );

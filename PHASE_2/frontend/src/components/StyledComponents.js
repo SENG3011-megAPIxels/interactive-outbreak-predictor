@@ -13,8 +13,8 @@ const Header = styled.div`
   background: red;
   align-items: center;
   justify-content: center;
-  font-weight: bold;
   font-size: 2em;
+  color: white;
 `
 
 const Footer = styled.div`
@@ -23,6 +23,7 @@ const Footer = styled.div`
   background: red;
   align-items: center;
   justify-content: center;
+  color: white;
 `
 
 const Main = styled.div`
@@ -48,7 +49,7 @@ const MapContainer = styled.div`
 const StyledSlider = styled(Slider)`
   flex: 1;
   margin-top: -100px;
-  margin-left: 30px;
+  margin-left: 40px;
   bottom: -50px !important;
   width: 70vw !important;
   color: black !important;

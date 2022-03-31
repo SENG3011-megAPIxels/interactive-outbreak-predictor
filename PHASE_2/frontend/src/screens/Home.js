@@ -13,18 +13,18 @@ function Home () {
   const marks = [
     {
       value: 1995,
-      label: '1995',
+      label: 'Jan 2019',
     },
     {
       value: 2017,
-      label: '2017',
+      label: 'Mar 2022',
     }
   ];
 
   return (
     <Container>
       <Header>
-        Epidemic Predictor by megAPIxels
+        Pandemic Predictor by megAPIxels
       </Header>
       <Main>
         <MapContainer>
@@ -33,9 +33,8 @@ function Home () {
           <StyledSlider
             aria-label="Timeline"
             defaultValue={2017}
-            valueLabelDisplay="auto"
             step={1}
-            marks
+            marks={marks}
             min={1995}
             max={2017}
             value={value2}
