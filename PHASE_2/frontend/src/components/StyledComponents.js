@@ -48,8 +48,10 @@ const MapContainer = styled.div`
 const StyledSlider = styled(Slider)`
   flex: 1;
   margin-top: -100px;
-  bottom: -80px !important;
-  width: 75vw !important;
+  margin-left: 30px;
+  bottom: -50px !important;
+  width: 70vw !important;
+  color: black !important;
 `
 
 const ModalContainer = styled.div`
@@ -62,7 +64,7 @@ const ModalContainer = styled.div`
   min-height: 200px;
   position: relative;
   right: 100px;
-
+  pointer-events: none;
 `
 
 const ModalContent = styled.div`
@@ -75,6 +77,7 @@ const ModalContent = styled.div`
   margin-top: 100px;
   padding: 5px;
   text-align: center;
+  pointer-events: all;
 `
 
 export { Container,

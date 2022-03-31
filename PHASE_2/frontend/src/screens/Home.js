@@ -10,6 +10,17 @@ function Home () {
   const [content, setContent] = useState("");
   const [value2, setValue2] = useState(2017);
 
+  const marks = [
+    {
+      value: 1995,
+      label: '1995',
+    },
+    {
+      value: 2017,
+      label: '2017',
+    }
+  ];
+
   return (
     <Container>
       <Header>
