@@ -1,7 +1,14 @@
 import React from 'react';
 import { StoreContext } from '../Store';
-import { Grid, Box, Paper, styled } from '@mui/material';
+import { Grid } from '@mui/material';
 import { GridContainer, GridElement } from './StyledComponents';
+import { LineChart } from 'reaviz';
+
+const data = [
+    { key: new Date('2/22/2020'), data: 14 },
+    { key: new Date('2/25/2020'), data: 5 },
+    { key: new Date('2/29/2020'), data: 18 }
+];
 
 function FormRow() {
     const { page, modal, country } = React.useContext(StoreContext);
@@ -9,20 +16,17 @@ function FormRow() {
         <React.Fragment>
             <Grid item xs={4}>
                 <GridElement>
-                    <img src={require('../graph.png')}></img>
-                    Muffins Sold in {country.country}
+                    <LineChart height={250} width={300} data={data}/>
                 </GridElement>
             </Grid>
             <Grid item xs={4}>
                 <GridElement>
-                    <img src={require('../graph.png')}></img>
-                    Muffins Sold in {country.country}
+                    <LineChart height={250} width={300} data={data}/>
                 </GridElement>
             </Grid>
             <Grid item xs={4}>
                 <GridElement>
-                    <img src={require('../graph.png')}></img>
-                    Muffins Sold in {country.country}
+                    <LineChart height={250} width={300} data={data}/>
                 </GridElement>
             </Grid>
         </React.Fragment>
@@ -30,7 +34,6 @@ function FormRow() {
   }
 
 function GraphGrid() {
-    
     return (
         <GridContainer >
             <Grid container spacing={1}>
