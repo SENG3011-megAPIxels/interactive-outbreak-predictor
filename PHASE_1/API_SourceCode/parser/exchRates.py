@@ -1,5 +1,7 @@
 import json
 import psycopg2
+# import re
+import pycountry
 
 def lambda_handler(event, context):
     db_host = "database-2.cjcukgskbtyu.ap-southeast-2.rds.amazonaws.com"
@@ -18,6 +20,10 @@ def lambda_handler(event, context):
     curr = conn.cursor()
 
     country_code = event["country"]
+
+    country_data = pycountry.countries.get(alpha_3=country_code)
+
+    print(country_data.currency_code)
 
     query=f"""
         select month_year, unemployment_value
@@ -49,3 +55,9 @@ def lambda_handler(event, context):
     }
     
     return res
+
+country_code = "AUS"
+
+country_data = pycountry.countries.get(alpha_3=country_code)
+
+print(country_data.currency_code)

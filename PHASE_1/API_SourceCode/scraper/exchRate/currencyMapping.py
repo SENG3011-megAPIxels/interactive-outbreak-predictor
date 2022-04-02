@@ -1,6 +1,6 @@
 import csv
-import requests
 import psycopg2
+import pycountry
 
 # Fetches and stores global currency data in db
 
@@ -20,7 +20,7 @@ conn = psycopg2.connect(
 # conn = psycopg2.connect(dbname="testing")
 curr = conn.cursor()
 
-with open('global_unemployment.csv', 'r') as csvfile:
+with open('currencyinfo.csv', 'r') as csvfile:
     reader = csv.reader(csvfile, delimiter=',')
     lineCount = 0
     for row in reader:
@@ -28,18 +28,19 @@ with open('global_unemployment.csv', 'r') as csvfile:
         if lineCount == 0:
             lineCount += 1
         else:
-            date = row[8]
-            date_split = row[8].split('-')
-            year = date_split[0]
-            month = date_split[1]
-            month_year = month + '-' + year[2:]
-            country = row[2]
-            value = row[16]
-            print(f"INSERTING {country} {month_year}, {value} into unemployment")
+            country_code_a2 = row[1]
+            country_name = row[0]
+            currency_name = row[2]
+            currency_code = row[3]
+            country_data = pycountry.countries.get(alpha_2=country_code_a2)
+            if not country_data:
+                continue
+            country_code = country_data.alpha_3
+            print(f"INSERTING {country_name} {country_code} {currency_code}, into currency info")
             curr.execute(
                 f"""
-                INSERT INTO unemployment(country_code, month_year, unemployment_value)
-                VALUES ('{country}', '{month_year}', '{value}')
+                INSERT INTO currency_info(country_code, country_code_a2, country_name, currency_code, currency_name)
+                VALUES ('{country_code}', '{country_code_a2}', '{country_name}', '{currency_code}', '{currency_name}')
                 """
             )
 
