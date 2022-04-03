@@ -21,30 +21,31 @@ def lambda_handler(event, context):
 
     country_code = event["country"]
 
-    country_data = pycountry.countries.get(alpha_3=country_code)
-
-    print(country_data.currency_code)
-
     query=f"""
-        select month_year, unemployment_value
-        from unemployment u
-        where u.country_code = '{country_code}'
+        select e.currency_code, c.currency_name, e.month_year, e.rate
+        from exchange_rates e
+        join currency_info c on (c.currency_code = e.currency_code)
+        where c.country_code = '{country_code}'
         """
 
     curr.execute(query)
     query_objects = curr.fetchall()
     
     if not query_objects:
-        raise Exception("Error: not a valid search")
+        raise Exception(f"Error: no currency data for {country_code}")
 
     months_dict = {}
 
+    currency_code = query_objects[0][0]
+    currency_name = query_objects[0][1]
+
+    months_dict['currency_code'] = currency_code
+    months_dict['currency_name'] = currency_name
+
     for month in query_objects:
-        month_object = {}
-        month_year = month[0]
-        month_object['percOfUnempl'] = month[1]
-        # month_object['numOfUnempl'] = num_unempl
-        months_dict[month_year] = month_object
+        month_year = month[2]
+        rate = month[3]
+        months_dict[month_year] = rate
 
     res = {
         "statusCode": 200,
@@ -55,9 +56,3 @@ def lambda_handler(event, context):
     }
     
     return res
-
-country_code = "AUS"
-
-country_data = pycountry.countries.get(alpha_3=country_code)
-
-print(country_data.currency_code)
