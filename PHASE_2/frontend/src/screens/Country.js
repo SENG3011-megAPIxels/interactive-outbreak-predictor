@@ -7,10 +7,13 @@ import { Container, Header, Footer, CountryMain, GridElement } from '../componen
 function Country () {
   const { page, modal, country } = React.useContext(StoreContext);
 
-  return (   
+  return (
     <Container>
       <Header>
-        <LinkButton to={'/'} onClick={() => {modal.setModal(2); page.setPage(0)}} value="Back"/>
+        <LinkButton to={'/'}
+          onClick={() => {modal.setModal(2); page.setPage(0)}}
+          style={{border: "solid 1px white"}}
+          value="Back"/>
         {country.country}'s Graphs and Predictions
       </Header>
       <CountryMain>

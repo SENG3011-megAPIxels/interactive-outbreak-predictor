@@ -12,7 +12,6 @@ const StyledLink = styled(Link)`
   color: white;
   padding: 10px;
   border-radius: 10px;
-  border: none;
   font-size: 12pt;
   text-decoration: none;
   margin: 10px;
