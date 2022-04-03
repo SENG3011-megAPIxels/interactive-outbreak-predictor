@@ -17,3 +17,9 @@ https://p5t20q9fz6.execute-api.ap-southeast-2.amazonaws.com/ProMedApi/
 ```
 $ psql --host=database-2.cjcukgskbtyu.ap-southeast-2.rds.amazonaws.com --port=5432 --username=postgres --password --dbname=database2
 ```
+
+## AWS Account Number
+
+```
+5973-1883-9136
+```
