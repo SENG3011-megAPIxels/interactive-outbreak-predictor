@@ -20,6 +20,8 @@ conn = psycopg2.connect(
 # conn = psycopg2.connect(dbname="testing")
 curr = conn.cursor()
 
+table_name = "future_unemployment"
+
 with open('global_unemployment.csv', 'r') as csvfile:
     reader = csv.reader(csvfile, delimiter=',')
     lineCount = 0
@@ -35,10 +37,10 @@ with open('global_unemployment.csv', 'r') as csvfile:
             month_year = month + '-' + year[2:]
             country = row[2]
             value = row[16]
-            print(f"INSERTING {country} {month_year}, {value} into unemployment")
+            print(f"INSERTING {country} {month_year}, {value} into {table_name}")
             curr.execute(
                 f"""
-                INSERT INTO unemployment(country_code, month_year, unemployment_value)
+                INSERT INTO {table_name}(country_code, month_year, unemployment_value)
                 VALUES ('{country}', '{month_year}', '{value}')
                 """
             )
