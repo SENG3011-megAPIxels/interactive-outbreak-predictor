@@ -1,21 +1,20 @@
 import React, { useState } from "react";
 import { StoreContext } from '../Store';
 import { LinkButton } from '../components/LinkButton';
-import { GraphGrid } from '../components/GraphGrid';
-import { Container, Header, Footer, CountryMain } from '../components/StyledComponents'
+import { GraphGrid, Graph } from '../components/GraphGrid';
+import { Container, Header, Footer, CountryMain, GridElement } from '../components/StyledComponents'
 
 function Country () {
   const { page, modal, country } = React.useContext(StoreContext);
 
-  return (
+  return (   
     <Container>
       <Header>
-        Pandemic Predictor by megAPIxels
+        <LinkButton to={'/'} onClick={() => {modal.setModal(2); page.setPage(0)}} value="Back"/>
+        {country.country}'s Graphs and Predictions
       </Header>
       <CountryMain>
-        <h1>{country.country}</h1>
         <GraphGrid />
-        <LinkButton to={'/'} onClick={() => {modal.setModal(2); page.setPage(0)}} value="Back"/>
       </CountryMain>
       <Footer>
         &copy; megAPIxels 2022

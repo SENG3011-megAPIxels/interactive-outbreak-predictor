@@ -37,6 +37,7 @@ const CountryMain = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
+  padding: 20px; 
 `
 
 const MapContainer = styled.div`
@@ -81,13 +82,12 @@ const ModalContent = styled.div`
   text-align: center;
   pointer-events: all;
 `
-
 const GridContainer = styled.div`
   display: flex;
   padding: 20px;
   border-style: dotted;
-  height: 80%;
-  width: 85%;
+  height: 100%;
+  width: 90%;
   overflow: hidden;
 `
 const GridElement = styled.div`
@@ -101,6 +101,8 @@ const GridElement = styled.div`
   flex-direction: column;
   text-align: center;
   padding: 2px;
+  height: 95%;
+  width: 95%;
 `
 
 export { Container,
