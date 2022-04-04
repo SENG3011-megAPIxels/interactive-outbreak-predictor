@@ -47,7 +47,7 @@ const MapChart = ({ setTooltipContent }) => {
     });
     const json = await response.json();
     if (response.ok) {
-      console.log(JSON.parse(json.body).AUS['01-20'].newCases);
+      console.log(JSON.parse(json.body).CHN);
       setCovidData(JSON.parse(json.body));
     } else {
       console.log('error');
@@ -79,9 +79,8 @@ const MapChart = ({ setTooltipContent }) => {
                   geography={geo}
                   onMouseEnter={() => {
                     const { NAME, ISO_A3 } = geo.properties;
-                    {console.log(covidData[ISO_A3]);}
-                    //setTooltipContent(`${NAME} — ${rounded(POP_EST)}`);
-                    setTooltipContent(`${NAME} - ${covidData[ISO_A3] !== undefined ? covidData[ISO_A3]['01-20'].newCases : 'Unknown'}`);
+                    {console.log(sliderVal.sliderVal);}
+                    setTooltipContent(`${NAME} - ${covidData[ISO_A3] !== undefined ? covidData[ISO_A3][sliderVal.sliderVal].newCases + ' Cases' : 'Unknown'}`);
                   }}
                   onMouseLeave={() => {
                     setTooltipContent("");

@@ -11,7 +11,7 @@ function Store ({ children }) {
   const [page, setPage] = React.useState(0);
   const [modal, setModal] = React.useState(1);
   const [country, setCountry] = React.useState('');
-  const [sliderVal, setSliderVal] = React.useState(2017);
+  const [sliderVal, setSliderVal] = React.useState('03-22');
   const [disease, setDisease] = React.useState("Covid-19");
 
   const store = {
