@@ -2,7 +2,7 @@ import React, { PureComponent } from 'react';
 import { StoreContext } from '../Store';
 import { Grid } from '@mui/material';
 import { GridContainer, GridElement } from './StyledComponents';
-import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer } from 'recharts';
+import { Graph } from './Graph';
 
 const data = [
     { name: "Page A", uv: 4000, pv: 2400, amt: 2400 },
@@ -14,32 +14,9 @@ const data = [
     { name: "Page G", uv: 3490, pv: 4300, amt: 2100 }
   ];
 
-function Graph() {
-    return (
-        <ResponsiveContainer width="99%" height={1} padding={0}>
-            <LineChart
-            data={data}
-            margin={{
-                top: 305,
-                right: 30,
-                left: 20,
-                bottom: 205,
-            }}
-            >
-            <CartesianGrid strokeDasharray="3 3" />
-            <XAxis dataKey="name" />
-            <YAxis />
-            <Tooltip />
-            <Legend />
-            <Line type="monotone" dataKey="pv" stroke="#8884d8" activeDot={{ r: 8 }} />
-            <Line type="monotone" dataKey="uv" stroke="#82ca9d" />
-            </LineChart>
-        </ResponsiveContainer>
-    );
-}
+
 
 function FormRow() {
-    const { page, modal, country } = React.useContext(StoreContext);
     return (
         <React.Fragment>
             <Grid item xs={4}>
@@ -62,18 +39,49 @@ function FormRow() {
   }
 
 function GraphGrid() {
+    const { country, graph } = React.useContext(StoreContext);
+    var countryISO = country.country.toUpperCase().substring(0,3);
+    var url = `https://p5t20q9fz6.execute-api.ap-southeast-2.amazonaws.com/ProMedApi/futureunemployment?country=` + countryISO; var aData;
+    // switch (graph.graph) {
+    //     case "Disease":
+    //         url = "https://p5t20q9fz6.execute-api.ap-southeast-2.amazonaws.com/ProMedApi/futureunemployment?country=" + countryISO;
+    //         break;
+    //     case "Jobs Market":
+    //         url = "https://p5t20q9fz6.execute-api.ap-southeast-2.amazonaws.com/ProMedApi/futureunemployment?country=" + countryISO;
+    //     default:
+    //         break;
+    // }
+
+    React.useEffect(async () => {
+        const response = await fetch(url, {
+          method: 'GET',
+          headers: {
+            Accept: 'application/json',
+          },
+        });
+        const json = await response.json();
+        if (response.ok) {
+            console.log(json.body);
+        //   console.log(JSON.parse(json.body));
+        //   aData = JSON.parse(json.body);
+        } else {
+        //   console.log('error');
+        }
+      }, [])
+
     return (   
-        <GridContainer >
-            <Grid container spacing={1}>
-                <Grid container item spacing={2}>
-                    <FormRow />
-                </Grid>
-                <Grid container item spacing={2}>
-                    <FormRow />
-                </Grid>
-            </Grid>
-        </GridContainer>
+        <Graph data={data}/>
+        // <GridContainer >
+        //     <Grid container spacing={1}>
+        //         <Grid container item spacing={2}>
+        //             <FormRow />
+        //         </Grid>
+        //         <Grid container item spacing={2}>
+        //             <FormRow />
+        //         </Grid>
+        //     </Grid>
+        // </GridContainer>
     );
 }
 
-export { GraphGrid, Graph }
+export { GraphGrid }

@@ -20,7 +20,7 @@ function GraphSwap() {
                 value={alignment}
                 exclusive
                 onChange={handleChange}
-                color="primary"
+                color="error"
             >
                 {graphs.map((type) => (
                     <ToggleButton value={type}>{type}</ToggleButton>
