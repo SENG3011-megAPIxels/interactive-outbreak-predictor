@@ -13,7 +13,7 @@ const Header = styled.div`
   display: flex;
   background: red;
   align-items: center;
-  justify-content: center;
+  justify-content: space-around;
   font-size: 2em;
   color: white;
 `

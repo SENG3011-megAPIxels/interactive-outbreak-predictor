@@ -10,8 +10,8 @@ function Country () {
   return (
     <Container>
       <Header>
-        <LinkButton2 to={'/'} onClick={() => {modal.setModal(2); page.setPage(0)}} value="Back"/>
         {country.country}'s Graphs and Predictions
+        <LinkButton2 to={'/'} onClick={() => {modal.setModal(2); page.setPage(0)}} value="Back"/>
       </Header>
       <CountryMain>
         <GraphGrid />

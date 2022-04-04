@@ -25,8 +25,8 @@ function Home () {
   return (
     <Container>
       <Header>
-        <DropDown/>
         Pandemic Predictor by megAPIxels
+        <DropDown/>
       </Header>
       <Main>
         <MapContainer>
