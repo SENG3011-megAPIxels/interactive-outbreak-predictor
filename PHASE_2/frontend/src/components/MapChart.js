@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import { csv } from "d3-fetch";
 import { scaleLinear } from "d3-scale";
 import {
@@ -13,28 +13,18 @@ import { StoreContext } from '../Store';
 const geoUrl =
   "https://raw.githubusercontent.com/zcreativelabs/react-simple-maps/master/topojson-maps/world-110m.json";
 
-const rounded = num => {
-  if (num > 1000000000) {
-    return Math.round(num / 100000000) / 10 + "Bn";
-  } else if (num > 1000000) {
-    return Math.round(num / 100000) / 10 + "M";
-  } else {
-    return Math.round(num / 100) / 10 + "K";
-  }
-};
-
 const colorScale = scaleLinear()
-  .domain([0, 1500000])
+  .domain([0, 4000000])
   .range(["#ffedea", "#ff0000"]);
 
 const MapChart = ({ setTooltipContent }) => {
   const { page, modal, country, sliderVal } = React.useContext(StoreContext);
-  const [data, setData] = useState([]);
-  const [covidData, setCovidData] = useState({});
-  const [iso, setIso] = useState('');
+  const [data, setData] = React.useState([]);
+  const [covidData, setCovidData] = React.useState({});
+  const [iso, setIso] = React.useState('');
 
-  useEffect(() => {
-    csv(`/vulnerability.csv`).then((data) => {
+  React.useEffect(() => {
+    csv(`/countryCodes.csv`).then((data) => {
       setData(data);
     });
   }, []);
