@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { StoreContext } from '../Store';
-import { LinkButton } from '../components/LinkButton';
+import { LinkButton2 } from '../components/LinkButton';
 import { GraphGrid, Graph } from '../components/GraphGrid';
 import { Container, Header, Footer, CountryMain, GridElement } from '../components/StyledComponents'
 
@@ -10,10 +10,7 @@ function Country () {
   return (
     <Container>
       <Header>
-        <LinkButton to={'/'}
-          onClick={() => {modal.setModal(2); page.setPage(0)}}
-          style={{border: "solid 1px white"}}
-          value="Back"/>
+        <LinkButton2 to={'/'} onClick={() => {modal.setModal(2); page.setPage(0)}} value="Back"/>
         {country.country}'s Graphs and Predictions
       </Header>
       <CountryMain>
