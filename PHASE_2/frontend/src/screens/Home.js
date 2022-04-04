@@ -17,12 +17,29 @@ function Home () {
       label: 'Dec 2019',
     },
     {
+      value: 7,
+      label: 'Jun 2020',
+    },
+    {
+      value: 13,
+      label: 'Dec 2020',
+    },
+    {
+      value: 19,
+      label: 'Jun 2021',
+    },
+    {
+      value: 25,
+      label: 'Dec 2021',
+    },
+    {
       value: 28,
       label: 'Mar 2022',
     }
   ];
 
   const updateSlider = (value) => {
+    setValue2(value)
     switch(value) {
       case 1:
         sliderVal.setSliderVal('12-19');
@@ -114,7 +131,7 @@ function Home () {
   return (
     <Container>
       <Header>
-        Pandemic Predictor by megAPIxels
+        Interactive Outbreak Predictor
         <DropDown/>
       </Header>
       <Main>
@@ -129,8 +146,8 @@ function Home () {
             min={1}
             max={28}
             value={value2}
-            onChange={(_, value) => setValue2(value)}
-            onChangeCommitted={(_, value) => updateSlider(value)}
+            onChange={(_, value) => updateSlider(value)}
+            //onChangeCommitted={(_, value) => updateSlider(value)}
           />
         </MapContainer>
         <Modal/>
