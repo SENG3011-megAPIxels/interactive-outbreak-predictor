@@ -1,5 +1,6 @@
 import styled from 'styled-components';
 import Slider from '@mui/material/Slider';
+import Select from '@mui/material/Select';
 
 const Container = styled.div`
   display: flex;
@@ -37,7 +38,7 @@ const CountryMain = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding: 20px; 
+  padding: 20px;
 `
 
 const MapContainer = styled.div`
@@ -105,6 +106,10 @@ const GridElement = styled.div`
   width: 95%;
 `
 
+const StyledSelect = styled(Select)`
+  color: white !important;
+`
+
 export { Container,
          Header,
          Footer,
@@ -115,5 +120,6 @@ export { Container,
          ModalContainer,
          ModalContent,
          GridContainer,
-         GridElement
+         GridElement,
+         StyledSelect
        }

@@ -3,6 +3,7 @@ import ReactTooltip from "react-tooltip";
 import { StoreContext } from '../Store';
 import MapChart from "../components/MapChart";
 import Modal from "../components/Modal";
+import DropDown from "../components/DropDown";
 import { Container, Header, Footer, Main, MapContainer, StyledSlider } from '../components/StyledComponents'
 
 function Home () {
@@ -24,6 +25,7 @@ function Home () {
   return (
     <Container>
       <Header>
+        <DropDown/>
         Pandemic Predictor by megAPIxels
       </Header>
       <Main>
