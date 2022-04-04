@@ -86,7 +86,6 @@ const ModalContent = styled.div`
 const GridContainer = styled.div`
   display: flex;
   padding: 20px;
-  border-style: dotted;
   height: 100%;
   width: 90%;
   overflow: hidden;
@@ -110,6 +109,11 @@ const StyledSelect = styled(Select)`
   color: white !important;
 `
 
+const ButtonRow = styled.div`
+  display: inline-block;
+  width: 85%;
+`
+
 export { Container,
          Header,
          Footer,
@@ -121,5 +125,6 @@ export { Container,
          ModalContent,
          GridContainer,
          GridElement,
-         StyledSelect
+         StyledSelect,
+         ButtonRow
        }

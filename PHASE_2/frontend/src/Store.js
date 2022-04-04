@@ -13,6 +13,7 @@ function Store ({ children }) {
   const [country, setCountry] = React.useState('');
   const [sliderVal, setSliderVal] = React.useState('03-22');
   const [disease, setDisease] = React.useState("Covid-19");
+  const [graph, setGraph] = React.useState("Disease");
 
   const store = {
     // The page number
@@ -24,7 +25,9 @@ function Store ({ children }) {
     // The slider value
     sliderVal: { sliderVal, setSliderVal },
     // The disease being displayed
-    disease: { disease, setDisease }
+    disease: { disease, setDisease },
+    // The graphs being displayed
+    graph: { graph, setGraph }
   }
 
   return <StoreContext.Provider value={store}>{children}</StoreContext.Provider>
