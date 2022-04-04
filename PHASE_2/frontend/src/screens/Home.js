@@ -22,25 +22,6 @@ function Home () {
     }
   ];
 
-  const getCovidData = async () => {
-    const response = await fetch(`https://p5t20q9fz6.execute-api.ap-southeast-2.amazonaws.com/ProMedApi/globalcovid`, {
-      method: 'GET',
-      headers: {
-        Accept: 'application/json',
-      },
-    });
-    const json = await response.json();
-    if (response.ok) {
-      console.log(JSON.parse(json.body).AUS);
-    } else {
-      console.log('error');
-    }
-  }
-
-  React.useEffect(async () => {
-    getCovidData();
-  }, [])
-
   return (
     <Container>
       <Header>

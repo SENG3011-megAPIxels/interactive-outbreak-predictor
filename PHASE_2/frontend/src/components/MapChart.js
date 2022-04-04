@@ -30,12 +30,33 @@ const colorScale = scaleLinear()
 const MapChart = ({ setTooltipContent }) => {
   const { page, modal, country, sliderVal } = React.useContext(StoreContext);
   const [data, setData] = useState([]);
+  const [covidData, setCovidData] = useState({});
 
   useEffect(() => {
     csv(`/vulnerability.csv`).then((data) => {
       setData(data);
     });
   }, []);
+
+  const getCovidData = async () => {
+    const response = await fetch(`https://p5t20q9fz6.execute-api.ap-southeast-2.amazonaws.com/ProMedApi/globalcovid`, {
+      method: 'GET',
+      headers: {
+        Accept: 'application/json',
+      },
+    });
+    const json = await response.json();
+    if (response.ok) {
+      console.log(JSON.parse(json.body).AUS['01-20'].newCases);
+      setCovidData(JSON.parse(json.body));
+    } else {
+      console.log('error');
+    }
+  }
+
+  React.useEffect(async () => {
+    getCovidData();
+  }, [])
 
   return (
     <ComposableMap
@@ -57,8 +78,10 @@ const MapChart = ({ setTooltipContent }) => {
                   key={geo.rsmKey}
                   geography={geo}
                   onMouseEnter={() => {
-                    const { NAME, POP_EST } = geo.properties;
-                    setTooltipContent(`${NAME} — ${rounded(POP_EST)}`);
+                    const { NAME, ISO_A3 } = geo.properties;
+                    {console.log(covidData[ISO_A3]);}
+                    //setTooltipContent(`${NAME} — ${rounded(POP_EST)}`);
+                    setTooltipContent(`${NAME} - ${covidData[ISO_A3] !== undefined ? covidData[ISO_A3]['01-20'].newCases : 'Unknown'}`);
                   }}
                   onMouseLeave={() => {
                     setTooltipContent("");
