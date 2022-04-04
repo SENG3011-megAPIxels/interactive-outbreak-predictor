@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import ReactTooltip from "react-tooltip";
 import { StoreContext } from '../Store';
 import MapChart from "../components/MapChart";
@@ -8,8 +8,8 @@ import { Container, Header, Footer, Main, MapContainer, StyledSlider } from '../
 
 function Home () {
   const { modal, sliderVal } = React.useContext(StoreContext);
-  const [content, setContent] = useState("");
-  const [value2, setValue2] = useState(2017);
+  const [content, setContent] = React.useState("");
+  const [value2, setValue2] = React.useState(2017);
 
   const marks = [
     {
@@ -21,6 +21,25 @@ function Home () {
       label: 'Mar 2022',
     }
   ];
+
+  const getCovidData = async () => {
+    const response = await fetch(`https://p5t20q9fz6.execute-api.ap-southeast-2.amazonaws.com/ProMedApi/globalcovid`, {
+      method: 'GET',
+      headers: {
+        Accept: 'application/json',
+      },
+    });
+    const json = await response.json();
+    if (response.ok) {
+      console.log(JSON.parse(json.body).AUS);
+    } else {
+      console.log('error');
+    }
+  }
+
+  React.useEffect(async () => {
+    getCovidData();
+  }, [])
 
   return (
     <Container>
