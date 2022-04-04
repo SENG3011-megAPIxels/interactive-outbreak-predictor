@@ -23,7 +23,6 @@ function Home () {
   ];
 
   const updateSlider = (value) => {
-    console.log(value);
     switch(value) {
       case 1:
         sliderVal.setSliderVal('12-19');
@@ -110,7 +109,6 @@ function Home () {
         sliderVal.setSliderVal('03-22');
         break;
     }
-    console.log(sliderVal.sliderVal);
   };
 
   return (
