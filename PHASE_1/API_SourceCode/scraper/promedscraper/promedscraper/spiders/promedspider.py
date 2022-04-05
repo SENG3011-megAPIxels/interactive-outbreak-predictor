@@ -8,7 +8,7 @@ import spacy
 from dateutil.parser import parse 
 #from scrapy.crawler import CrawlerProcess
 
-# usage: scrapy crawl awspromed
+# usage: scrapy crawl promed
 class ProMedSpider(scrapy.Spider):
     name = 'promed'
     start_urls = ['https://promedmail.org/']
@@ -43,15 +43,15 @@ class ProMedSpider(scrapy.Spider):
     def parse(self, response):
         today = date.today()
         year = today.year
-        month = today.month
-        day = today.day
+        #month = today.month
+        #day = today.day
         
-        while day >= 11:
-            body = f'action=get_latest_posts&edate={day}-{month}-{year}&return_map=1&feed_id=1&seltype=latest'
+        while year >= 1995:
+            body = f'action=get_latest_posts&edate={year}&return_map=1&feed_id=1&seltype=latest'
 
             yield scrapy.Request(self.url, callback=self.parse_list, method='POST', headers=self.headers, body=body, dont_filter=True)
 
-            day = day - 1
+            year = year - 1
     
         
     def parse_list(self, response):
