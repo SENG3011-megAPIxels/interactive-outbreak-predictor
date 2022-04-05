@@ -19,8 +19,8 @@ svg {
   display: inline-block;
   vertical-align: middle;
   position: relative;
-  left: -100px;
-  right: -100px;
+  /* left: -100px;
+  right: -100px; */
   margin: -100px;
   height: 100vh;
 }

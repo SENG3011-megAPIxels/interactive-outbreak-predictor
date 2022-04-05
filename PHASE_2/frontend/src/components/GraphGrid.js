@@ -1,19 +1,71 @@
-import React, { PureComponent } from 'react';
+import React, { PureComponent, useState } from 'react';
 import { StoreContext } from '../Store';
 import { Grid } from '@mui/material';
 import { GridContainer, GridElement } from './StyledComponents';
 import { Graph } from './Graph';
 
-const data = [
-    { name: "Page A", uv: 4000, pv: 2400, amt: 2400 },
-    { name: "Page B", uv: 3000, pv: 1398, amt: 2210 },
-    { name: "Page C", uv: 2000, pv: 9800, amt: 2290 },
-    { name: "Page D", uv: 2780, pv: 3908, amt: 2000 },
-    { name: "Page E", uv: 1890, pv: 4800, amt: 2181 },
-    { name: "Page F", uv: 2390, pv: 3800, amt: 2500 },
-    { name: "Page G", uv: 3490, pv: 4300, amt: 2100 }
-  ];
+const lookup = require('country-code-lookup');
 
+function JobData() {
+    console.log('help');
+    const { country, graphData, options } = React.useContext(StoreContext);
+    const [data, setData] = React.useState([]);
+    var countryISO = lookup.byCountry(country.country).iso3;
+    var url = "https://p5t20q9fz6.execute-api.ap-southeast-2.amazonaws.com/ProMedApi/futureunemployment?country=" + countryISO;
+    
+    React.useEffect(async () => {
+        const response = await fetch(url, {
+            method: 'GET',
+            headers: {
+                Accept: 'application/json',
+            },
+        });
+        console.log('got data');
+        const json = await response.json();
+        if (response.ok) {
+            setData(JSON.parse(json.body));
+        } else {
+            console.log('error');
+        }
+
+        // dates
+        var labels = Object.keys(data);
+        var dataset = [];
+        labels.forEach(date => {
+            dataset.push(data[date]['percOfUnempl']);
+        });
+
+        var dataU = {
+            labels,
+            datasets: [
+                {
+                    label: '% of Unemployed',
+                    data: dataset,
+                    borderColor: 'rgb(255, 99, 132)',
+                    backgroundColor: 'rgba(255, 99, 132, 0.5)',
+                }
+            ]
+        };
+        var optionsU = {
+            responsive: true,
+            maintainAspectRatio: false,
+            plugins: {
+                legend: {
+                    position: 'top',
+                },
+                title: {
+                    display: true,
+                    text: 'Covid Cases',
+                },
+            },
+        };
+
+        console.log("setting data");
+        graphData.setGraphData(dataU);
+        options.setOptions(optionsU);
+        
+    }, [])
+}
 
 
 function FormRow() {
@@ -39,49 +91,46 @@ function FormRow() {
   }
 
 function GraphGrid() {
-    const { country, graph } = React.useContext(StoreContext);
-    var countryISO = country.country.toUpperCase().substring(0,3);
-    var url = `https://p5t20q9fz6.execute-api.ap-southeast-2.amazonaws.com/ProMedApi/futureunemployment?country=` + countryISO; var aData;
-    // switch (graph.graph) {
-    //     case "Disease":
-    //         url = "https://p5t20q9fz6.execute-api.ap-southeast-2.amazonaws.com/ProMedApi/futureunemployment?country=" + countryISO;
-    //         break;
-    //     case "Jobs Market":
-    //         url = "https://p5t20q9fz6.execute-api.ap-southeast-2.amazonaws.com/ProMedApi/futureunemployment?country=" + countryISO;
-    //     default:
-    //         break;
-    // }
+    const { graphData, options } = React.useContext(StoreContext);
+    const [isLoading, setIsLoading] = React.useState(true);
 
-    React.useEffect(async () => {
-        const response = await fetch(url, {
-          method: 'GET',
-          headers: {
-            Accept: 'application/json',
-          },
-        });
-        const json = await response.json();
-        if (response.ok) {
-            console.log(json.body);
-        //   console.log(JSON.parse(json.body));
-        //   aData = JSON.parse(json.body);
-        } else {
-        //   console.log('error');
+    React.useEffect(() => {
+        const fetchData = async () => {
+            try {
+                console.log("test");
+                JobData();
+                console.log('done');
+                setIsLoading(false);
+            } catch (error) {
+                setIsLoading(true);
+            }
         }
-      }, [])
+        fetchData();
+    }, [])
 
-    return (   
-        <Graph data={data}/>
-        // <GridContainer >
-        //     <Grid container spacing={1}>
-        //         <Grid container item spacing={2}>
-        //             <FormRow />
-        //         </Grid>
-        //         <Grid container item spacing={2}>
-        //             <FormRow />
-        //         </Grid>
-        //     </Grid>
-        // </GridContainer>
-    );
+    if (isLoading) {
+       return <div>Loading</div>       
+    } else {
+        
+        return (
+            <Graph data={graphData.graphData} options={options.options}/>
+        )
+    }
+
+
+    // return (   
+    //     <Graph data={graphData.graphData} options={options.options}/>
+    //     // <GridContainer >
+    //     //     <Grid container spacing={1}>
+    //     //         <Grid container item spacing={2}>
+    //     //             <FormRow />
+    //     //         </Grid>
+    //     //         <Grid container item spacing={2}>
+    //     //             <FormRow />
+    //     //         </Grid>
+    //     //     </Grid>
+    //     // </GridContainer>
+    // );
 }
 
 export { GraphGrid }
