@@ -13,9 +13,11 @@ const Header = styled.div`
   display: flex;
   background: red;
   align-items: center;
-  justify-content: space-around;
+  justify-content: space-between;
   font-size: 2em;
   color: white;
+  padding-left: 25vw;
+  padding-right: 10px;
 `
 
 const Footer = styled.div`
@@ -63,11 +65,11 @@ const ModalContainer = styled.div`
   flex: 1;
   align-items: flex-start;
   justify-content: center;
-  min-width: 200px;
-  max-width: 200px;
+  min-width: 280px;
+  max-width: 280px;
   min-height: 200px;
   position: relative;
-  right: 100px;
+  right: 50px;
   pointer-events: none;
 `
 

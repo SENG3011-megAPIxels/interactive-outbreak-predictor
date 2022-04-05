@@ -11,7 +11,7 @@ function Country () {
   return (
     <Container>
       <Header>
-        {country.country}'s {graph.graph} Graphs
+        {country.country.NAME}'s {graph.graph} Graphs
         <LinkButton2 to={'/'} onClick={() => {modal.setModal(2); page.setPage(0)}} value="Back"/>
       </Header>
       <CountryMain>

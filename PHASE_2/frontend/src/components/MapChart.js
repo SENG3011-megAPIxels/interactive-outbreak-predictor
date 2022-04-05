@@ -43,7 +43,7 @@ const MapChart = ({ setTooltipContent }) => {
     } else {
       console.log('error');
     }
-  }, [])
+  }, []);
 
   return (
     <ComposableMap
@@ -72,7 +72,7 @@ const MapChart = ({ setTooltipContent }) => {
                     setTooltipContent("");
                   }}
                   onClick={() => {
-                    country.setCountry(geo.properties.NAME);
+                    country.setCountry(geo.properties);
                     modal.setModal(2);
                   }}
                   //fill={d ? colorScale(d[sliderVal.sliderVal]) : "#F5F4F6"}
