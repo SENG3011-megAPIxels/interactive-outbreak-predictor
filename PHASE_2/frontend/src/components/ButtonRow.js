@@ -7,7 +7,7 @@ const graphs = ["Disease", "Jobs Market", "Financial"]
 
 function GraphSwap() {
     const { graph } = React.useContext(StoreContext);
-    const [alignment, setAlignment] = React.useState(graph);
+    const [alignment, setAlignment] = React.useState(graph.graph);
 
     const handleChange = (event, newAlignment) => {
         graph.setGraph(newAlignment);
@@ -22,8 +22,8 @@ function GraphSwap() {
                 onChange={handleChange}
                 color="error"
             >
-                {graphs.map((type) => (
-                    <ToggleButton value={type}>{type}</ToggleButton>
+                {graphs.map((type, i) => (
+                    <ToggleButton key={i} value={type}>{type}</ToggleButton>
                 ))}
             </ToggleButtonGroup>
         </ButtonRow>

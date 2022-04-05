@@ -17,16 +17,32 @@ function Home () {
       label: 'Dec 2019',
     },
     {
+      value: 4,
+      label: 'Mar 2020',
+    },
+    {
       value: 7,
       label: 'Jun 2020',
+    },
+    {
+      value: 10,
+      label: 'Sep 2020',
     },
     {
       value: 13,
       label: 'Dec 2020',
     },
     {
+      value: 16,
+      label: 'Mar 2021',
+    },
+    {
       value: 19,
       label: 'Jun 2021',
+    },
+    {
+      value: 22,
+      label: 'Sep 2021',
     },
     {
       value: 25,
