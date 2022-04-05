@@ -21,7 +21,7 @@ function Modal () {
     return (
       <ModalContainer>
         <ModalContent>
-          <p>Welcome to Pandemic Predictor!</p>
+          <p>Welcome to Interactive Outbreak Predictor!</p>
           <p>Please select a country to learn more</p>
         </ModalContent>
       </ModalContainer>
