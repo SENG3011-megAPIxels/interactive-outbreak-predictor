@@ -4,6 +4,7 @@ import { LinkButton2 } from '../components/LinkButton';
 import { GraphGrid, Graph } from '../components/GraphGrid';
 import { Container, Header, Footer, CountryMain, GridElement } from '../components/StyledComponents'
 import { GraphSwap } from "../components/ButtonRow";
+import GraphOptions from "../components/GraphOptions";
 
 function Country () {
   const { page, modal, country, graph } = React.useContext(StoreContext);
@@ -17,6 +18,7 @@ function Country () {
       <CountryMain>
         <GraphGrid/>
         <GraphSwap/>
+        <GraphOptions/>
       </CountryMain>
       <Footer>
         &copy; megAPIxels 2022

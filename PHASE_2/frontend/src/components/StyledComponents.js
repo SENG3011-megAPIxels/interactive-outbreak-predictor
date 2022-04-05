@@ -116,6 +116,20 @@ const ButtonRow = styled.div`
   width: 85%;
 `
 
+const GraphOptionsMain = styled.div`
+  display: flex;
+  position: fixed;
+  bottom: 75px;
+  align-items: center;
+  width: 80%;
+  justify-content: space-around;
+`
+
+const GraphSingleOption = styled.div`
+  display: flex;
+  align-items: center;
+`
+
 export { Container,
          Header,
          Footer,
@@ -128,5 +142,7 @@ export { Container,
          GridContainer,
          GridElement,
          StyledSelect,
-         ButtonRow
+         ButtonRow,
+         GraphOptionsMain,
+         GraphSingleOption
        }
