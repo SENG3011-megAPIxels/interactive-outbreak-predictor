@@ -2,15 +2,15 @@ import React, { PureComponent, useState } from 'react';
 import { StoreContext } from '../Store';
 import { Grid } from '@mui/material';
 import { GridContainer, GridElement } from './StyledComponents';
-import { Graph } from './Graph';
+import { Graph, UnGraph } from './UnemGraph';
+import { CovidGraph } from './CovidGraph';
+import { ExchGraph } from './ExchGraph';
 
 const lookup = require('country-code-lookup');
 
-function JobData() {
-    console.log('help');
-    const { country, graphData, options } = React.useContext(StoreContext);
+async function JobData(country) {
     const [data, setData] = React.useState([]);
-    var countryISO = lookup.byCountry(country.country).iso3;
+    var countryISO = lookup.byCountry(country).iso3;
     var url = "https://p5t20q9fz6.execute-api.ap-southeast-2.amazonaws.com/ProMedApi/futureunemployment?country=" + countryISO;
     
     React.useEffect(async () => {
@@ -60,77 +60,64 @@ function JobData() {
             },
         };
 
-        console.log("setting data");
-        graphData.setGraphData(dataU);
-        options.setOptions(optionsU);
+        console.log(dataU);
         
     }, [])
 }
 
 
-function FormRow() {
-    return (
-        <React.Fragment>
-            <Grid item xs={4}>
-                <GridElement>
-                    <Graph/>
-                </GridElement>
-            </Grid>
-            <Grid item xs={4}>
-                <GridElement>
-                    <Graph/>
-                </GridElement>
-            </Grid>
-            <Grid item xs={4}>
-                <GridElement>
-                    <Graph/>
-                </GridElement>
-            </Grid>
-        </React.Fragment>
-    );
-  }
 
 function GraphGrid() {
-    const { graphData, options } = React.useContext(StoreContext);
-    const [isLoading, setIsLoading] = React.useState(true);
+    const { graph } = React.useContext(StoreContext);
+    const [data, setData] = React.useState([]);
+    const [isBusy, setBusy] = React.useState(true);
 
-    React.useEffect(() => {
-        const fetchData = async () => {
-            try {
-                console.log("test");
-                JobData();
-                console.log('done');
-                setIsLoading(false);
-            } catch (error) {
-                setIsLoading(true);
-            }
-        }
-        fetchData();
-    }, [])
-
-    if (isLoading) {
-       return <div>Loading</div>       
-    } else {
-        
-        return (
-            <Graph data={graphData.graphData} options={options.options}/>
-        )
+    switch (graph.graph) {
+        case "Jobs Market":
+            return <UnGraph></UnGraph>;
+        case "Disease":
+            return <CovidGraph></CovidGraph>;
+        case "Financial":
+            return <ExchGraph></ExchGraph>
+        default:
+            return <CovidGraph></CovidGraph>;
     }
 
 
-    // return (   
-    //     <Graph data={graphData.graphData} options={options.options}/>
-    //     // <GridContainer >
-    //     //     <Grid container spacing={1}>
-    //     //         <Grid container item spacing={2}>
-    //     //             <FormRow />
-    //     //         </Grid>
-    //     //         <Grid container item spacing={2}>
-    //     //             <FormRow />
-    //     //         </Grid>
-    //     //     </Grid>
-    //     // </GridContainer>
-    // );
+
+
+
+
+
+
+
+
+
+
+
+        // const { country, graphData, options } = React.useContext(StoreContext);
+        // const [isLoading, setIsLoading] = React.useState(true);
+    
+        // React.useEffect(() => {
+    
+        // }, [])
+    
+        // React.useEffect(() => {
+        //     const fetchData = async () => {
+        //         try {
+        //             console.log("test");
+        //             JobData(country);
+        //             setIsLoading(false);
+        //         } catch (error) {
+        //             setIsLoading(true);
+        //         }
+        //     }
+        //     fetchData();
+        // }, [])
+        // if (isLoading) {
+    //    return <div>Loading</div>       
+    // } else {
+    // }
 }
 
 export { GraphGrid }
