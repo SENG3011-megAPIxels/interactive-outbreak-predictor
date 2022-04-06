@@ -1,7 +1,7 @@
 import React from 'react';
 import { StoreContext } from '../Store';
 import { LinkButton } from './LinkButton';
-import { ModalContainer, ModalContent } from './StyledComponents'
+import { ModalContainer, ModalContent, ModalImage } from './StyledComponents'
 
 function Modal () {
   const { page, modal, country, sliderVal } = React.useContext(StoreContext);
@@ -28,6 +28,7 @@ function Modal () {
       <ModalContainer>
         <ModalContent>
             <h2 className="modal-title">{country.country.NAME}</h2>
+            <ModalImage src={`https://countryflagsapi.com/png/${country.country.ISO_A3}`} alt={`Flag of ${country.country.NAME}`}/>
             <p>{'New Cases: ' + (covidData[country.country.ISO_A3] !== undefined ? covidData[country.country.ISO_A3][sliderVal.sliderVal].newCases : 'Unknown')}</p>
             <p>{'New Deaths: ' + (covidData[country.country.ISO_A3] !== undefined ? covidData[country.country.ISO_A3][sliderVal.sliderVal].newDeaths : 'Unknown')}</p>
             <p>{'Total Vaccinated: ' + (covidData[country.country.ISO_A3] !== undefined ? covidData[country.country.ISO_A3][sliderVal.sliderVal].totalVaccinated : 'Unknown')}</p>

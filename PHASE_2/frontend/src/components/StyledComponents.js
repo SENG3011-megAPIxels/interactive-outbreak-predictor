@@ -130,6 +130,13 @@ const GraphSingleOption = styled.div`
   align-items: center;
 `
 
+const ModalImage = styled.img`
+  width: 50px;
+  height: 40px;
+  object-fit:contain;
+  margin-left:10px;
+`
+
 export { Container,
          Header,
          Footer,
@@ -144,5 +151,6 @@ export { Container,
          StyledSelect,
          ButtonRow,
          GraphOptionsMain,
-         GraphSingleOption
+         GraphSingleOption,
+         ModalImage
        }
