@@ -1,8 +1,8 @@
-import React, { useState } from "react";
+import React from "react";
 import { StoreContext } from '../Store';
 import { LinkButton2 } from '../components/LinkButton';
-import { GraphGrid, Graph } from '../components/GraphGrid';
-import { Container, Header, Footer, CountryMain, GridElement } from '../components/StyledComponents'
+import { GraphGrid } from '../components/GraphGrid';
+import { Container, Header, Footer, CountryMain } from '../components/StyledComponents'
 import { GraphSwap } from "../components/ButtonRow";
 import GraphOptions from "../components/GraphOptions";
 

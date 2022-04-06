@@ -1,8 +1,11 @@
 import React from 'react';
 import { GraphOptionsMain, GraphSingleOption } from './StyledComponents';
 import { LinkButton } from './LinkButton';
+import { StoreContext } from '../Store';
 
 function GraphOptions () {
+  const { country } = React.useContext(StoreContext);
+
   return (
     <GraphOptionsMain>
       <GraphSingleOption>
@@ -21,7 +24,7 @@ function GraphOptions () {
         <input type="checkbox" id="lockdown" name="lockdown" value="yes"/>
         <label htmlFor="lockdown"> Lockdown </label>
       </GraphSingleOption>
-      <LinkButton to={'.'} onClick={() => {}} value="Predict!"/>
+      <LinkButton to={`/country/${country.country.NAME}`} onClick={() => {}} value="Predict!"/>
     </GraphOptionsMain>
   );
 }

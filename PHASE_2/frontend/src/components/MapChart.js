@@ -21,7 +21,6 @@ const MapChart = ({ setTooltipContent }) => {
   const { page, modal, country, sliderVal } = React.useContext(StoreContext);
   const [data, setData] = React.useState([]);
   const [covidData, setCovidData] = React.useState({});
-  const [iso, setIso] = React.useState('');
 
   React.useEffect(() => {
     csv(`/countryCodes.csv`).then((data) => {

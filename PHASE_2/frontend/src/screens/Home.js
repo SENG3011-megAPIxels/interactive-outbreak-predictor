@@ -7,7 +7,7 @@ import DropDown from "../components/DropDown";
 import { Container, Header, Footer, Main, MapContainer, StyledSlider } from '../components/StyledComponents'
 
 function Home () {
-  const { modal, sliderVal } = React.useContext(StoreContext);
+  const { sliderVal } = React.useContext(StoreContext);
   const [content, setContent] = React.useState("");
   const [value2, setValue2] = React.useState(28);
 
