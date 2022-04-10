@@ -1,6 +1,7 @@
 import React from 'react';
 import Home from './screens/Home';
 import Country from './screens/Country';
+import Help from './screens/Help';
 import { BrowserRouter as Switch, Route } from 'react-router-dom';
 import { StoreContext } from './Store';
 
@@ -13,6 +14,7 @@ function App () {
   <Switch>
     <Route exact path="/" component={Home}/>
     <Route path="/country" component={Country}/>
+    <Route path="/help" component={Help}/>
   </Switch>
 
   React.useContext(StoreContext);
@@ -25,7 +27,11 @@ function App () {
     return (
       <Country/>
     );
-  } else {
+  } else if (route.includes('/help')){
+    return(
+      <Help/>
+    );
+  } else{
     return (
       <h1>Page Not Found!</h1>
     )

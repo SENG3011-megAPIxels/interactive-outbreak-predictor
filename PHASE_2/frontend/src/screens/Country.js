@@ -8,7 +8,6 @@ import GraphOptions from "../components/GraphOptions";
 
 function Country () {
   const { page, modal, country, graph } = React.useContext(StoreContext);
-
   return (
     <Container>
       <Header>

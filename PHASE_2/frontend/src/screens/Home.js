@@ -6,12 +6,13 @@ import Modal from "../components/Modal";
 import DropDown from "../components/DropDown";
 import { Container, Header, Footer, Main, MapContainer, StyledSlider } from '../components/StyledComponents';
 import Logoimg from "./logo.png"
-
+import { LinkButton } from "../components/LinkButton";
 
 function Home () {
   const { sliderVal } = React.useContext(StoreContext);
   const [content, setContent] = React.useState("");
   const [value2, setValue2] = React.useState(28);
+  const { page } = React.useContext(StoreContext);
 
   const marks = [
     {
@@ -152,6 +153,7 @@ function Home () {
         {/* <Logo src={Logoimg} alt = "logo"/> */}
         <img src={Logoimg} height={"80px"} width={"180px"} alignItems={'left'} justifyContent={'left'} />
         Interactive Outbreak Predictor
+        {/* <LinkButton to={'./help'} onClick={() => page.setPage(2)} value="Help"/> */}
         <DropDown/>
       </Header>
       <Main>

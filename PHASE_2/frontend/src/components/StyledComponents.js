@@ -69,12 +69,12 @@ const ModalContainer = styled.div`
   max-width: 280px;
   min-height: 200px;
   position: relative;
-  right: 50px;
+  right: 17px;
   pointer-events: none;
 `
 
 const ModalContent = styled.div`
-  background-color: #aaa;
+  background-color: #ffb3b3;
   width: 150%;
   display: flex;
   align-items: center;
@@ -136,7 +136,6 @@ const ModalImage = styled.img`
   object-fit:contain;
   margin-left:10px;
 `
-
 export { Container,
          Header,
          Footer,

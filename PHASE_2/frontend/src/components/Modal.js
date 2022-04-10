@@ -44,6 +44,7 @@ function Modal () {
         <ModalContent>
           <p>Welcome to Interactive Outbreak Predictor!</p>
           <p>Please select a country to learn more</p>
+          <LinkButton to={'./help'} onClick={() => page.setPage(2)} value="Help"/>
         </ModalContent>
       </ModalContainer>
     );
