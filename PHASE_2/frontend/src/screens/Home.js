@@ -4,7 +4,9 @@ import { StoreContext } from '../Store';
 import MapChart from "../components/MapChart";
 import Modal from "../components/Modal";
 import DropDown from "../components/DropDown";
-import { Container, Header, Footer, Main, MapContainer, StyledSlider } from '../components/StyledComponents'
+import { Container, Header, Footer, Main, MapContainer, StyledSlider } from '../components/StyledComponents';
+import Logoimg from "./logo.png"
+
 
 function Home () {
   const { sliderVal } = React.useContext(StoreContext);
@@ -147,6 +149,8 @@ function Home () {
   return (
     <Container>
       <Header>
+        {/* <Logo src={Logoimg} alt = "logo"/> */}
+        <img src={Logoimg} height={"80px"} width={"180px"} alignItems={'left'} justifyContent={'left'} />
         Interactive Outbreak Predictor
         <DropDown/>
       </Header>
