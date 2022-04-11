@@ -9,6 +9,7 @@ import GraphOptions from "../components/GraphOptions";
 function Country () {
   const { page, modal, country, graph } = React.useContext(StoreContext);
   return (
+    // <Graph country={country.country.NAME}/>
     <Container>
       <Header>
         {country.country.NAME}'s {graph.graph} Graphs
