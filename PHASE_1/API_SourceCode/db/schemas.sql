@@ -50,3 +50,12 @@ CREATE TABLE salaries
     salary float,
     PRIMARY KEY (country_code, month_year, job_title)
 );
+
+CREATE TABLE real_estate
+(
+    country_code text,
+    region text,
+    price float, 
+    month_year text,
+    PRIMARY KEY (country_code, region, month_year)
+);
