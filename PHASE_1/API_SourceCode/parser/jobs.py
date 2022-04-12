@@ -21,7 +21,7 @@ def lambda_handler(event, context):
 
     query1=f"""
         select distinct month_year
-        from stocks
+        from salaries
         where country_code = '{country_code}'
         """
 
@@ -33,13 +33,13 @@ def lambda_handler(event, context):
 
     months_dict = {}
 
-    for month_query_obj in months:
-        month = month_query_obj[0]
+    for month_obj in months:
+        month_year = month_obj[0]
         query2=f"""
-            select *
-            from stocks
+            select job, job_title, salary
+            from salaries
             where country_code = '{country_code}'
-            and month_year = '{month}'
+            and month_year = '{month_year}'
             """
 
         curr.execute(query2)
@@ -50,11 +50,16 @@ def lambda_handler(event, context):
 
         month_dict = {}
 
-        for stock in query_objects:
-            stock_code = stock[0]
-            value = stock[3]
-            month_dict[stock_code] = value
-        months_dict[month] = month_dict
+        for job in query_objects:
+            job_dict = {}
+            jobType = job[0]
+            jobTitle = job[1]
+            salary = job[2]
+            job_dict['avgSalary'] = salary
+            job_dict['jobTitle'] = jobTitle
+            month_dict[jobType] = job_dict
+        
+        months_dict[month_year] = month_dict
 
     res = {
         "statusCode": 200,
