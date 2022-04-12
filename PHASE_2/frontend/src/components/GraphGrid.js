@@ -1,19 +1,44 @@
 import React, { Component, PureComponent, useState } from 'react';
 import { StoreContext } from '../Store';
-import { Grid } from '@mui/material';
-import { GridContainer, GridElement } from './StyledComponents';
-import { UnGraph } from './UnemGraph';
-import { CovidGraph } from './CovidGraph';
-import { ExchGraph } from './ExchGraph';
+import {
+    Chart as ChartJS,
+    CategoryScale,
+    LinearScale,
+    PointElement,
+    LineElement,
+    Title,
+    Tooltip,
+    Legend,
+} from 'chart.js';
+import { Line } from 'react-chartjs-2';
+
+ChartJS.register(
+    CategoryScale,
+    LinearScale,
+    PointElement,
+    LineElement,
+    Title,
+    Tooltip,
+    Legend
+);
 
 const lookup = require('country-code-lookup');
+const url = {
+    'Disease': "https://p5t20q9fz6.execute-api.ap-southeast-2.amazonaws.com/ProMedApi/countrycovid?country=",
+    'Jobs Market': "https://p5t20q9fz6.execute-api.ap-southeast-2.amazonaws.com/ProMedApi/futureunemployment?country=",
+    'Financial': {
+        'Stocks': "https://p5t20q9fz6.execute-api.ap-southeast-2.amazonaws.com/ProMedApi/stocks?country=",
+        'Exchange': "https://p5t20q9fz6.execute-api.ap-southeast-2.amazonaws.com/ProMedApi/exchrate?country="
+    }
+}
+
 
 function GraphGrid() {
     const { graph, country } = React.useContext(StoreContext);
 
-    return <Graph country={country.country.NAME} graphType={graph.graph}/>;
+    var cURL = url[graph.graph];
+    return <Graph country={country.country.NAME} graphType={graph.graph} url={cURL}/>;
 }
-
 
 class Graph extends Component {
 
@@ -22,6 +47,7 @@ class Graph extends Component {
         this.state = {
             country: this.props.country,
             graph: this.props.graphType,
+            url: this.props.url,
             data: {},
             options: {
                 responsive: true,
@@ -37,21 +63,27 @@ class Graph extends Component {
 
     // update data after loading is shown on screen
     componentDidMount() {
-        var gData = getGraphData(this.state.country, this.state.graph);
-        this.setState({
-            data: gData,
-        });
-
+        getGraphData(this.state.country, this.state.url).then(
+            gData => parseData(gData, this.state.graph).then(resp => {
+                this.setState({
+                    data: resp,
+                })
+            })
+        );
     }
 
     // on state change - change data
     componentDidUpdate(prevProps) {
         if (prevProps !== this.props) {
-            var gData = getGraphData(this.state.country, this.props.graphType);
-            this.setState({
-                graph: this.props.graphType,
-                data: gData
-            })
+            getGraphData(this.state.country, this.props.url).then(
+                gData => parseData(gData, this.state.graph).then(resp => {
+                        this.setState({
+                            graph: this.props.graphType,
+                            url: this.props.url,
+                            data: resp
+                        })
+                    })
+            )
         }
     }
 
@@ -61,8 +93,8 @@ class Graph extends Component {
                 Loading
             </div>
         ) : (
-            <div>
-                {this.state.data.dataset}
+            <div style={{width: "80%", height: 0}}>
+                <Line options={this.state.options} data={this.state.data}/>
             </div>
         );
     }
@@ -70,27 +102,59 @@ class Graph extends Component {
 
 // depending on the current clicked graph, get the
 // corresponding data from the api and parse it
-function getGraphData(country, graphType) {
-    // const { graph } = React.useContext(StoreContext);
+async function getGraphData(country, url) {
+    if (country == "United States of America")
+        country = "United States"
     const countryISO = lookup.byCountry(country).iso3;
 
-    var gData;
+    var cURL = url + countryISO;
+    
+    let resp = await fetch(cURL);
+    let respJSON = await resp.json();
+
+    return JSON.parse(respJSON.body);
+
+}
+
+// parse the data depending on the graphType
+async function parseData(data, graphType) {
     switch (graphType) {
         case "Disease":
-            gData = {
-                dataset: ["Disease"]
-            };
+            
             break;
+        case "Jobs Market":
+            return parseJobData(data);
         default:
-            gData = {
-                dataset: ["Jobs Market"]
-            };
             break;
-    }
-    return gData;
-    // return {
-    //     dataset: ["Jobs Market"]
-    // };
+        }
+    return parseJobData(data);
+} 
+
+
+// parse the unemployment data received from the api
+// and return it in the required format for a graph
+async function parseJobData(data) {
+    // dates
+    var labels = Object.keys(data);
+    var dataset = [];
+    console.log(labels)
+    labels.forEach(date => {
+        dataset.push(data[date]['percOfUnempl']);
+    });
+
+    var dataU = {
+        labels,
+        datasets: [
+            {
+                label: '% of Unemployed',
+                data: dataset,
+                borderColor: 'rgb(255, 99, 132)',
+                backgroundColor: 'rgba(255, 99, 132, 0.5)',
+            }
+        ]
+    };
+
+    return dataU;
 }
 
 export { GraphGrid }
