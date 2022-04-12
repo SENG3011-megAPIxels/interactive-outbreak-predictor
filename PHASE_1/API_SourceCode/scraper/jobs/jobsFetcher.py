@@ -1,18 +1,11 @@
 import requests
 import psycopg2
 
-# http://api.adzuna.com/v1/api/jobs/gb/history?app_id={YOUR API ID}&app_key={YOUR API KEY}&location0=UK&location1=London&category=it-jobs&content-type=application/json
-
 apiId = '0c28cb57'
 apiKey = 'd1fe99bf73d444c85538f67d743bea34'
 
 jobType = 'travel-jobs'
 jobTitle = 'Travel Jobs'
-
-# country = 'us'
-# country_code = 'USA'
-# country = 'au'
-# country_code = 'AUS'
 
 countries = ['us', 'au']
 
