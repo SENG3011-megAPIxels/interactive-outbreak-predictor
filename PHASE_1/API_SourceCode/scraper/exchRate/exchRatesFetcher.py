@@ -1,8 +1,9 @@
-import csv
 import requests
 import psycopg2
 
-# Fetches and stores global currency data in db
+access_key = 'b070df542265127d4c781478837a5cfe'
+
+# conn = psycopg2.connect(dbname="testing")
 
 db_host = "database-2.cjcukgskbtyu.ap-southeast-2.rds.amazonaws.com"
 db_user = "postgres"
@@ -17,31 +18,29 @@ conn = psycopg2.connect(
     dbname=db_name,
     port=db_port
 )
-# conn = psycopg2.connect(dbname="testing")
 curr = conn.cursor()
 
-with open('global_unemployment.csv', 'r') as csvfile:
-    reader = csv.reader(csvfile, delimiter=',')
-    lineCount = 0
-    for row in reader:
-        # Skip first line
-        if lineCount == 0:
-            lineCount += 1
-        else:
-            date = row[8]
-            date_split = row[8].split('-')
-            year = date_split[0]
-            month = date_split[1]
-            month_year = month + '-' + year[2:]
-            country = row[2]
-            value = row[16]
-            print(f"INSERTING {country} {month_year}, {value} into unemployment")
-            curr.execute(
-                f"""
-                INSERT INTO unemployment(country_code, month_year, unemployment_value)
-                VALUES ('{country}', '{month_year}', '{value}')
-                """
-            )
+for month in range(1, 13):
+
+    year = 20 # Manually changed per run
+
+    response = requests.get(f"http://api.currencylayer.com/historical?access_key={access_key}&date=20{year}-{month:02d}-01")
+
+    payload = response.json()
+
+    quotes = payload['quotes']
+
+    month_year = f"{month:02d}-{year}"
+
+    for key, value in quotes.items():
+        currency = key[3:]
+        print(f"INSERTING {currency} {month_year} {value} into exchange_rates")
+        curr.execute(
+            f"""
+            INSERT INTO exchange_rates(currency_code, month_year, rate)
+            VALUES ('{currency}', '{month_year}', '{value}')
+            """
+        )
 
 curr.execute("COMMIT")
 curr.close()
