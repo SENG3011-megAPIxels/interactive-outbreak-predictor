@@ -1,8 +1,6 @@
 import csv
-import requests
 import psycopg2
 import calendar
-import re
 
 stocks = ['BHP', 'CBA', 'RIO', 'WBC', 'CSL', 'ANZ', 'NAB', 'MQG', 'WOW', 'WES']
 
