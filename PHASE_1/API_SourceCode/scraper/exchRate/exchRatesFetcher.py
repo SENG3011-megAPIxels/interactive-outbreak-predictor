@@ -22,7 +22,7 @@ curr = conn.cursor()
 
 for month in range(1, 13):
 
-    year = 20 # Manually changed per run
+    year = 22 # Manually changed per run
 
     response = requests.get(f"http://api.currencylayer.com/historical?access_key={access_key}&date=20{year}-{month:02d}-01")
 
