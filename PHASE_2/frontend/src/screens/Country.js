@@ -5,7 +5,7 @@ import { GraphGrid } from '../components/GraphGrid';
 import { Container, Header, Footer, CountryMain, LogoImage } from '../components/StyledComponents'
 import { GraphSwap } from "../components/ButtonRow";
 import GraphOptions from "../components/GraphOptions";
-import Logoimg from "./logo.png"
+import Logoimg from "./logo.png";
 
 function Country () {
   const { page, modal, country, graph } = React.useContext(StoreContext);

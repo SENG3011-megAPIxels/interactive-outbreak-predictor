@@ -5,7 +5,7 @@ import MapChart from "../components/MapChart";
 import Modal from "../components/Modal";
 import DropDown from "../components/DropDown";
 import { Container, Header, Footer, Main, MapContainer, StyledSlider, LogoImage } from '../components/StyledComponents';
-import Logoimg from "./logo.png"
+import Logoimg from "./logo.png";
 
 function Home () {
   const { sliderVal, sliderNum } = React.useContext(StoreContext);

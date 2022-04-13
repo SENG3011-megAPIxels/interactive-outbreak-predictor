@@ -2,7 +2,7 @@ import React from "react";
 import { StoreContext } from '../Store';
 import { Container, Header, Footer, CountryMain, LogoImage } from '../components/StyledComponents'
 import { LinkButton2 } from "../components/LinkButton";
-import Logoimg from "./logo.png"
+import Logoimg from "./logo.png";
 
 function Help () {
     const { page } = React.useContext(StoreContext);
