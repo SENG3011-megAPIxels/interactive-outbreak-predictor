@@ -35,6 +35,14 @@ const Main = styled.div`
   display: flex;
 `
 
+const PreferencesMain = styled.div`
+  flex: 15;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+`
+
 const CountryMain = styled.div`
   flex: 15;
   display: flex;
@@ -136,6 +144,12 @@ const ModalImage = styled.img`
   object-fit:contain;
   margin-left:10px;
 `
+
+const StyledForm = styled.form`
+  display: flex;
+  flex-direction: column;
+`
+
 export { Container,
          Header,
          Footer,
@@ -151,5 +165,7 @@ export { Container,
          ButtonRow,
          GraphOptionsMain,
          GraphSingleOption,
-         ModalImage
+         ModalImage,
+         StyledForm,
+         PreferencesMain
        }

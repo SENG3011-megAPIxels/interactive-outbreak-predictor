@@ -6,7 +6,6 @@ import Modal from "../components/Modal";
 import DropDown from "../components/DropDown";
 import { Container, Header, Footer, Main, MapContainer, StyledSlider } from '../components/StyledComponents';
 import Logoimg from "./logo.png"
-import { LinkButton } from "../components/LinkButton";
 
 function Home () {
   const { sliderVal } = React.useContext(StoreContext);

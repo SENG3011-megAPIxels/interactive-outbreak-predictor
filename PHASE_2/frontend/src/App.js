@@ -2,12 +2,15 @@ import React from 'react';
 import Home from './screens/Home';
 import Country from './screens/Country';
 import Help from './screens/Help';
+import Preferences from './screens/Preferences';
 import { BrowserRouter as Switch, Route } from 'react-router-dom';
 import { StoreContext } from './Store';
 
 /* setPage values:
   Home = setPage(0);
   Country = setPage(1);
+  Help = setPage(2);
+  Preferences = setPage(3);
 */
 
 function App () {
@@ -15,6 +18,7 @@ function App () {
     <Route exact path="/" component={Home}/>
     <Route path="/country" component={Country}/>
     <Route path="/help" component={Help}/>
+    <Route path="/preferences" component={Preferences}/>
   </Switch>
 
   React.useContext(StoreContext);
@@ -27,9 +31,13 @@ function App () {
     return (
       <Country/>
     );
-  } else if (route.includes('/help')){
+  } else if (route === '/help'){
     return(
       <Help/>
+    );
+  } else if (route === '/preferences'){
+    return(
+      <Preferences/>
     );
   } else{
     return (

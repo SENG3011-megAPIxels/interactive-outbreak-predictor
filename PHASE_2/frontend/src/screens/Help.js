@@ -1,16 +1,15 @@
 import React from "react";
 import { StoreContext } from '../Store';
 import { Container, Header, Footer, CountryMain } from '../components/StyledComponents'
-import { LinkButton } from "../components/LinkButton";
+import { LinkButton2 } from "../components/LinkButton";
 
 function Help () {
     const { page } = React.useContext(StoreContext);
   return (
     <Container>
       <Header>
-          <text>Help</text>
-        
-        <LinkButton to={'.'} onClick={() => page.setPage(1)} value="Back"/>
+        <text>Help</text>
+        <LinkButton2 to={'.'} onClick={() => page.setPage(0)} value="Back"/>
       </Header>
       <CountryMain>
         <text>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam hendrerit libero sit amet viverra posuere. Pellentesque tempor id augue vel ultricies. Donec maximus in odio nec auctor. Nunc imperdiet gravida enim et fringilla. Aliquam blandit aliquam quam fringilla lacinia. Donec ac fringilla arcu. Etiam tempus turpis eu lorem maximus, cursus dapibus ex egestas. Nulla porttitor tempor imperdiet.
