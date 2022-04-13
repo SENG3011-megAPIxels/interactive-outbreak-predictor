@@ -11,7 +11,7 @@ const Container = styled.div`
 const Header = styled.div`
   flex: 1;
   display: flex;
-  background: red;
+  background: darkred;
   align-items: center;
   justify-content: space-between;
   font-size: 2em;
@@ -21,7 +21,7 @@ const Header = styled.div`
 const Footer = styled.div`
   flex: 1;
   display: flex;
-  background: red;
+  background: darkred;
   align-items: center;
   justify-content: center;
   color: white;

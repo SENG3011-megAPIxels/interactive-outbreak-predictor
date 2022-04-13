@@ -1,7 +1,7 @@
 import React from "react";
 import { StoreContext } from '../Store';
 import { Container, Header, Footer, PreferencesMain, StyledForm, GraphSingleOption, StyledInput, StyledSelectInput, LogoImage } from '../components/StyledComponents'
-import { LinkButton, LinkButton2 } from "../components/LinkButton";
+import { LinkButton } from "../components/LinkButton";
 import DropDown from "../components/DropDown";
 import Logoimg from "./logo.png";
 import emailjs from '@emailjs/browser';
@@ -59,7 +59,7 @@ function Preferences () {
       <Header>
         <LogoImage src={Logoimg}/>
         Preferences
-        <LinkButton2 to={'.'} onClick={() => page.setPage(0)} value="Back"/>
+        <LinkButton to={'.'} onClick={() => page.setPage(0)} value="Back"/>
       </Header>
       <PreferencesMain>
         <StyledForm>

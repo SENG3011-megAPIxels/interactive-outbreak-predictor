@@ -1,6 +1,6 @@
 import React from "react";
 import { StoreContext } from '../Store';
-import { LinkButton2 } from '../components/LinkButton';
+import { LinkButton } from '../components/LinkButton';
 import { GraphGrid } from '../components/GraphGrid';
 import { Container, Header, Footer, CountryMain, LogoImage } from '../components/StyledComponents'
 import { GraphSwap } from "../components/ButtonRow";
@@ -15,7 +15,7 @@ function Country () {
       <Header>
         <LogoImage src={Logoimg}/>
         {country.country.NAME}'s {graph.graph} Graphs
-        <LinkButton2 to={'/'} onClick={() => {modal.setModal(2); page.setPage(0)}} value="Back"/>
+        <LinkButton to={'/'} onClick={() => {modal.setModal(2); page.setPage(0)}} value="Back"/>
       </Header>
       <CountryMain>
         <GraphGrid/>

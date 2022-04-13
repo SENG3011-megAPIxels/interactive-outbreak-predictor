@@ -1,7 +1,7 @@
 import React from "react";
 import { StoreContext } from '../Store';
 import { Container, Header, Footer, CountryMain, LogoImage } from '../components/StyledComponents'
-import { LinkButton2 } from "../components/LinkButton";
+import { LinkButton } from "../components/LinkButton";
 import Logoimg from "./logo.png";
 
 function Help () {
@@ -11,7 +11,7 @@ function Help () {
       <Header>
         <LogoImage src={Logoimg}/>
         Help
-        <LinkButton2 to={'.'} onClick={() => page.setPage(0)} value="Back"/>
+        <LinkButton to={'.'} onClick={() => page.setPage(0)} value="Back"/>
       </Header>
       <CountryMain>
         <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam hendrerit libero sit amet viverra posuere. Pellentesque tempor id augue vel ultricies. Donec maximus in odio nec auctor. Nunc imperdiet gravida enim et fringilla. Aliquam blandit aliquam quam fringilla lacinia. Donec ac fringilla arcu. Etiam tempus turpis eu lorem maximus, cursus dapibus ex egestas. Nulla porttitor tempor imperdiet.
