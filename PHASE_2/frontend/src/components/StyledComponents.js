@@ -16,8 +16,6 @@ const Header = styled.div`
   justify-content: space-between;
   font-size: 2em;
   color: white;
-  padding-left: 25vw;
-  padding-right: 10px;
 `
 
 const Footer = styled.div`
@@ -40,7 +38,7 @@ const PreferencesMain = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
+  justify-content: space-around;
 `
 
 const CountryMain = styled.div`
@@ -147,7 +145,27 @@ const ModalImage = styled.img`
 
 const StyledForm = styled.form`
   display: flex;
+  justify-content: center;
   flex-direction: column;
+  align-items: center;
+`
+
+const StyledInput = styled.input`
+  height: 30px;
+  font-size: 12pt;
+  border-radius: 10px;
+  border: 1px solid black;
+  width: 200px;
+  margin: 10px;
+`
+
+const StyledSelectInput = styled.select`
+  height: 30px;
+  font-size: 12pt;
+  border-radius: 10px;
+  border: 1px solid black;
+  width: 200px;
+  margin: 10px;
 `
 
 export { Container,
@@ -167,5 +185,7 @@ export { Container,
          GraphSingleOption,
          ModalImage,
          StyledForm,
-         PreferencesMain
+         PreferencesMain,
+         StyledInput,
+         StyledSelectInput
        }

@@ -2,12 +2,14 @@ import React from "react";
 import { StoreContext } from '../Store';
 import { Container, Header, Footer, CountryMain } from '../components/StyledComponents'
 import { LinkButton2 } from "../components/LinkButton";
+import Logoimg from "./logo.png"
 
 function Help () {
     const { page } = React.useContext(StoreContext);
   return (
     <Container>
       <Header>
+        <img src={Logoimg} height={"80px"} width={"180px"} alignItems={'left'} justifyContent={'left'} />
         <text>Help</text>
         <LinkButton2 to={'.'} onClick={() => page.setPage(0)} value="Back"/>
       </Header>
