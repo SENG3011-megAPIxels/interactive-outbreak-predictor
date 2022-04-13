@@ -33,7 +33,7 @@ function Modal () {
             <p>{'New Deaths: ' + (covidData[country.country.ISO_A3] !== undefined ? covidData[country.country.ISO_A3][sliderVal.sliderVal].newDeaths : 'Unknown')}</p>
             <p>{'Total Vaccinated: ' + (covidData[country.country.ISO_A3] !== undefined ? covidData[country.country.ISO_A3][sliderVal.sliderVal].totalVaccinated : 'Unknown')}</p>
             <p>{'Percentage Vaccinated: ' + (covidData[country.country.ISO_A3] !== undefined ? covidData[country.country.ISO_A3][sliderVal.sliderVal].percVaccinated : 'N/A')}</p>
-            <LinkButton to={`/country/${country.country.NAME}`} onClick={() => {modal.setModal(0); page.setPage(1)}} value="See More"/>
+            <LinkButton to={`/country/${country.country.NAME}`} onClick={() => {modal.setModal(0); page.setPage(1)}} value="See Predictions"/>
             <LinkButton to={'.'} onClick={() => modal.setModal(1)} value="Back"/>
         </ModalContent>
       </ModalContainer>

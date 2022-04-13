@@ -12,6 +12,7 @@ function Store ({ children }) {
   const [modal, setModal] = React.useState(1);
   const [country, setCountry] = React.useState('');
   const [sliderVal, setSliderVal] = React.useState('03-22');
+  const [sliderNum, setSliderNum] = React.useState(28);
   const [disease, setDisease] = React.useState("Covid-19");
   const [graph, setGraph] = React.useState("Disease");
   const [graphData, setGraphData] = React.useState({});
@@ -26,6 +27,8 @@ function Store ({ children }) {
     country: { country, setCountry },
     // The slider value
     sliderVal: { sliderVal, setSliderVal },
+    // The slider number
+    sliderNum: { sliderNum, setSliderNum },
     // The disease being displayed
     disease: { disease, setDisease },
     // The graphs being displayed

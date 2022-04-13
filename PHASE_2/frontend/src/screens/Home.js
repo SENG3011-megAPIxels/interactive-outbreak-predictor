@@ -8,9 +8,8 @@ import { Container, Header, Footer, Main, MapContainer, StyledSlider, LogoImage 
 import Logoimg from "./logo.png"
 
 function Home () {
-  const { sliderVal } = React.useContext(StoreContext);
+  const { sliderVal, sliderNum } = React.useContext(StoreContext);
   const [content, setContent] = React.useState("");
-  const [value2, setValue2] = React.useState(28);
   const { page } = React.useContext(StoreContext);
 
   const marks = [
@@ -57,7 +56,7 @@ function Home () {
   ];
 
   const updateSlider = (value) => {
-    setValue2(value)
+    sliderNum.setSliderNum(value)
     switch(value) {
       case 1:
         sliderVal.setSliderVal('12-19');
@@ -149,10 +148,8 @@ function Home () {
   return (
     <Container>
       <Header>
-        {/* <Logo src={Logoimg} alt = "logo"/> */}
         <LogoImage src={Logoimg}/>
         Interactive Outbreak Predictor
-        {/* <LinkButton to={'./help'} onClick={() => page.setPage(2)} value="Help"/> */}
         <DropDown/>
       </Header>
       <Main>
@@ -166,9 +163,8 @@ function Home () {
             marks={marks}
             min={1}
             max={28}
-            value={value2}
+            value={sliderNum.sliderNum}
             onChange={(_, value) => updateSlider(value)}
-            //onChangeCommitted={(_, value) => updateSlider(value)}
           />
         </MapContainer>
         <Modal/>
