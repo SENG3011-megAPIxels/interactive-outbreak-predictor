@@ -1,9 +1,10 @@
 import React from "react";
 import { StoreContext } from '../Store';
-import { Container, Header, Footer, PreferencesMain, StyledForm, GraphSingleOption, StyledInput, StyledSelectInput } from '../components/StyledComponents'
+import { Container, Header, Footer, PreferencesMain, StyledForm, GraphSingleOption, StyledInput, StyledSelectInput, LogoImage } from '../components/StyledComponents'
 import { LinkButton, LinkButton2 } from "../components/LinkButton";
 import DropDown from "../components/DropDown";
-import Logoimg from "./logo.png"
+import Logoimg from "./logo.png";
+import emailjs from '@emailjs/browser';
 
 function Preferences () {
   const { page } = React.useContext(StoreContext);
@@ -13,6 +14,7 @@ function Preferences () {
   const [firstName, setFirstName] = React.useState('');
   const [lastName, setLastName] = React.useState('');
   const [disease, setDisease] = React.useState('Covid-19');
+  const [subscription, setSubscription] = React.useState('Subscribe to Alerts!');
 
   function sendEmail () {
     if (email === '') {
@@ -24,15 +26,31 @@ function Preferences () {
     } else if (country === '') {
       alert('No country entered!');
     } else {
-      alert(`Thank you ${firstName}.\nConfirmation email sent to ${email}\nYou will be notified about ${disease} in ${country}.`)
+      emailjs.send(
+        'service_w0yalb7',
+        'template_m2300qc',
+        {
+          firstName: firstName,
+          lastName: lastName,
+          disease: disease,
+          country: country,
+          email: email,
+        },
+        'NsG3_GwA4VyoGy7Ht'
+      );
+      setEmail('');
+      setCountry('');
+      setFirstName('');
+      setLastName('');
+      setSubscription('Subscribed! (Check Your Inbox)');
     }
   }
 
   return (
     <Container>
       <Header>
-        <img src={Logoimg} height={"80px"} width={"180px"} alignItems={'left'} justifyContent={'left'} />
-        <text>Preferences</text>
+        <LogoImage src={Logoimg}/>
+        Preferences
         <LinkButton2 to={'.'} onClick={() => page.setPage(0)} value="Back"/>
       </Header>
       <PreferencesMain>
@@ -47,15 +65,15 @@ function Preferences () {
           </GraphSingleOption>
         </StyledForm>
         <StyledForm>
-          <h2>Subscribe to Alerts!</h2>
+          <h2>{`${subscription}`}</h2>
           <label htmlFor="firstName"> First Name </label>
-          <StyledInput id="firstName" type="text" onChange={({ target }) => setFirstName(target.value)} placeholder="John"/>
+          <StyledInput id="firstName" value={firstName} type="text" onChange={({ target }) => setFirstName(target.value)} placeholder="John"/>
           <label htmlFor="lastName"> Last Name </label>
-          <StyledInput id="lastName" type="text" onChange={({ target }) => setLastName(target.value)} placeholder="Smith"/>
+          <StyledInput id="lastName" value={lastName} type="text" onChange={({ target }) => setLastName(target.value)} placeholder="Smith"/>
           <label htmlFor="email"> Email Address </label>
-          <StyledInput id="email" type="email" onChange={({ target }) => setEmail(target.value)} placeholder="example@email.com"/>
+          <StyledInput id="email" value={email} type="email" onChange={({ target }) => setEmail(target.value)} placeholder="example@email.com"/>
           <label htmlFor="country"> Country </label>
-          <StyledInput id="country" type="text" onChange={({ target }) => setCountry(target.value)} placeholder="Australia"/>
+          <StyledInput id="country" value={country} type="text" onChange={({ target }) => setCountry(target.value)} placeholder="Australia"/>
           <label htmlFor="disease"> Disease </label>
           <StyledSelectInput>
             <option id="disease" value="Covid-19">Covid-19</option>

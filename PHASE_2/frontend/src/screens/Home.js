@@ -4,7 +4,7 @@ import { StoreContext } from '../Store';
 import MapChart from "../components/MapChart";
 import Modal from "../components/Modal";
 import DropDown from "../components/DropDown";
-import { Container, Header, Footer, Main, MapContainer, StyledSlider } from '../components/StyledComponents';
+import { Container, Header, Footer, Main, MapContainer, StyledSlider, LogoImage } from '../components/StyledComponents';
 import Logoimg from "./logo.png"
 
 function Home () {
@@ -150,7 +150,7 @@ function Home () {
     <Container>
       <Header>
         {/* <Logo src={Logoimg} alt = "logo"/> */}
-        <img src={Logoimg} height={"80px"} width={"180px"} alignItems={'left'} justifyContent={'left'} />
+        <LogoImage src={Logoimg}/>
         Interactive Outbreak Predictor
         {/* <LinkButton to={'./help'} onClick={() => page.setPage(2)} value="Help"/> */}
         <DropDown/>

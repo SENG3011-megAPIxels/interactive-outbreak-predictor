@@ -168,6 +168,13 @@ const StyledSelectInput = styled.select`
   margin: 10px;
 `
 
+const LogoImage = styled.img`
+  height: 80px;
+  width: 180px;
+  align-items: left;
+  justifyContent: left;
+`
+
 export { Container,
          Header,
          Footer,
@@ -187,5 +194,6 @@ export { Container,
          StyledForm,
          PreferencesMain,
          StyledInput,
-         StyledSelectInput
+         StyledSelectInput,
+         LogoImage
        }
