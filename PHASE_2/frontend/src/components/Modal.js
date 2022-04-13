@@ -38,12 +38,12 @@ function Modal () {
         </ModalContent>
       </ModalContainer>
     );
-  } else if (modal.modal === 1){
+  } else if (modal.modal === 1) {
     return (
       <ModalContainer>
         <ModalContent>
           <p>Welcome to Interactive Outbreak Predictor!</p>
-          <p>Please select a country to learn more</p>
+          <p>Please select a country to begin predicting</p>
           <LinkButton to={'./help'} onClick={() => page.setPage(2)} value="Help"/>
           <LinkButton to={'./preferences'} onClick={() => page.setPage(3)} value="Preferences"/>
         </ModalContent>
