@@ -15,7 +15,7 @@ const geoUrl =
 
 const colorScale = scaleLinear()
   .domain([0, 2500000])
-  .range(["lightblue", "darkblue"]);
+  .range(["#cee8f0", "darkblue"]);
 
 const MapChart = ({ setTooltipContent }) => {
   const { page, modal, country, sliderVal } = React.useContext(StoreContext);
