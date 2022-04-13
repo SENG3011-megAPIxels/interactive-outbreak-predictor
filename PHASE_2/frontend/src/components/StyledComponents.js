@@ -11,7 +11,7 @@ const Container = styled.div`
 const Header = styled.div`
   flex: 1;
   display: flex;
-  background: darkred;
+  background: #37568d;
   align-items: center;
   justify-content: space-between;
   font-size: 2em;
@@ -21,7 +21,7 @@ const Header = styled.div`
 const Footer = styled.div`
   flex: 1;
   display: flex;
-  background: darkred;
+  background: #37568d;
   align-items: center;
   justify-content: center;
   color: white;
@@ -80,8 +80,8 @@ const ModalContainer = styled.div`
   flex: 1;
   align-items: flex-start;
   justify-content: center;
-  min-width: 280px;
-  max-width: 280px;
+  min-width: 300px;
+  max-width: 300px;
   min-height: 200px;
   position: relative;
   right: 17px;
@@ -89,7 +89,7 @@ const ModalContainer = styled.div`
 `
 
 const ModalContent = styled.div`
-  background-color: #ffb3b3;
+  background-color: lightsteelblue;
   width: 150%;
   display: flex;
   align-items: center;
@@ -97,7 +97,7 @@ const ModalContent = styled.div`
   border-radius: 10px;
   margin-top: 100px;
   padding: 5px;
-  text-align: center;
+  text-align: left;
   pointer-events: all;
 `
 const GridContainer = styled.div`

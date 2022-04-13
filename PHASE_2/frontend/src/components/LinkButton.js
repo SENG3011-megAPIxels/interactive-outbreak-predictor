@@ -8,7 +8,7 @@ const StyledLink = styled(Link)`
     width: 19vw;
     font-size: 10pt;
   }
-  background-color: red;
+  background-color: darkblue;
   color: white;
   padding: 10px;
   border-radius: 10px;
@@ -18,11 +18,11 @@ const StyledLink = styled(Link)`
   cursor: pointer;
   width: 120px;
   text-align: center;
-  border: 1px solid red;
+  border: 1px solid darkblue;
 
   &:hover {
     background-color: white;
-    color: red;
+    color: darkblue;
   }
 `
 

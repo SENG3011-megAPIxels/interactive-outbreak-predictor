@@ -29,10 +29,12 @@ function Modal () {
         <ModalContent>
             <h2 className="modal-title">{country.country.NAME}</h2>
             <ModalImage src={`https://countryflagsapi.com/png/${country.country.ISO_A3}`} alt={`Flag of ${country.country.NAME}`}/>
-            <p>{'New Cases: ' + (covidData[country.country.ISO_A3] !== undefined ? covidData[country.country.ISO_A3][sliderVal.sliderVal].newCases : 'Unknown')}</p>
-            <p>{'New Deaths: ' + (covidData[country.country.ISO_A3] !== undefined ? covidData[country.country.ISO_A3][sliderVal.sliderVal].newDeaths : 'Unknown')}</p>
-            <p>{'Total Vaccinated: ' + (covidData[country.country.ISO_A3] !== undefined ? covidData[country.country.ISO_A3][sliderVal.sliderVal].totalVaccinated : 'Unknown')}</p>
-            <p>{'Percentage Vaccinated: ' + (covidData[country.country.ISO_A3] !== undefined ? covidData[country.country.ISO_A3][sliderVal.sliderVal].percVaccinated : 'N/A')}</p>
+            <div>
+              <p>{'New Cases: ' + (covidData[country.country.ISO_A3] !== undefined ? covidData[country.country.ISO_A3][sliderVal.sliderVal].newCases : 'Unknown')}</p>
+              <p>{'New Deaths: ' + (covidData[country.country.ISO_A3] !== undefined ? covidData[country.country.ISO_A3][sliderVal.sliderVal].newDeaths : 'Unknown')}</p>
+              <p>{'Total Vaccinated: ' + (covidData[country.country.ISO_A3] !== undefined ? covidData[country.country.ISO_A3][sliderVal.sliderVal].totalVaccinated : 'Unknown')}</p>
+              <p>{'Percentage Vaccinated: ' + (covidData[country.country.ISO_A3] !== undefined ? covidData[country.country.ISO_A3][sliderVal.sliderVal].percVaccinated : 'N/A')}</p>
+            </div>
             <LinkButton to={`/country/${country.country.NAME}`} onClick={() => {modal.setModal(0); page.setPage(1)}} value="See Predictions"/>
             <LinkButton to={'.'} onClick={() => modal.setModal(1)} value="Back"/>
         </ModalContent>
