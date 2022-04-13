@@ -7,7 +7,7 @@ import Logoimg from "./logo.png";
 import emailjs from '@emailjs/browser';
 
 function Preferences () {
-  const { page } = React.useContext(StoreContext);
+  const { page, dark } = React.useContext(StoreContext);
 
   const [email, setEmail] = React.useState('');
   const [country, setCountry] = React.useState('');
@@ -15,6 +15,14 @@ function Preferences () {
   const [lastName, setLastName] = React.useState('');
   const [disease, setDisease] = React.useState('Covid-19');
   const [subscription, setSubscription] = React.useState('Subscribe to Alerts!');
+
+  React.useEffect(() => {
+    if (dark.dark) {
+      document.body.classList.add('darkMode');
+    } else {
+      document.body.classList.remove('darkMode');
+    }
+  },[dark.dark]);
 
   function sendEmail () {
     if (email === '') {
@@ -56,11 +64,11 @@ function Preferences () {
       <PreferencesMain>
         <StyledForm>
           <GraphSingleOption>
-            <input type="radio" id="lightMode" name="mode" value="light" defaultChecked/>
+            <input type="radio" id="lightMode" name="mode" value="light" defaultChecked={!dark.dark} onChange={() => dark.setDark(false)}/>
             <label htmlFor="lightMode"> Light Mode </label>
           </GraphSingleOption>
           <GraphSingleOption>
-            <input type="radio" id="darkMode" name="mode" value="dark"/>
+            <input type="radio" id="darkMode" name="mode" value="dark" defaultChecked={dark.dark} onChange={() => dark.setDark(true)}/>
             <label htmlFor="darkMode"> Dark Mode </label>
           </GraphSingleOption>
         </StyledForm>

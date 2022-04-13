@@ -66,6 +66,15 @@ const StyledSlider = styled(Slider)`
   color: black !important;
 `
 
+const StyledSliderDark = styled(Slider)`
+  flex: 1;
+  margin-top: -100px;
+  margin-left: 40px;
+  bottom: -50px !important;
+  width: 70vw !important;
+  color: white !important;
+`
+
 const ModalContainer = styled.div`
   display: flex;
   flex: 1;
@@ -182,6 +191,7 @@ export { Container,
          CountryMain,
          MapContainer,
          StyledSlider,
+         StyledSliderDark,
          ModalContainer,
          ModalContent,
          GridContainer,

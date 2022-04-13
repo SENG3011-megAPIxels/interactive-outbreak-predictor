@@ -17,6 +17,7 @@ function Store ({ children }) {
   const [graph, setGraph] = React.useState("Disease");
   const [graphData, setGraphData] = React.useState({});
   const [options, setOptions] = React.useState({});
+  const [dark, setDark] = React.useState(false);
 
   const store = {
     // The page number
@@ -36,7 +37,9 @@ function Store ({ children }) {
     // The data of the graphs
     graphData: { graphData, setGraphData },
     // The options of the graph
-    options: { options, setOptions }
+    options: { options, setOptions },
+    // Is dark mode enabled
+    dark: { dark, setDark }
   }
 
   return <StoreContext.Provider value={store}>{children}</StoreContext.Provider>

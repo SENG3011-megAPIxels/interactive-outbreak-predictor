@@ -24,3 +24,21 @@ svg {
   margin: -100px;
   height: 100vh;
 }
+
+.darkMode {
+  background: black;
+  color: white !important;
+}
+
+.darkMode .css-yafthl-MuiSlider-markLabel {
+  color: white !important;
+}
+
+.darkMode .css-1eoe787-MuiSlider-markLabel {
+  color: white !important;
+}
+
+.darkMode .css-1gjgmky-MuiToggleButtonGroup-root .MuiToggleButtonGroup-grouped {
+  border: 1px solid white;
+  background: white;
+}
