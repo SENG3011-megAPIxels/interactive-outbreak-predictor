@@ -37,7 +37,7 @@ function GraphGrid() {
     const { graph, country } = React.useContext(StoreContext);
 
     var cURL = url[graph.graph];
-    return <Graph country={country.country.NAME} graphType={graph.graph} url={cURL}/>;
+    return <Graph country={country.country.NAME} graphType={graph.graph} url={cURL} param={'newCases'}/>;
 }
 
 class Graph extends Component {
@@ -48,6 +48,7 @@ class Graph extends Component {
             country: this.props.country,
             graph: this.props.graphType,
             url: this.props.url,
+            graphChoice: this.props.param,
             data: {},
             options: {
                 responsive: true,
@@ -64,7 +65,7 @@ class Graph extends Component {
     // update data after loading is shown on screen
     componentDidMount() {
         getGraphData(this.state.country, this.state.url).then(
-            gData => parseData(gData, this.state.graph).then(resp => {
+            gData => parseData(gData, this.state.graph, this.props.param).then(resp => {
                 this.setState({
                     data: resp,
                 })
@@ -76,13 +77,14 @@ class Graph extends Component {
     componentDidUpdate(prevProps) {
         if (prevProps !== this.props) {
             getGraphData(this.state.country, this.props.url).then(
-                gData => parseData(gData, this.state.graph).then(resp => {
-                        this.setState({
-                            graph: this.props.graphType,
-                            url: this.props.url,
-                            data: resp
-                        })
+                gData => parseData(gData, this.props.graphType, this.props.param).then(resp => {
+                    this.setState({
+                        graph: this.props.graphType,
+                        url: this.props.url,
+                        graphChoice: this.props.param,
+                        data: resp
                     })
+                })
             )
         }
     }
@@ -117,11 +119,10 @@ async function getGraphData(country, url) {
 }
 
 // parse the data depending on the graphType
-async function parseData(data, graphType) {
+async function parseData(data, graphType, param) {
     switch (graphType) {
         case "Disease":
-            
-            break;
+            return parseCovidData(data, param);
         case "Jobs Market":
             return parseJobData(data);
         default:
@@ -137,12 +138,11 @@ async function parseJobData(data) {
     // dates
     var labels = Object.keys(data);
     var dataset = [];
-    console.log(labels)
     labels.forEach(date => {
         dataset.push(data[date]['percOfUnempl']);
     });
 
-    var dataU = {
+    return {
         labels,
         datasets: [
             {
@@ -153,116 +153,71 @@ async function parseJobData(data) {
             }
         ]
     };
-
-    return dataU;
 }
 
+// format the covid data to be in the required format
+// time on the x-axis, count on the y-axis
+async function parseCovidData(data, param) {
+    var subregions = Object.keys(data);
+    var labels = Object.keys(data[subregions[0]]);
+    labels.sort((a, b) => {
+        var spA = a.split("-");
+        var spB = b.split("-");
+        // year of a less than year of b
+        if (parseInt(spA[1]) < parseInt(spB[1]))
+            return -1;
+        // year of a and b equal
+        else if (parseInt(spA[1]) == parseInt(spB[1]))
+            return parseInt(spA[0]) - parseInt(spB[0]);
+        // year of b less than year of a
+        return 1;
+    });
+    var dataset = [];
+    subregions.forEach(region => {
+        var dates = Object.keys(data[region]);
+        var paramVal = [];
+        dates.forEach(date => {
+            paramVal.push(data[region][date][param]);
+        });
+        var colour = poolColors(paramVal.length);
+        dataset.push(
+            {
+                label: region,
+                data: paramVal,
+                backgroundColor: colour,
+                borderColor: colour,
+            }
+        );
+    });
+
+    return {
+        labels,
+        datasets: dataset
+    }
+}
+
+
+
+
+
+
+
+// get dynamic colours for each dataset
+function dynamicColors() {
+    var r = Math.floor(Math.random() * 255);
+    var g = Math.floor(Math.random() * 255);
+    var b = Math.floor(Math.random() * 255);
+    return "rgba(" + r + "," + g + "," + b + ", 0.5)";
+}
+
+// return those dynamic colours to work with the format
+function poolColors(len) {
+    var pool = [];
+    for(var i = 0; i < len; i++) {
+        pool.push(dynamicColors());
+    }
+    return pool;
+}
+
+
 export { GraphGrid }
-
-
-
-
-
-
-
-
-// async function JobData(country) {
-//     const [data, setData] = React.useState([]);
-//     var countryISO = lookup.byCountry(country).iso3;
-//     var url = "https://p5t20q9fz6.execute-api.ap-southeast-2.amazonaws.com/ProMedApi/futureunemployment?country=" + countryISO;
-    
-//     React.useEffect(async () => {
-//         const response = await fetch(url, {
-//             method: 'GET',
-//             headers: {
-//                 Accept: 'application/json',
-//             },
-//         });
-//         console.log('got data');
-//         const json = await response.json();
-//         if (response.ok) {
-//             setData(JSON.parse(json.body));
-//         } else {
-//             console.log('error');
-//         }
-
-//         // dates
-//         var labels = Object.keys(data);
-//         var dataset = [];
-//         labels.forEach(date => {
-//             dataset.push(data[date]['percOfUnempl']);
-//         });
-
-//         var dataU = {
-//             labels,
-//             datasets: [
-//                 {
-//                     label: '% of Unemployed',
-//                     data: dataset,
-//                     borderColor: 'rgb(255, 99, 132)',
-//                     backgroundColor: 'rgba(255, 99, 132, 0.5)',
-//                 }
-//             ]
-//         };
-        
-//         console.log(dataU);
-        
-//     }, [])
-// }
-
-
-
-// function GraphGrid() {
-//     const { graph } = React.useContext(StoreContext);
-//     const [data, setData] = React.useState([]);
-//     const [isBusy, setBusy] = React.useState(true);
-
-//     switch (graph.graph) {
-//         case "Jobs Market":
-//             return <UnGraph></UnGraph>;
-//         case "Disease":
-//             return <CovidGraph></CovidGraph>;
-//         case "Financial":
-//             return <ExchGraph></ExchGraph>
-//         default:
-//             return <CovidGraph></CovidGraph>;
-//     }
-
-
-
-
-
-
-
-
-
-
-
-
-
-//         // const { country, graphData, options } = React.useContext(StoreContext);
-//         // const [isLoading, setIsLoading] = React.useState(true);
-    
-//         // React.useEffect(() => {
-    
-//         // }, [])
-    
-//         // React.useEffect(() => {
-//         //     const fetchData = async () => {
-//         //         try {
-//         //             console.log("test");
-//         //             JobData(country);
-//         //             setIsLoading(false);
-//         //         } catch (error) {
-//         //             setIsLoading(true);
-//         //         }
-//         //     }
-//         //     fetchData();
-//         // }, [])
-//         // if (isLoading) {
-//     //    return <div>Loading</div>       
-//     // } else {
-//     // }
-// }
-
-// export { GraphGrid }
