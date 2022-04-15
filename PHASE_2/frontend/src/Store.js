@@ -15,8 +15,7 @@ function Store ({ children }) {
   const [sliderNum, setSliderNum] = React.useState(28);
   const [disease, setDisease] = React.useState("Covid-19");
   const [graph, setGraph] = React.useState("Disease");
-  const [graphData, setGraphData] = React.useState({});
-  const [options, setOptions] = React.useState({});
+  const [graphChoice, setGraphChoice] = React.useState('Cases');
   const [dark, setDark] = React.useState(false);
 
   const store = {
@@ -32,12 +31,10 @@ function Store ({ children }) {
     sliderNum: { sliderNum, setSliderNum },
     // The disease being displayed
     disease: { disease, setDisease },
-    // The graphs being displayed
+    // The graph being displayed
     graph: { graph, setGraph },
-    // The data of the graphs
-    graphData: { graphData, setGraphData },
-    // The options of the graph
-    options: { options, setOptions },
+    // The different version of each graph
+    graphChoice: { graphChoice, setGraphChoice },
     // Is dark mode enabled
     dark: { dark, setDark }
   }
