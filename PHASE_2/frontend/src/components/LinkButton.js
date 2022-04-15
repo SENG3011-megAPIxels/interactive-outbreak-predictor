@@ -18,11 +18,11 @@ const StyledLink = styled(Link)`
   cursor: pointer;
   width: 120px;
   text-align: center;
-  border: 1px solid darkblue;
+  border: 1.5px solid darkblue;
 
   &:hover {
-    background-color: white;
-    color: darkblue;
+    background-color: #ff3333;
+    color: white;
   }
 `
 
