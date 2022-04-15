@@ -4,7 +4,7 @@ import { StoreContext } from '../Store';
 import MapChart from "../components/MapChart";
 import Modal from "../components/Modal";
 import Slider from "../components/Slider";
-import DropDown from "../components/DropDown";
+import { DropDown } from "../components/DropDown";
 import { Container, Header, Footer, Main, MapContainer, LogoImage } from '../components/StyledComponents';
 import Logoimg from "./logo.png";
 
