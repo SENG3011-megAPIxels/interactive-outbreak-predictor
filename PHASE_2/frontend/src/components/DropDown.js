@@ -5,7 +5,7 @@ import FormControl from '@mui/material/FormControl';
 import { StoreContext } from '../Store';
 import { StyledSelect } from './StyledComponents';
 
-const DropDown = ({ setTooltipContent }) => {
+const HomeDropDown = ({ setTooltipContent }) => {
   const { disease } = React.useContext(StoreContext);
 
   return (
@@ -25,60 +25,66 @@ const DropDown = ({ setTooltipContent }) => {
   );
 };
 
+const Dropdown = ({ label, value, options, onChange }) => {
+  return (
+    <label>
+      {label}
+      <select value={value} onChange={onChange}>
+        {options.map((option) => (
+          <option value={option}>{option}</option>
+        ))}
+      </select>
+    </label>
+  );
+};
+
 function GraphDropDown({ graphType }) {
   const { graphChoice } = React.useContext(StoreContext);
   const [alignment, setAlignment] = React.useState(graphChoice.graphChoice);
   if (!["Disease", "Financial", "Jobs"].includes(graphType))
     return null;
   
-  const aligns = {
-    'Disease': "Cases",
-    'Financial': "Stocks",
-    'Jobs': "Test"
-  }
-
-  if (alignment != aligns[graphType]) {
-    setAlignment(aligns[graphType]);
-  }
-
-  const handleChange = (event, newValue) => {
-    setAlignment(newValue.props.value)
-    graphChoice.setGraphChoice(newValue.props.value)
+  const handleChange = (event) => {
+    setAlignment(event.target.value)
+    graphChoice.setGraphChoice(event.target.value)
   };
 
-  const populateDropdown = (graphType) => {
-    var options = [];
-    switch (graphType) {
-      case "Disease":
-        options = ["Cases", "Deaths"];
-        break;
-      case "Financial":
-        options = ["Stocks", "Exchange Rate"];
-        break;
-      case "Jobs":
-        //TODO: add jobs
-        options = [];
-        break;
-      default:
-        break;
-    }
-    return options.map(option => (<MenuItem value={option}>{option}</MenuItem>));
+  var options = [];
+  switch (graphType) {
+    case "Disease":
+      options = ["Cases", "Deaths"];
+      break;
+    case "Financial":
+      options = ["Stocks", "Exchange Rate"];
+      break;
+    default:
+      //TODO: add jobs
+      options = [ "Accounting & Finance Jobs",
+        "Teaching Jobs",
+        "Domestic Help & Cleaning Jobs",
+        "PR, Advertising & Marketing Jobs",
+        "Trade & Construction Jobs",
+        "IT Jobs",
+        "Social Work Jobs",
+        "Hopitality & Catering Jobs",
+        "Travel Jobs",
+        "Manufacturing Jobs",
+        "Engineering Jobs",
+        "Scientific & QA Jobs",
+        "Admin Jobs",
+        "Consultancy Jobs",
+        "Legal Jobs",
+        "Sales Jobs" ];
   }
 
   return (
-    <FormControl sx={{ m: 1, minWidth: 80 }}>
-      <InputLabel id="demo-simple-select-label">Focus</InputLabel>
-      <StyledSelect
-        labelId="demo-simple-select-label"
-        id="demo-simple-select"
-        value={alignment}
-        label={graphType}
-        onChange={handleChange}
-      >
-        {populateDropdown(graphType)}
-      </StyledSelect>
-    </FormControl>
+    <Dropdown 
+      label="Focus"
+      options={options}
+      value={alignment}
+      onChange={handleChange}
+    />
   );
 }
 
-export { GraphDropDown, DropDown }
+export { GraphDropDown, HomeDropDown }

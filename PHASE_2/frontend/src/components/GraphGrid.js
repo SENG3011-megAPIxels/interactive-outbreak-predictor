@@ -38,13 +38,20 @@ const url = {
 function GraphGrid() {
     const { graph, country, graphChoice } = React.useContext(StoreContext);
 
-    console.log(graphChoice.graphChoice)
     var cURL = url[graph.graph];
     switch (graph.graph) {
         case "Financial":
-            return <Graph country={country.country.NAME} graphType={graph.graph} url={cURL.Stocks} param={'newCases'}/>
-        case "Real Estate":
-            return <Graph country={country.country.NAME} graphType={graph.graph} url={cURL} param={'newCases'}/>
+            if (graphChoice.graphChoice == "Exchange Rate")
+                return <Graph country={country.country.NAME} graphType={graph.graph} url={cURL.Exchange} param={'Exchange'}/>
+            else
+                return <Graph country={country.country.NAME} graphType={graph.graph} url={cURL.Stocks} param={'Stock'}/>
+        case "Disease":
+            if (graphChoice.graphChoice == "Deaths")
+                return <Graph country={country.country.NAME} graphType={graph.graph} url={cURL} param={'newDeaths'}/>
+            else
+                return <Graph country={country.country.NAME} graphType={graph.graph} url={cURL} param={'newCases'}/>
+        case "Jobs":
+            return <Graph country={country.country.NAME} graphType={graph.graph} url={cURL} param={graphChoice.graphChoice}/>
         default:
             return <Graph country={country.country.NAME} graphType={graph.graph} url={cURL} param={'newCases'}/>
     }
@@ -136,11 +143,14 @@ async function parseData(data, graphType, param) {
         case "Unemployment":
             return parseUnemployData(data);
         case "Financial":
-            return parseStockData(data);
+            if (param == 'Stock')
+                return parseStockData(data);
+            else 
+                return parseExchData(data);
         case "Real Estate":
             return parseRealEstateData(data);
         case "Jobs":
-            return parseJobData(data);    
+            return parseJobData(data, param);    
     }
     return parseUnemployData(data);
 } 
@@ -256,19 +266,65 @@ async function parseStockData(data) {
 
 async function parseRealEstateData(data) {
     var labels = Object.keys(data);
+    labels.sort((a, b) => sortDates(a, b))
     var regions = Object.keys(data[labels[0]])
-    console.log(regions)
-}
-
-async function parseJobData(data) {
-    var labels = Object.keys(data);
-    labels.sort((a, b) => sortDates(a, b));
-    var jobs = {}
-    Object.keys(data[labels[0]]).forEach(jobName => {
-        jobs[data[labels[0]][jobName]['jobTitle']] = [];
+    var regionSet = {}
+    regions.forEach(region => {
+        regionSet[region] = []
+    })
+    labels.forEach(date => {
+        Object.keys(data[date]).forEach(region => {
+            regionSet[region].push(data[date][region]);
+        })
     })
 
-    console.log(jobs);
+    var dataR = [];
+    Object.keys(regionSet).forEach(key => {
+        var colour = poolColors(regionSet[key].length)
+        dataR.push({
+            label: key,
+            data: regionSet[key],
+            backgroundColor: colour,
+            borderColor: colour,
+        })
+    });
+
+    return {
+        labels,
+        datasets: dataR
+    };
+}
+
+async function parseJobData(data, param) {
+    var labels = Object.keys(data);
+    labels.sort((a, b) => sortDates(a, b));
+    var jobs = [];
+    Object.keys(data[labels[0]]).forEach(jobName => {
+        jobs.push(data[labels[0]][jobName]['jobTitle'])
+    });
+
+    if (!jobs.includes(param))
+        param = "Accounting & Finance Jobs";
+    
+    var specJobData = [];    
+    labels.forEach(date => {
+        Object.keys(data[date]).forEach(jobName => {
+            if (data[date][jobName]['jobTitle'] == param)
+                specJobData.push(data[date][jobName]['avgSalary']);
+        })
+    })
+
+    return {
+        labels,
+        datasets: [
+            {
+                label: param,
+                data: specJobData,
+                borderColor: 'rgb(255, 99, 132)',
+                backgroundColor: 'rgba(255, 99, 132, 0.5)',
+            }
+        ]
+    };
 }
 
 // get dynamic colours for each dataset

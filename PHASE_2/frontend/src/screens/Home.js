@@ -4,7 +4,7 @@ import { StoreContext } from '../Store';
 import MapChart from "../components/MapChart";
 import Modal from "../components/Modal";
 import Slider from "../components/Slider";
-import { DropDown } from "../components/DropDown";
+import { HomeDropDown } from "../components/DropDown";
 import { Container, Header, Footer, Main, MapContainer, LogoImage } from '../components/StyledComponents';
 import Logoimg from "./logo.png";
 
@@ -17,7 +17,7 @@ function Home () {
       <Header>
         <LogoImage src={Logoimg}/>
         Interactive Outbreak Predictor
-        <DropDown/>
+        <HomeDropDown/>
       </Header>
       <Main>
         <MapContainer>
