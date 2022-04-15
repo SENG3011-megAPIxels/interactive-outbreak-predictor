@@ -14,12 +14,12 @@ import { HashLink as Link} from "react-router-hash-link"
 function Help () {
     const { page } = React.useContext(StoreContext);
   return (
-    
+
     <Container>
       <Header>
         <LogoImage src={Logoimg}/>
         Help
-        <LinkButton to={'.'} onClick={() => page.setPage(0)} value="Back"/>
+        <LinkButton to={'./map'} onClick={() => page.setPage(0)} value="Back"/>
       </Header>
       <Typography>
       <BrowserRouter>
@@ -58,11 +58,11 @@ function Help () {
               2.3 <Link to = '#2.3' style = {{color: "black"}} smooth>
               <u>The Predictions Page</u> <br></br>
               </Link>
-              
+
             </HelpBody>
             3. <Link to = '#3' style = {{color: "black"}} smooth>
             <u>Contact the developers</u><br></br>
-              </Link> 
+              </Link>
             4. <Link to = '#4' style = {{color: "black"}} smooth>
             <u>Disclaimer</u><br></br>
               </Link>
@@ -77,20 +77,20 @@ function Help () {
         IOP is an interactive web-based API that is designed to provide historical statistical information about diseases in each country including COVID-19, as well as providing insight into the possibility of potential future outbreaks. The API also provides information about past and predicted future data on stocks, petrol prices, jobs market and much more to be added later.
         </HelpBody>
         <HelpBody>
-        The API is a team project developed in 2022 by 5 students from the University of New South Wales (UNSW) Sydney Australia. As it is still a work in progress, many features have not yet been implemented and more UI improvements are expected to take place over time. On that note, if the user suspects there is an error or bug in the application, or would like to make any suggestions for improvements or submit a general inquiry, 
+        The API is a team project developed in 2022 by 5 students from the University of New South Wales (UNSW) Sydney Australia. As it is still a work in progress, many features have not yet been implemented and more UI improvements are expected to take place over time. On that note, if the user suspects there is an error or bug in the application, or would like to make any suggestions for improvements or submit a general inquiry,
         please see the <Link to = '#3' style = {{color: "black"}} smooth>Contact the developers</Link> section.
         </HelpBody>
         <HelpHeading id ="2">
           <br></br>
           <br></br>
           2. How to use the API
-        </HelpHeading> 
+        </HelpHeading>
         <HelpSubHeading id ="2.1">
           <br></br>
           2.1. The Home page
-        </HelpSubHeading> 
+        </HelpSubHeading>
         <HelpBody>
-        The Homepage is composted of 4 main sections: 
+        The Homepage is composted of 4 main sections:
         <HelpBody>• Heat map (🅐)<br></br>•	Side modal (🅑)<br></br>•	Slider (🅒)<br></br>•	Disease dropdown (🅓)<br></br>
           </HelpBody>
           <br></br>
@@ -138,7 +138,7 @@ function Help () {
           </HelpBody>
         <HelpSubHeading id = "2.2">
         2.2. The Preferences Page
-          </HelpSubHeading>  
+          </HelpSubHeading>
         <HelpBody>
         In the preferences page, you are able to customize the look of the API by selecting Light and Dark modes (Additional colour schemes coming soon).
         You are also able to subscribe to IOP using an email address to receive updates and alerts about the latest disease information in the selected country.
@@ -179,7 +179,7 @@ function Help () {
         &copy; megAPIxels 2022
       </Footer>
     </Container>
-    
+
   );
 }
 

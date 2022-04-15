@@ -15,7 +15,7 @@ function Country () {
       <Header>
         <LogoImage src={Logoimg}/>
         {country.country.NAME}'s {graph.graph} Graphs
-        <LinkButton to={'/'} onClick={() => {modal.setModal(2); page.setPage(0)}} value="Back"/>
+        <LinkButton to={'./map'} onClick={() => {modal.setModal(2); page.setPage(0)}} value="Back"/>
       </Header>
       <CountryMain>
         <GraphGrid/>

@@ -49,6 +49,14 @@ const CountryMain = styled.div`
   padding: 20px;
 `
 
+const LandingMain = styled.div`
+  flex: 15;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-around;
+`
+
 const MapContainer = styled.div`
   flex: 10;
   padding: 5px;
@@ -253,5 +261,6 @@ export { Container,
          HelpImg1,
          HelpGif1,
          HelpGif2,
-         HelpGif3
+         HelpGif3,
+         LandingMain
        }

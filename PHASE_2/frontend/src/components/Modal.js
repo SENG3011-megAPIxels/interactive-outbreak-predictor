@@ -36,7 +36,7 @@ function Modal () {
               <p>{'Percentage Vaccinated: ' + (covidData[country.country.ISO_A3] !== undefined ? covidData[country.country.ISO_A3][sliderVal.sliderVal].percVaccinated : 'N/A')}</p>
             </div>
             <LinkButton to={`/country/${country.country.NAME}`} onClick={() => {modal.setModal(0); page.setPage(1)}} value="See Predictions"/>
-            <LinkButton to={'.'} onClick={() => modal.setModal(1)} value="Back"/>
+            <LinkButton to={'./map'} onClick={() => modal.setModal(1)} value="Back"/>
         </ModalContent>
       </ModalContainer>
     );
@@ -46,6 +46,7 @@ function Modal () {
         <ModalContent>
           <p>Welcome to Interactive Outbreak Predictor!</p>
           <p>Please select a country to begin predicting</p>
+          <LinkButton to={'./'} onClick={() => page.setPage(4)} value="Home"/>
           <LinkButton to={'./help'} onClick={() => page.setPage(2)} value="Help"/>
           <LinkButton to={'./preferences'} onClick={() => page.setPage(3)} value="Preferences"/>
         </ModalContent>

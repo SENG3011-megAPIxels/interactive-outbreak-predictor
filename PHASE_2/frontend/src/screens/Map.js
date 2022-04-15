@@ -8,7 +8,7 @@ import { HomeDropDown } from "../components/DropDown";
 import { Container, Header, Footer, Main, MapContainer, LogoImage } from '../components/StyledComponents';
 import Logoimg from "./logo.png";
 
-function Home () {
+function Map () {
   const [content, setContent] = React.useState("");
   const { page } = React.useContext(StoreContext);
 
@@ -34,4 +34,4 @@ function Home () {
   );
 }
 
-export default Home;
+export default Map;

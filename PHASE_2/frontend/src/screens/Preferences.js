@@ -59,7 +59,7 @@ function Preferences () {
       <Header>
         <LogoImage src={Logoimg}/>
         Preferences
-        <LinkButton to={'.'} onClick={() => page.setPage(0)} value="Back"/>
+        <LinkButton to={'./map'} onClick={() => page.setPage(0)} value="Back"/>
       </Header>
       <PreferencesMain>
         <StyledForm>
