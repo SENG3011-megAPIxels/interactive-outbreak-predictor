@@ -183,7 +183,48 @@ const LogoImage = styled.img`
   align-items: left;
   justifyContent: left;
 `
-
+const HelpHeading = styled.div`
+  font-size: 25pt;
+  justifyContent: left;
+  margin-left: 70px;
+  margin-right: 70px;
+`
+const HelpSubHeading = styled.div`
+  font-size: 20pt;
+  justifyContent: left;
+  margin-left: 70px;
+  margin-right: 70px;
+`
+const HelpBody = styled.div`
+  font-size: 15pt;
+  justifyContent: left;
+  margin-left: 70px;
+  margin-right: 70px;
+`
+const HelpImg1 = styled.img`
+  height: 680px;
+  width: 1200px;
+  align-items: left;
+  justifyContent: left;
+`
+const HelpGif1 = styled.img`
+height: 670px;
+width: 1200px;
+align-items: left;
+justifyContent: left;
+`
+const HelpGif2 = styled.img`
+height: 670px;
+width: 1200px;
+align-items: left;
+justifyContent: left;
+`
+const HelpGif3 = styled.img`
+height: 670px;
+width: 1200px;
+align-items: left;
+justifyContent: left;
+`
 export { Container,
          Header,
          Footer,
@@ -205,5 +246,12 @@ export { Container,
          PreferencesMain,
          StyledInput,
          StyledSelectInput,
-         LogoImage
+         LogoImage,
+         HelpHeading,
+         HelpSubHeading,
+         HelpBody,
+         HelpImg1,
+         HelpGif1,
+         HelpGif2,
+         HelpGif3
        }
