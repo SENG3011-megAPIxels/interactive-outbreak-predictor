@@ -81,7 +81,7 @@ const MapChart = ({ setTooltipContent }) => {
                       outline: "none"
                     },
                     hover: {
-                      fill: "#aaa",
+                      fill: "#ff3333",
                       outline: "none",
                       cursor: "pointer"
                     }

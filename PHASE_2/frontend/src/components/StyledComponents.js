@@ -54,7 +54,7 @@ const LandingMain = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: space-around;
+  justify-content: space-evenly;
 `
 
 const MapContainer = styled.div`
@@ -189,8 +189,33 @@ const LogoImage = styled.img`
   height: 80px;
   width: 180px;
   align-items: left;
-  justifyContent: left;
+  justify-content: left;
 `
+
+const LandingImageContainer = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  max-height: 60vh;
+  min-height: 60vh;
+  max-width: 100vw;
+  min-width: 100vw;
+  overflow: hidden;
+`
+
+const LandingImage = styled.img`
+  max-width: 50%;
+  min-width: 50%;
+  filter: grayscale(100%);
+  -webkit-filter: grayscale(100%);
+  transition: transform .5s ease;
+  &:hover {
+    filter: none;
+    -webkit-filter: grayscale(0);
+    transform: scale(1.05);
+  }
+`
+
 const HelpHeading = styled.div`
   font-size: 25pt;
   justifyContent: left;
@@ -262,5 +287,7 @@ export { Container,
          HelpGif1,
          HelpGif2,
          HelpGif3,
-         LandingMain
+         LandingMain,
+         LandingImage,
+         LandingImageContainer
        }

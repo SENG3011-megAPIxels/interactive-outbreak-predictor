@@ -26,26 +26,26 @@ const StyledLink = styled(Link)`
   }
 `
 
-const StyledLink2 = styled(Link)`
-  @media (max-width: 768px) {
-    width: 19vw;
-    font-size: 10pt;
-  }
-  background-color: red;
+const StyledLinkLarge = styled(Link)`
+  background-color: darkblue;
   color: white;
   padding: 10px;
   border-radius: 10px;
-  font-size: 12pt;
+  font-size: 20pt;
   text-decoration: none;
   margin: 10px;
   cursor: pointer;
-  width: 120px;
+  width: 200px;
   text-align: center;
-  border: 1px solid white;
+  border: 1px solid darkblue;
+  height: 70px;
+  align-items: center;
+  display: flex;
+  justify-content: center;
 
   &:hover {
-    background-color: white;
-    color: red;
+    background-color: #ff3333;
+    color: white;
   }
 `
 /*
@@ -61,12 +61,12 @@ function LinkButton ({ id, to, onClick, value }) {
   )
 }
 
-function LinkButton2 ({ id, to, onClick, value }) {
+function LinkButtonLarge ({ id, to, onClick, value }) {
   return (
     <Router>
-      <StyledLink2 id={id} to={to} onClick={onClick}>
+      <StyledLinkLarge id={id} to={to} onClick={onClick}>
         {value}
-      </StyledLink2>
+      </StyledLinkLarge>
     </Router>
   )
 }
@@ -78,11 +78,11 @@ LinkButton.propTypes = {
   value: PropTypes.string.isRequired,
 };
 
-LinkButton2.propTypes = {
+LinkButtonLarge.propTypes = {
   id: PropTypes.string,
   to: PropTypes.string.isRequired,
   onClick: PropTypes.func.isRequired,
   value: PropTypes.string.isRequired,
 };
 
-export { LinkButton, LinkButton2, StyledLink };
+export { LinkButton, LinkButtonLarge };
