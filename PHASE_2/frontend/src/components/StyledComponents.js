@@ -28,7 +28,7 @@ const Footer = styled.div`
   bottom: 0;
 `
 
-const Main = styled.div`
+const MapMain = styled.div`
   flex: 15;
   display: flex;
 `
@@ -58,11 +58,14 @@ const LandingMain = styled.div`
 `
 
 const MapContainer = styled.div`
-  flex: 10;
-  padding: 5px;
+  width: 70vw;
+  margin-left: 7vw;
+`
+
+const OuterMapContainer = styled.div`
   display: flex;
   flex-direction: column;
-  justify-content: space-around;
+  width: 100%;
 `
 
 const StyledSlider = styled(Slider)`
@@ -70,7 +73,7 @@ const StyledSlider = styled(Slider)`
   margin-top: -100px;
   margin-left: 40px;
   bottom: -50px !important;
-  width: 70vw !important;
+  width: 94vw !important;
   color: black !important;
 `
 
@@ -79,7 +82,7 @@ const StyledSliderDark = styled(Slider)`
   margin-top: -100px;
   margin-left: 40px;
   bottom: -50px !important;
-  width: 70vw !important;
+  width: 94vw !important;
   color: white !important;
 `
 
@@ -92,7 +95,7 @@ const ModalContainer = styled.div`
   max-width: 300px;
   min-height: 200px;
   position: relative;
-  right: 17px;
+  right: 20vw;
   pointer-events: none;
 `
 
@@ -258,10 +261,11 @@ width: 1200px;
 align-items: left;
 justifyContent: left;
 `
+
 export { Container,
          Header,
          Footer,
-         Main,
+         MapMain,
          CountryMain,
          MapContainer,
          StyledSlider,
@@ -289,5 +293,6 @@ export { Container,
          HelpGif3,
          LandingMain,
          LandingImage,
-         LandingImageContainer
+         LandingImageContainer,
+         OuterMapContainer
        }

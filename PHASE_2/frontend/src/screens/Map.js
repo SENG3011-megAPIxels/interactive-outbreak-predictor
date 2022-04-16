@@ -5,7 +5,7 @@ import MapChart from "../components/MapChart";
 import Modal from "../components/Modal";
 import Slider from "../components/Slider";
 import { HomeDropDown } from "../components/DropDown";
-import { Container, Header, Footer, Main, MapContainer, LogoImage } from '../components/StyledComponents';
+import { Container, Header, Footer, MapMain, MapContainer, OuterMapContainer, LogoImage } from '../components/StyledComponents';
 import Logoimg from "./logo.png";
 
 function Map () {
@@ -19,14 +19,16 @@ function Map () {
         Interactive Outbreak Predictor
         <HomeDropDown/>
       </Header>
-      <Main>
-        <MapContainer>
-          <MapChart setTooltipContent={setContent} />
-          <ReactTooltip>{content}</ReactTooltip>
+      <MapMain>
+        <OuterMapContainer>
+          <MapContainer>
+            <MapChart setTooltipContent={setContent} />
+            <ReactTooltip>{content}</ReactTooltip>
+          </MapContainer>
           <Slider/>
-        </MapContainer>
+        </OuterMapContainer>
         <Modal/>
-      </Main>
+      </MapMain>
       <Footer>
         &copy; megAPIxels 2022
       </Footer>

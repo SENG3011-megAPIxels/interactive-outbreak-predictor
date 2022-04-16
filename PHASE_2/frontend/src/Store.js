@@ -12,7 +12,7 @@ function Store ({ children }) {
   const [modal, setModal] = React.useState(1);
   const [country, setCountry] = React.useState('');
   const [sliderVal, setSliderVal] = React.useState('03-22');
-  const [sliderNum, setSliderNum] = React.useState(28);
+  const [sliderNum, setSliderNum] = React.useState(27);
   const [disease, setDisease] = React.useState("Covid-19");
   const [graph, setGraph] = React.useState("Disease");
   const [graphChoice, setGraphChoice] = React.useState('Cases');
