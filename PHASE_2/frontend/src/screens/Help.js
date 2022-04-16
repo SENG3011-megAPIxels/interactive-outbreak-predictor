@@ -28,42 +28,43 @@ function Help () {
         <HelpHeading>
           Contents
           <HelpBody>
-          1. <Link to = '#1' style = {{color: "black"}} smooth>
+          {/*changed color to #888 to work with dark and light mode*/}
+          1. <Link to = '#1' style = {{color: "#888"}} smooth>
           <u>About IOP</u><br></br>
             </Link>
-            2. <Link  to = '#2' style = {{color: "black"}} smooth>
+            2. <Link  to = '#2' style = {{color: "#888"}} smooth>
             <u>How to use the API</u> <br></br>
             </Link>
             <HelpBody>
-             2.1 <Link to = '#2.1' style = {{color: "black"}} smooth>
+             2.1 <Link to = '#2.1' style = {{color: "#888"}} smooth>
              <u> The Home Page</u><br></br>
                </Link>
-              2.2 <Link to = '#2.2' style = {{color: "black"}} smooth>
+              2.2 <Link to = '#2.2' style = {{color: "#888"}} smooth>
               <u> The Preferences Page</u> <br></br>
               </Link>
               <HelpBody>
-                2.1.1 <Link to = '#2.1.1' style = {{color: "black"}} smooth>
+                2.1.1 <Link to = '#2.1.1' style = {{color: "#888"}} smooth>
                 <u> Using the Slider</u> <br></br>
                 </Link>
-                2.1.2 <Link to = '#2.1.2' style = {{color: "black"}} smooth>
+                2.1.2 <Link to = '#2.1.2' style = {{color: "#888"}} smooth>
                 <u> Interacting with the Heat Map</u> <br></br>
                   </Link>
-                2.1.3 <Link to = '#2.1.3' style = {{color: "black"}} smooth>
+                2.1.3 <Link to = '#2.1.3' style = {{color: "#888"}} smooth>
                 <u> Interacting with the Modal</u> <br></br>
                   </Link>
-                2.1.4 <Link to = '#2.1.4' style = {{color: "black"}} smooth>
+                2.1.4 <Link to = '#2.1.4' style = {{color: "#888"}} smooth>
                 <u> Using the Dropdown</u> <br></br>
                   </Link>
               </HelpBody>
-              2.3 <Link to = '#2.3' style = {{color: "black"}} smooth>
+              2.3 <Link to = '#2.3' style = {{color: "#888"}} smooth>
               <u>The Predictions Page</u> <br></br>
               </Link>
 
             </HelpBody>
-            3. <Link to = '#3' style = {{color: "black"}} smooth>
+            3. <Link to = '#3' style = {{color: "#888"}} smooth>
             <u>Contact the developers</u><br></br>
               </Link>
-            4. <Link to = '#4' style = {{color: "black"}} smooth>
+            4. <Link to = '#4' style = {{color: "#888"}} smooth>
             <u>Disclaimer</u><br></br>
               </Link>
           </HelpBody>
@@ -78,7 +79,7 @@ function Help () {
         </HelpBody>
         <HelpBody>
         The API is a team project developed in 2022 by 5 students from the University of New South Wales (UNSW) Sydney Australia. As it is still a work in progress, many features have not yet been implemented and more UI improvements are expected to take place over time. On that note, if the user suspects there is an error or bug in the application, or would like to make any suggestions for improvements or submit a general inquiry,
-        please see the <Link to = '#3' style = {{color: "black"}} smooth>Contact the developers</Link> section.
+        please see the <Link to = '#3' style = {{color: "#888"}} smooth>Contact the developers</Link> section.
         </HelpBody>
         <HelpHeading id ="2">
           <br></br>

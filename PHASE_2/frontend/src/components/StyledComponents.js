@@ -91,11 +91,11 @@ const ModalContainer = styled.div`
   flex: 1;
   align-items: flex-start;
   justify-content: center;
-  min-width: 300px;
-  max-width: 300px;
-  min-height: 200px;
+  min-width: 320px;
+  max-width: 320px;
   position: relative;
   right: 20vw;
+  bottom: 10vh;
   pointer-events: none;
 `
 
@@ -110,7 +110,30 @@ const ModalContent = styled.div`
   padding: 5px;
   text-align: left;
   pointer-events: all;
+  min-height: 550px;
+  justify-content: space-around;
 `
+
+const ModalContent2 = styled.div`
+  background-color: lightsteelblue;
+  width: 150%;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  border-radius: 10px;
+  margin-top: 100px;
+  padding: 10px;
+  text-align: center;
+  pointer-events: all;
+  min-height: 500px;
+  justify-content: space-around;
+`
+
+const ModalButtons = styled.div`
+  display: flex;
+  flex-direction: column;
+`
+
 const GridContainer = styled.div`
   display: flex;
   padding: 20px;
@@ -294,5 +317,7 @@ export { Container,
          LandingMain,
          LandingImage,
          LandingImageContainer,
-         OuterMapContainer
+         OuterMapContainer,
+         ModalContent2,
+         ModalButtons
        }
