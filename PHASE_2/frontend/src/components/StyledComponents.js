@@ -180,8 +180,8 @@ const GraphSingleOption = styled.div`
 `
 
 const ModalImage = styled.img`
-  width: 50px;
-  height: 40px;
+  width: 75px;
+  height: 60px;
   object-fit:contain;
   margin-left:10px;
 `
