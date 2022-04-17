@@ -43,7 +43,7 @@ function Country () {
           </GraphOptionsMain>  
         </CountryMain>
         <Footer>
-          &copy; megAPIxels 2020;
+          &copy; megAPIxels 2022
         </Footer>
       </Container>
     );
