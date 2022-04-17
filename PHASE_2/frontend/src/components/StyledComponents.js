@@ -49,6 +49,7 @@ const CountryMain = styled.div`
   padding: 20px;
 `
 
+
 const LandingMain = styled.div`
   flex: 15;
   display: flex;
@@ -89,7 +90,7 @@ const StyledSliderDark = styled(Slider)`
 const ModalContainer = styled.div`
   display: flex;
   flex: 1;
-  align-items: flex-start;
+  align-items: center;
   justify-content: center;
   min-width: 320px;
   max-width: 320px;
@@ -158,6 +159,7 @@ const GridElement = styled.div`
 
 const StyledSelect = styled(Select)`
   color: white !important;
+
 `
 
 const ButtonRow = styled.div`
@@ -167,11 +169,10 @@ const ButtonRow = styled.div`
 
 const GraphOptionsMain = styled.div`
   display: flex;
-  position: fixed;
-  bottom: 75px;
-  align-items: center;
-  width: 80%;
-  justify-content: space-around;
+  object-fit:contain;
+  margin-left:29.5vw;
+  flex-direction: column;
+  width: 10vw;
 `
 
 const GraphSingleOption = styled.div`

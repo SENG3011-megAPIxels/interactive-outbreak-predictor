@@ -72,7 +72,7 @@ class Graph extends Component {
                 maintainAspectRatio: false,
                 plugins: {
                     legend: {
-                        position: 'top',
+                        position: 'bottom',
                     },
                 },
             }
@@ -109,7 +109,7 @@ class Graph extends Component {
     render() {
         return (this.state.data && Object.keys(this.state.data).length == 0) ? (
             <div>
-                Loading
+                Loading...
             </div>
         ) : (
             <div style={{width: "80%", height: 0}}>
