@@ -8,14 +8,15 @@ Store.propTypes = {
 };
 
 function Store ({ children }) {
-  const [page, setPage] = React.useState(0);
+  const [page, setPage] = React.useState(100);
   const [modal, setModal] = React.useState(1);
   const [country, setCountry] = React.useState('');
   const [sliderVal, setSliderVal] = React.useState('03-22');
+  const [sliderNum, setSliderNum] = React.useState(27);
   const [disease, setDisease] = React.useState("Covid-19");
   const [graph, setGraph] = React.useState("Disease");
-  const [graphData, setGraphData] = React.useState({});
-  const [options, setOptions] = React.useState({});
+  const [graphChoice, setGraphChoice] = React.useState('Cases');
+  const [dark, setDark] = React.useState(false);
 
   const store = {
     // The page number
@@ -26,14 +27,16 @@ function Store ({ children }) {
     country: { country, setCountry },
     // The slider value
     sliderVal: { sliderVal, setSliderVal },
+    // The slider number
+    sliderNum: { sliderNum, setSliderNum },
     // The disease being displayed
     disease: { disease, setDisease },
-    // The graphs being displayed
+    // The graph being displayed
     graph: { graph, setGraph },
-    // The data of the graphs
-    graphData: { graphData, setGraphData },
-    // The options of the graph
-    options: { options, setOptions }
+    // The different version of each graph
+    graphChoice: { graphChoice, setGraphChoice },
+    // Is dark mode enabled
+    dark: { dark, setDark }
   }
 
   return <StoreContext.Provider value={store}>{children}</StoreContext.Provider>

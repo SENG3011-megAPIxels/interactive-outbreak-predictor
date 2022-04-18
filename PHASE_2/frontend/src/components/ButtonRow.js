@@ -3,7 +3,7 @@ import { StoreContext } from '../Store';
 import { ButtonRow } from "./StyledComponents";
 import { ToggleButtonGroup, ToggleButton } from "@mui/material";
 
-const graphs = ["Disease", "Jobs Market", "Financial"]
+const graphs = ["Disease", "Jobs", "Financial", "Unemployment", "Real Estate"]
 
 function GraphSwap() {
     const { graph } = React.useContext(StoreContext);

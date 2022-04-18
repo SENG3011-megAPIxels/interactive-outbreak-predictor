@@ -14,8 +14,8 @@ const geoUrl =
   "https://raw.githubusercontent.com/zcreativelabs/react-simple-maps/master/topojson-maps/world-110m.json";
 
 const colorScale = scaleLinear()
-  .domain([0, 4000000])
-  .range(["#ffedea", "#ff0000"]);
+  .domain([0, 2500000])
+  .range(["#cee8f0", "darkblue"]);
 
 const MapChart = ({ setTooltipContent }) => {
   const { page, modal, country, sliderVal } = React.useContext(StoreContext);
@@ -29,7 +29,7 @@ const MapChart = ({ setTooltipContent }) => {
   }, []);
 
   React.useEffect(async () => {
-    const response = await fetch(`https://p5t20q9fz6.execute-api.ap-southeast-2.amazonaws.com/ProMedApi/globalcovid`, {
+    const response = await fetch(`https://p5t20q9fz6.execute-api.ap-southeast-2.amazonaws.com/ProMedApi/futureglobalcovid`, {
       method: 'GET',
       headers: {
         Accept: 'application/json',
@@ -70,12 +70,13 @@ const MapChart = ({ setTooltipContent }) => {
                   onMouseLeave={() => {
                     setTooltipContent("");
                   }}
-                  onClick={() => {
+                  onClick={(e) => {
                     country.setCountry(geo.properties);
                     modal.setModal(2);
+                    e.currentTarget.style.fill = "#aaa";
                   }}
                   //fill={d ? colorScale(d[sliderVal.sliderVal]) : "#F5F4F6"}
-                  fill={covidData[ISO_A3] !== undefined ? colorScale(covidData[ISO_A3][sliderVal.sliderVal].newCases) : "#F5F4F6"}
+                  fill={covidData[ISO_A3] !== undefined ? colorScale(covidData[ISO_A3][sliderVal.sliderVal].newCases) : "#eee"}
                   style={{
                     default: {
                       outline: "none"
@@ -84,7 +85,7 @@ const MapChart = ({ setTooltipContent }) => {
                       fill: "#aaa",
                       outline: "none",
                       cursor: "pointer"
-                    },
+                    }
                   }}
                 />
               );

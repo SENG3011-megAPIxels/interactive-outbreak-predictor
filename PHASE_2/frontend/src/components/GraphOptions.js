@@ -2,9 +2,10 @@ import React from 'react';
 import { GraphOptionsMain, GraphSingleOption } from './StyledComponents';
 import { LinkButton } from './LinkButton';
 import { StoreContext } from '../Store';
+import { DropDown, GraphDropDown } from './DropDown';
 
 function GraphOptions () {
-  const { country } = React.useContext(StoreContext);
+  const { country, graph } = React.useContext(StoreContext);
 
   return (
     <GraphOptionsMain>
@@ -25,6 +26,7 @@ function GraphOptions () {
         <label htmlFor="lockdown"> Lockdown </label>
       </GraphSingleOption>
       <LinkButton to={`/country/${country.country.NAME}`} onClick={() => {}} value="Predict!"/>
+      <GraphDropDown graphType={graph.graph}/>
     </GraphOptionsMain>
   );
 }

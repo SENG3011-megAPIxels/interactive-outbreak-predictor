@@ -11,28 +11,34 @@ const Container = styled.div`
 const Header = styled.div`
   flex: 1;
   display: flex;
-  background: red;
+  background: #37568d;
   align-items: center;
   justify-content: space-between;
   font-size: 2em;
   color: white;
-  padding-left: 25vw;
-  padding-right: 10px;
 `
 
 const Footer = styled.div`
   flex: 1;
   display: flex;
-  background: red;
+  background: #37568d;
   align-items: center;
   justify-content: center;
   color: white;
   bottom: 0;
 `
 
-const Main = styled.div`
+const MapMain = styled.div`
   flex: 15;
   display: flex;
+`
+
+const PreferencesMain = styled.div`
+  flex: 15;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-around;
 `
 
 const CountryMain = styled.div`
@@ -43,12 +49,24 @@ const CountryMain = styled.div`
   padding: 20px;
 `
 
-const MapContainer = styled.div`
-  flex: 10;
-  padding: 5px;
+
+const LandingMain = styled.div`
+  flex: 15;
   display: flex;
   flex-direction: column;
-  justify-content: space-around;
+  align-items: center;
+  justify-content: space-evenly;
+`
+
+const MapContainer = styled.div`
+  width: 70vw;
+  margin-left: 7vw;
+`
+
+const OuterMapContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  width: 100%;
 `
 
 const StyledSlider = styled(Slider)`
@@ -56,25 +74,34 @@ const StyledSlider = styled(Slider)`
   margin-top: -100px;
   margin-left: 40px;
   bottom: -50px !important;
-  width: 70vw !important;
+  width: 94vw !important;
   color: black !important;
+`
+
+const StyledSliderDark = styled(Slider)`
+  flex: 1;
+  margin-top: -100px;
+  margin-left: 40px;
+  bottom: -50px !important;
+  width: 94vw !important;
+  color: white !important;
 `
 
 const ModalContainer = styled.div`
   display: flex;
   flex: 1;
-  align-items: flex-start;
+  align-items: center;
   justify-content: center;
-  min-width: 280px;
-  max-width: 280px;
-  min-height: 200px;
+  min-width: 320px;
+  max-width: 320px;
   position: relative;
-  right: 17px;
+  right: 20vw;
+  bottom: 10vh;
   pointer-events: none;
 `
 
 const ModalContent = styled.div`
-  background-color: #ffb3b3;
+  background-color: lightsteelblue;
   width: 150%;
   display: flex;
   align-items: center;
@@ -82,9 +109,32 @@ const ModalContent = styled.div`
   border-radius: 10px;
   margin-top: 100px;
   padding: 5px;
+  text-align: left;
+  pointer-events: all;
+  min-height: 550px;
+  justify-content: space-around;
+`
+
+const ModalContent2 = styled.div`
+  background-color: lightsteelblue;
+  width: 150%;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  border-radius: 10px;
+  margin-top: 100px;
+  padding: 10px;
   text-align: center;
   pointer-events: all;
+  min-height: 500px;
+  justify-content: space-around;
 `
+
+const ModalButtons = styled.div`
+  display: flex;
+  flex-direction: column;
+`
+
 const GridContainer = styled.div`
   display: flex;
   padding: 20px;
@@ -109,6 +159,7 @@ const GridElement = styled.div`
 
 const StyledSelect = styled(Select)`
   color: white !important;
+
 `
 
 const ButtonRow = styled.div`
@@ -118,11 +169,10 @@ const ButtonRow = styled.div`
 
 const GraphOptionsMain = styled.div`
   display: flex;
-  position: fixed;
-  bottom: 75px;
-  align-items: center;
-  width: 80%;
-  justify-content: space-around;
+  object-fit:contain;
+  margin-left:29.5vw;
+  flex-direction: column;
+  width: 10vw;
 `
 
 const GraphSingleOption = styled.div`
@@ -131,18 +181,119 @@ const GraphSingleOption = styled.div`
 `
 
 const ModalImage = styled.img`
-  width: 50px;
-  height: 40px;
+  width: 75px;
+  height: 60px;
   object-fit:contain;
   margin-left:10px;
 `
+
+const StyledForm = styled.form`
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+`
+
+const StyledInput = styled.input`
+  height: 30px;
+  font-size: 12pt;
+  border-radius: 10px;
+  border: 1px solid black;
+  width: 200px;
+  margin: 10px;
+`
+
+const StyledSelectInput = styled.select`
+  height: 30px;
+  font-size: 12pt;
+  border-radius: 10px;
+  border: 1px solid black;
+  width: 200px;
+  margin: 10px;
+`
+
+const LogoImage = styled.img`
+  height: 80px;
+  width: 180px;
+  align-items: left;
+  justify-content: left;
+`
+
+const LandingImageContainer = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  max-height: 60vh;
+  min-height: 60vh;
+  max-width: 100vw;
+  min-width: 100vw;
+  overflow: hidden;
+`
+
+const LandingImage = styled.img`
+  max-width: 50%;
+  min-width: 50%;
+  filter: grayscale(100%);
+  -webkit-filter: grayscale(100%);
+  transition: transform .5s ease;
+  &:hover {
+    filter: none;
+    -webkit-filter: grayscale(0);
+    transform: scale(1.05);
+  }
+`
+
+const HelpHeading = styled.div`
+  font-size: 25pt;
+  justifyContent: left;
+  margin-left: 70px;
+  margin-right: 70px;
+`
+const HelpSubHeading = styled.div`
+  font-size: 20pt;
+  justifyContent: left;
+  margin-left: 70px;
+  margin-right: 70px;
+`
+const HelpBody = styled.div`
+  font-size: 15pt;
+  justifyContent: left;
+  margin-left: 70px;
+  margin-right: 70px;
+`
+const HelpImg1 = styled.img`
+  height: 680px;
+  width: 1200px;
+  align-items: left;
+  justifyContent: left;
+`
+const HelpGif1 = styled.img`
+height: 670px;
+width: 1200px;
+align-items: left;
+justifyContent: left;
+`
+const HelpGif2 = styled.img`
+height: 670px;
+width: 1200px;
+align-items: left;
+justifyContent: left;
+`
+const HelpGif3 = styled.img`
+height: 670px;
+width: 1200px;
+align-items: left;
+justifyContent: left;
+`
+
 export { Container,
          Header,
          Footer,
-         Main,
+         MapMain,
          CountryMain,
          MapContainer,
          StyledSlider,
+         StyledSliderDark,
          ModalContainer,
          ModalContent,
          GridContainer,
@@ -151,5 +302,23 @@ export { Container,
          ButtonRow,
          GraphOptionsMain,
          GraphSingleOption,
-         ModalImage
+         ModalImage,
+         StyledForm,
+         PreferencesMain,
+         StyledInput,
+         StyledSelectInput,
+         LogoImage,
+         HelpHeading,
+         HelpSubHeading,
+         HelpBody,
+         HelpImg1,
+         HelpGif1,
+         HelpGif2,
+         HelpGif3,
+         LandingMain,
+         LandingImage,
+         LandingImageContainer,
+         OuterMapContainer,
+         ModalContent2,
+         ModalButtons
        }
