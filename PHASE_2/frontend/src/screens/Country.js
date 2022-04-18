@@ -32,22 +32,24 @@ function Country () {
       <Container>
         <Header>
           <LogoImage src={Logoimg}/>
-          <EndsWith/> {graph.graph} Graphs
+          <div style={{display: 'flex'}}>
+            {EndsWith()}&nbsp;{graph.graph} Graphs
+          </div>
           <LinkButton to={'./map'} onClick={() => {modal.setModal(2); page.setPage(0)}} value="Back"/>
         </Header>
-        <CountryMain> 
+        <CountryMain>
           <GraphSwap/>
           <GraphGrid/>
           <GraphOptionsMain>
             <GraphOptions/>
-          </GraphOptionsMain>  
+          </GraphOptionsMain>
         </CountryMain>
         <Footer>
           &copy; megAPIxels 2022
         </Footer>
       </Container>
     );
-  } 
+  }
 
 
 export default Country;
