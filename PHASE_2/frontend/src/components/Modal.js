@@ -141,7 +141,7 @@ function Modal () {
     return (
       <ModalContainer>
         <ModalContent>
-            <h2>{country.country.NAME}</h2>
+            <h2 style={{textAlign: 'center'}}>{country.country.NAME}</h2>
             <ModalImage src={`https://countryflagsapi.com/png/${country.country.ISO_A3}`} alt={`Flag of ${country.country.NAME}`}/>
             <h3>{getMonth(sliderNum.sliderNum)}</h3>
             <div>
