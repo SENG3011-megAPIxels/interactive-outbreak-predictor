@@ -111,10 +111,12 @@ for row in iso_codes:
     
     
     for i, month in enumerate(future_dates):
+
         curr.execute(
             f"""
-            INSERT INTO future_globalcovid(iso_code, month, new_cases, new_deaths, total_vax, perc_vax) 
-            VALUES ('{iso}', '{month}', '{cases_predictions[i-1]}', '{deaths_predictions[i-1]}', '{vax_predictions[i-1]}', '{percvax_predictions[i-1]}')
+            UPDATE future_globalcovid
+            SET new_cases = '{cases_predictions[i]}', new_deaths = '{deaths_predictions[i]}', total_vax = '{vax_predictions[i]}', perc_vax = '{percvax_predictions[i]}'
+            WHERE iso_code = '{iso}' and month = '{month}'
             """
         )
 
