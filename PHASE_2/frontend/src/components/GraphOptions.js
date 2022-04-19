@@ -2,7 +2,7 @@ import React from 'react';
 import { GraphOptionsMain, GraphSingleOption } from './StyledComponents';
 import { LinkButton } from './LinkButton';
 import { StoreContext } from '../Store';
-import { DropDown, GraphDropDown } from './DropDown';
+import { CountryDropDown, DropDown, GraphDropDown } from './DropDown';
 
 function GraphOptions () {
   const { country, graph, prediction } = React.useContext(StoreContext);
@@ -42,6 +42,7 @@ function GraphOptions () {
         <button type="submit"> Predict! </button>
       </form>
       <GraphDropDown graphType={graph.graph}/>
+      <CountryDropDown graphType={graph.graph}/>
     </GraphOptionsMain>
   );
 }

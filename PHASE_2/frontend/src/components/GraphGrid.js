@@ -25,7 +25,10 @@ ChartJS.defaults.font.size = 20;
 
 const lookup = require('country-code-lookup');
 const url = {
-    'Disease': "https://p5t20q9fz6.execute-api.ap-southeast-2.amazonaws.com/ProMedApi/futurecountrycovid?country=",
+    'Disease': {
+        'Country': "https://p5t20q9fz6.execute-api.ap-southeast-2.amazonaws.com/ProMedApi/futureglobalcovid",
+        'Subregions': "https://p5t20q9fz6.execute-api.ap-southeast-2.amazonaws.com/ProMedApi/futurecountrycovid?country="
+    },
     'Unemployment': "https://p5t20q9fz6.execute-api.ap-southeast-2.amazonaws.com/ProMedApi/futureunemployment?country=",
     'Financial': {
         'Stocks': "https://p5t20q9fz6.execute-api.ap-southeast-2.amazonaws.com/ProMedApi/futurestocks?country=",
@@ -38,7 +41,7 @@ const url = {
 
 
 function GraphGrid() {
-    const { graph, country, graphChoice, prediction } = React.useContext(StoreContext);
+    const { graph, country, graphChoice, prediction, diseaseView } = React.useContext(StoreContext);
 
     var cURL = url[graph.graph];
     switch (graph.graph) {
@@ -58,6 +61,10 @@ function GraphGrid() {
                     param={'Stock'}
                 />
         case "Disease":
+            if (diseaseView.diseaseView == 'Country')
+                cURL = cURL.Country;
+            else
+                cURL = cURL.Subregions;
             if (graphChoice.graphChoice == "Deaths")
                 return <Graph 
                     country={country.country.NAME} 
@@ -87,19 +94,12 @@ class Graph extends Component {
             yAxis: 'Case Count',
             data: {},
         }
-        // this.setOptions();
     }
-
-    // setOptions() {
-    //     this.setState({
-            
-    //     })
-    // }
 
     // update data after loading is shown on screen
     componentDidMount() {
         getGraphData(this.state.country, this.state.url).then(
-            gData => parseData(gData, this.state.graph, this.props.param).then(resp => {
+            gData => parseData(gData, this.state.graph, this.props.param, this.state.country).then(resp => {
                 this.setState({
                     data: resp,
                     options: {
@@ -134,7 +134,7 @@ class Graph extends Component {
     componentDidUpdate(prevProps) {
         if (prevProps !== this.props) {
             getGraphData(this.state.country, this.props.url, this.props.prediction).then(
-                gData => parseData(gData, this.props.graphType, this.props.param).then(resp => {
+                gData => parseData(gData, this.props.graphType, this.props.param, this.state.country).then(resp => {
                     this.setState({
                         graph: this.props.graphType,
                         url: this.props.url,
@@ -166,14 +166,20 @@ async function getGraphData(country, url, prediction) {
         country = "United States"
     const countryISO = lookup.byCountry(country).iso3;
 
-    
-    var cURL = url + countryISO;
+    var cURL = url;
+    // subregion covid
+    if (url.endsWith("="))
+        cURL += countryISO;
+
     if (prediction) {
         var preStr = "";
         Object.keys(prediction).forEach(pre => {
             if (prediction[pre])
                 preStr += "&" + pre + "=True";
         })
+        // subregion covid
+        if (!cURL.endsWith(countryISO))
+            preStr = preStr.replace('&', '?');
         cURL += preStr;
     }
     
@@ -190,12 +196,14 @@ async function getGraphData(country, url, prediction) {
 }
 
 // parse the data depending on the graphType
-async function parseData(data, graphType, param) {
+async function parseData(data, graphType, param, country) {
     if (Object.keys(data).length == 0)
         return {};
 
     switch (graphType) {
         case "Disease":
+            if (Object.keys(data).length == 189)
+                return parseCountryCovidData(data, param, country)
             return parseCovidData(data, param);
         case "Unemployment":
             return parseUnemployData(data);
@@ -229,6 +237,33 @@ async function parseUnemployData(data) {
         datasets: [
             {
                 label: '% of Unemployed',
+                data: dataset,
+                borderColor: 'rgb(255, 99, 132)',
+                backgroundColor: 'rgba(255, 99, 132, 0.5)',
+            }
+        ]
+    };
+}
+
+async function parseCountryCovidData(data, param, country) {
+    const countryISO = lookup.byCountry(country).iso3;
+    data = data[countryISO];
+    var labels = Object.keys(data);
+    labels.sort((a, b) => sortDates(a, b));
+    var dataset = [];
+    labels.forEach(date => {
+        dataset.push(data[date][param]);
+    });
+
+    var labelStr = "Death Count";
+    if (param == 'newCases')
+        labelStr = "Case Count";
+
+    return {
+        labels,
+        datasets: [
+            {
+                label: country + " " + labelStr,
                 data: dataset,
                 borderColor: 'rgb(255, 99, 132)',
                 backgroundColor: 'rgba(255, 99, 132, 0.5)',

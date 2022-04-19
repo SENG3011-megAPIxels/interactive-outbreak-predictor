@@ -18,6 +18,7 @@ function Store ({ children }) {
   const [graphChoice, setGraphChoice] = React.useState('Cases');
   const [dark, setDark] = React.useState(false);
   const [prediction, setPrediction] = React.useState({});
+  const [diseaseView, setDiseaseView] = React.useState('Country');
 
   const store = {
     // The page number
@@ -40,6 +41,8 @@ function Store ({ children }) {
     dark: { dark, setDark },
     // Prediction options
     prediction: { prediction, setPrediction },
+    // Region or country graph view for disease
+    diseaseView: { diseaseView, setDiseaseView },
   }
 
   return <StoreContext.Provider value={store}>{children}</StoreContext.Provider>

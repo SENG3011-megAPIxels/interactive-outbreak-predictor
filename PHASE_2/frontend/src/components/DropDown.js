@@ -86,4 +86,30 @@ function GraphDropDown({ graphType }) {
   );
 }
 
-export { GraphDropDown, HomeDropDown }
+function CountryDropDown({ graphType }) {
+  const { diseaseView } = React.useContext(StoreContext);
+  const [alignment, setAlignment] = React.useState();
+
+  if (graphType != 'Disease')
+    return null;
+
+  const handleChange = (event) => {
+    setAlignment(event.target.value);
+    diseaseView.setDiseaseView(event.target.value);
+  }
+
+  return (
+    <Dropdown
+      label="Detailed View"
+      options={[
+        "Country",
+        "Subregions",
+      ]}
+      value={alignment}
+      onChange={handleChange}
+    />
+  )
+}
+
+
+export { GraphDropDown, HomeDropDown, CountryDropDown }
