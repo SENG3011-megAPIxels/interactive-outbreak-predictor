@@ -8,7 +8,9 @@ function GraphOptions () {
   const { country, graph, prediction } = React.useContext(StoreContext);
 
   if (graph.graph != 'Disease')
-    return <GraphDropDown graphType={graph.graph}/>;
+    return (<GraphOptionsMain>
+      <GraphDropDown graphType={graph.graph}/>
+    </GraphOptionsMain>)
 
   const handleSubmit = (event) => {
     event.preventDefault();

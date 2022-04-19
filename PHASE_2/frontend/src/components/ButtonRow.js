@@ -6,12 +6,14 @@ import { ToggleButtonGroup, ToggleButton } from "@mui/material";
 const graphs = ["Disease", "Jobs", "Financial", "Unemployment", "Real Estate"]
 
 function GraphSwap() {
-    const { graph } = React.useContext(StoreContext);
+    const { graph, prediction } = React.useContext(StoreContext);
     const [alignment, setAlignment] = React.useState(graph.graph);
 
     const handleChange = (event, newAlignment) => {
         graph.setGraph(newAlignment);
         setAlignment(newAlignment);
+        if (newAlignment == 'Disease') 
+            prediction.setPrediction(null);
     }
 
     return (

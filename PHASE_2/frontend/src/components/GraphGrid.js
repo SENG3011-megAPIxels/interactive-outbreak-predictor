@@ -25,7 +25,7 @@ ChartJS.defaults.font.size = 20;
 
 const lookup = require('country-code-lookup');
 const url = {
-    'Disease': "https://p5t20q9fz6.execute-api.ap-southeast-2.amazonaws.com/ProMedApi/countrycovid?country=",
+    'Disease': "https://p5t20q9fz6.execute-api.ap-southeast-2.amazonaws.com/ProMedApi/futurecountrycovid?country=",
     'Unemployment': "https://p5t20q9fz6.execute-api.ap-southeast-2.amazonaws.com/ProMedApi/futureunemployment?country=",
     'Financial': {
         'Stocks': "https://p5t20q9fz6.execute-api.ap-southeast-2.amazonaws.com/ProMedApi/futurestocks?country=",
@@ -169,7 +169,12 @@ async function getGraphData(country, url, prediction) {
     
     var cURL = url + countryISO;
     if (prediction) {
-        console.log(url + "&")
+        var preStr = "";
+        Object.keys(prediction).forEach(pre => {
+            if (prediction[pre])
+                preStr += "&" + pre + "=True";
+        })
+        cURL += preStr;
     }
     
     let resp;
@@ -240,9 +245,8 @@ async function parseCovidData(data, param) {
     labels.sort((a, b) => sortDates(a, b));
     var dataset = [];
     subregions.forEach(region => {
-        var dates = Object.keys(data[region]);
         var paramVal = [];
-        dates.forEach(date => {
+        labels.forEach(date => {
             paramVal.push(data[region][date][param]);
         });
         var colour = poolColors(paramVal.length);
@@ -264,20 +268,19 @@ async function parseCovidData(data, param) {
 
 async function parseExchData(data) {
     var labels = Object.keys(data);
-    // remove unnecessary info
-    var code = labels.shift();
-    labels.shift();
+
+    console.log(data)
     labels.sort((a, b) => sortDates(a, b));
     var dataset = [];
     labels.forEach(date => {
-        dataset.push(data[date]);
+        dataset.push(data[date]['rate']);
     })
 
     return {
         labels,
         datasets: [
             {
-                label: 'Exchange rate of ' + data[code],
+                label: 'Exchange rate',
                 data: dataset,
                 borderColor: 'rgb(255, 99, 132)',
                 backgroundColor: 'rgba(255, 99, 132, 0.5)',
@@ -359,6 +362,7 @@ async function parseJobData(data, param) {
     if (!jobs.includes(param))
         param = "Accounting & Finance Jobs";
     
+
     var specJobData = [];    
     labels.forEach(date => {
         Object.keys(data[date]).forEach(jobName => {
