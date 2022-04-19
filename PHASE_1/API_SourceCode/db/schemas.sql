@@ -59,3 +59,47 @@ CREATE TABLE real_estate
     month_year text,
     PRIMARY KEY (country_code, region, month_year)
 );
+
+CREATE TABLE future_globalcovid_masks AS
+SELECT * FROM global_covid;
+
+CREATE TABLE future_globalcovid_lockdown AS
+SELECT * FROM global_covid;
+
+CREATE TABLE future_globalcovid_socialdistancing AS
+SELECT * FROM global_covid;
+
+CREATE TABLE future_globalcovid_masks_socialdistancing AS
+SELECT * FROM global_covid;
+
+CREATE TABLE future_countrycovid AS
+SELECT * FROM country_covid;
+
+CREATE TABLE future_countrycovid_masks AS
+SELECT * FROM country_covid;
+
+CREATE TABLE future_countrycovid_lockdown AS
+SELECT * FROM country_covid;
+
+CREATE TABLE future_countrycovid_socialdistancing AS
+SELECT * FROM country_covid;
+
+CREATE TABLE future_countrycovid_masks_socialdistancing AS
+SELECT * FROM country_covid;
+
+-- CREATE TABLE future_globalcovid_masks
+-- (
+--     iso_code text,
+--     month text,
+--     new_cases int,
+--     new_deaths int,
+--     total_vax int,
+--     perc_vax float,
+--     PRIMARY KEY (iso_code, month)
+-- );
+
+SELECT new_cases, new_deaths, month
+FROM country_covid
+WHERE iso_code = 'AUS' and subregion = 'Queensland' and month <> '12-19'
+ORDER BY split_part(month, '-', 2), split_part(month, '-', 1)
+;

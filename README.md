@@ -23,3 +23,11 @@ $ psql --host=database-2.cjcukgskbtyu.ap-southeast-2.rds.amazonaws.com --port=54
 ```
 5973-1883-9136
 ```
+
+# Accessing the Frontend
+
+The app can be accessed at this address:
+
+```
+https://seng3011-megapixels.pages.dev
+```
