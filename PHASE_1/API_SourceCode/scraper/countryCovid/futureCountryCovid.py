@@ -96,8 +96,8 @@ curr = conn.cursor()
 future_dates = ["04-22", "05-22", "06-22", "07-22", "08-22", "09-22", "10-22", "11-22", "12-22"]
 
 curr.execute("""
-    SELECT iso_code, population
-    FROM countries;
+    SELECT DISTINCT iso_code, subregion
+    FROM country_covid;
 """)
 
 conn2 = psycopg2.connect(dbname="testing")
@@ -105,52 +105,37 @@ curr2 = conn2.cursor()
 
 iso_codes = curr.fetchall()
 
-table = "future_globalcovid_masks_socialdistancing"
+table = "future_countrycovid_masks_socialdistancing"
 
 for row in iso_codes:
     iso = row[0]
-    population = row[1]
+    subregion = row[1]
     
     curr.execute(f"""
-    SELECT new_cases, new_deaths, total_vax, perc_vax
-    FROM global_covid
-    WHERE iso_code = '{iso}' and month <> '12-19';
+    SELECT new_cases, new_deaths, month
+    FROM country_covid
+    WHERE iso_code = '{iso}' and subregion = '{subregion}' and month <> '12-19'
+    ORDER BY split_part(month, '-', 2), split_part(month, '-', 1)
     """)
 
     past_data = curr.fetchall()
 
     cases_series = []
     deaths_series = []
-    vax_series = []
-    percvax_series = []
 
     for row in past_data:
         cases_series.append(row[0])
         deaths_series.append(row[1])
-        vax_series.append(row[2])
-        percvax_series.append(row[3])
 
     cases_predictions = createPredictions(cases_series, 0.81)
     deaths_predictions = createPredictions(deaths_series, 0.80)
-    percvax_predictions = logisticPredictions(percvax_series)
-    vax_predictions = []
-    for i in percvax_predictions:
-        vax_predictions.append(int(population*(i/100)))
-    
     
     for i, month in enumerate(future_dates):
 
-        # curr2.execute(
-        #     f"""
-        #     UPDATE {table}
-        #     SET new_cases = '{cases_predictions[i]}', new_deaths = '{deaths_predictions[i]}', total_vax = '{vax_predictions[i]}', perc_vax = '{percvax_predictions[i]}'
-        #     WHERE iso_code = '{iso}' and month = '{month}'
-        #     """
-        # )
         curr.execute(
             f"""
-            INSERT INTO {table} (new_cases, new_deaths, total_vax, perc_vax, month, iso_code)
-            VALUES ('{cases_predictions[i]}', '{deaths_predictions[i]}', '{vax_predictions[i]}', '{percvax_predictions[i]}', '{month}', '{iso}')
+            INSERT INTO {table} (new_cases, new_deaths, month, iso_code, subregion)
+            VALUES ('{cases_predictions[i]}', '{deaths_predictions[i]}', '{month}', '{iso}', '{subregion}')
             """
         )
 

@@ -1,6 +1,27 @@
 import json
 import psycopg2
 
+def getTable(event):
+    masks = False
+    lockdown = False
+    social_distancing = False
+    if 'masks' in event:
+        masks = event['masks']
+    if 'social_distancing' in event:
+        social_distancing = event['social_distancing']
+    if 'lockdown' in event:
+        lockdown = event['lockdown']
+    if lockdown:
+        return 'future_globalcovid_lockdown'
+    elif masks and social_distancing:
+        return 'future_globalcovid_masks_socialdistancing'
+    elif masks:
+        return 'future_globalcovid_masks'
+    elif social_distancing:
+        return 'future_globalcovid_socialdistancing'
+    else:
+        return 'future_globalcovid'
+
 def lambda_handler(event, context):
     db_host = "database-2.cjcukgskbtyu.ap-southeast-2.rds.amazonaws.com"
     db_user = "postgres"
@@ -17,12 +38,14 @@ def lambda_handler(event, context):
     )
     curr = conn.cursor()
 
-    query="""
+    table = getTable(event)
+
+    query=f"""
         select *
-        from future_globalcovid
+        from {table}
         order by iso_code
         """
-  
+
     curr.execute(query)
     query_objects = curr.fetchall()
     
