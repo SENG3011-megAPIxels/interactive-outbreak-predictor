@@ -28,7 +28,6 @@ function Country () {
   const CountryName = country.country.NAME;
   const last = CountryName.charAt(CountryName.length - 1);
     return (
-      // <Graph country={country.country.NAME}/>
       <Container>
         <Header>
           <LogoImage src={Logoimg}/>

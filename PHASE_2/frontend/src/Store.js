@@ -17,6 +17,7 @@ function Store ({ children }) {
   const [graph, setGraph] = React.useState("Disease");
   const [graphChoice, setGraphChoice] = React.useState('Cases');
   const [dark, setDark] = React.useState(false);
+  const [prediction, setPrediction] = React.useState({});
 
   const store = {
     // The page number
@@ -36,7 +37,9 @@ function Store ({ children }) {
     // The different version of each graph
     graphChoice: { graphChoice, setGraphChoice },
     // Is dark mode enabled
-    dark: { dark, setDark }
+    dark: { dark, setDark },
+    // Prediction options
+    prediction: { prediction, setPrediction },
   }
 
   return <StoreContext.Provider value={store}>{children}</StoreContext.Provider>

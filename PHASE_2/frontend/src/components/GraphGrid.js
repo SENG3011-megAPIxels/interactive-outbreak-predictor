@@ -21,35 +21,54 @@ ChartJS.register(
     Tooltip,
     Legend
 );
+ChartJS.defaults.font.size = 20;
 
 const lookup = require('country-code-lookup');
 const url = {
     'Disease': "https://p5t20q9fz6.execute-api.ap-southeast-2.amazonaws.com/ProMedApi/countrycovid?country=",
     'Unemployment': "https://p5t20q9fz6.execute-api.ap-southeast-2.amazonaws.com/ProMedApi/futureunemployment?country=",
     'Financial': {
-        'Stocks': "https://p5t20q9fz6.execute-api.ap-southeast-2.amazonaws.com/ProMedApi/stocks?country=",
-        'Exchange': "https://p5t20q9fz6.execute-api.ap-southeast-2.amazonaws.com/ProMedApi/exchrate?country="
+        'Stocks': "https://p5t20q9fz6.execute-api.ap-southeast-2.amazonaws.com/ProMedApi/futurestocks?country=",
+        'Exchange': "https://p5t20q9fz6.execute-api.ap-southeast-2.amazonaws.com/ProMedApi/futureexchangerates?country="
     },
-    'Real Estate': "https://p5t20q9fz6.execute-api.ap-southeast-2.amazonaws.com/ProMedApi/realestate?country=",
-    'Jobs': "https://p5t20q9fz6.execute-api.ap-southeast-2.amazonaws.com/ProMedApi/jobs?country="
+    'Real Estate': "https://p5t20q9fz6.execute-api.ap-southeast-2.amazonaws.com/ProMedApi/futurerealestate?country=",
+    'Jobs': "https://p5t20q9fz6.execute-api.ap-southeast-2.amazonaws.com/ProMedApi/futuresalaries?country="
 }
 
 
+
 function GraphGrid() {
-    const { graph, country, graphChoice } = React.useContext(StoreContext);
+    const { graph, country, graphChoice, prediction } = React.useContext(StoreContext);
 
     var cURL = url[graph.graph];
     switch (graph.graph) {
         case "Financial":
             if (graphChoice.graphChoice == "Exchange Rate")
-                return <Graph country={country.country.NAME} graphType={graph.graph} url={cURL.Exchange} param={'Exchange'}/>
+                return <Graph 
+                    country={country.country.NAME} 
+                    graphType={graph.graph} 
+                    url={cURL.Exchange} 
+                    param={'Exchange'}
+                />
             else
-                return <Graph country={country.country.NAME} graphType={graph.graph} url={cURL.Stocks} param={'Stock'}/>
+                return <Graph 
+                    country={country.country.NAME} 
+                    graphType={graph.graph}
+                    url={cURL.Stocks}
+                    param={'Stock'}
+                />
         case "Disease":
             if (graphChoice.graphChoice == "Deaths")
-                return <Graph country={country.country.NAME} graphType={graph.graph} url={cURL} param={'newDeaths'}/>
+                return <Graph 
+                    country={country.country.NAME} 
+                    graphType={graph.graph} 
+                    url={cURL} 
+                    param={'newDeaths'}
+                    prediction={prediction.prediction}
+                />
             else
-                return <Graph country={country.country.NAME} graphType={graph.graph} url={cURL} param={'newCases'}/>
+                return <Graph country={country.country.NAME} graphType={graph.graph} url={cURL} param={'newCases'}
+                prediction={prediction.prediction}/>
         case "Jobs":
             return <Graph country={country.country.NAME} graphType={graph.graph} url={cURL} param={graphChoice.graphChoice}/>
         default:
@@ -58,7 +77,6 @@ function GraphGrid() {
 }
 
 class Graph extends Component {
-
     constructor(props) {
         super(props)
         this.state = {
@@ -66,18 +84,17 @@ class Graph extends Component {
             graph: this.props.graphType,
             url: this.props.url,
             graphChoice: this.props.param,
+            yAxis: 'Case Count',
             data: {},
-            options: {
-                responsive: true,
-                maintainAspectRatio: false,
-                plugins: {
-                    legend: {
-                        position: 'bottom',
-                    },
-                },
-            }
         }
+        // this.setOptions();
     }
+
+    // setOptions() {
+    //     this.setState({
+            
+    //     })
+    // }
 
     // update data after loading is shown on screen
     componentDidMount() {
@@ -85,15 +102,38 @@ class Graph extends Component {
             gData => parseData(gData, this.state.graph, this.props.param).then(resp => {
                 this.setState({
                     data: resp,
+                    options: {
+                        responsive: true,
+                        maintainAspectRatio: false,
+                        plugins: {
+                            legend: {
+                                position: 'bottom',
+                            },
+                        },
+                        scales: {
+                            y: {
+                                title: {
+                                    display: false,
+                                    text: this.state.yAxis,
+                                },
+                            },
+                            x: {
+                                title: {
+                                    display: true,
+                                    text: 'Months',
+                                },
+                            }
+                        }     
+                    }
                 })
             })
         );
     }
-
+    
     // on state change - change data
     componentDidUpdate(prevProps) {
         if (prevProps !== this.props) {
-            getGraphData(this.state.country, this.props.url).then(
+            getGraphData(this.state.country, this.props.url, this.props.prediction).then(
                 gData => parseData(gData, this.props.graphType, this.props.param).then(resp => {
                     this.setState({
                         graph: this.props.graphType,
@@ -109,7 +149,7 @@ class Graph extends Component {
     render() {
         return (this.state.data && Object.keys(this.state.data).length == 0) ? (
             <div>
-                Loading...
+                No Data
             </div>
         ) : (
             <div style={{width: "80%", height: 0}}>
@@ -121,22 +161,34 @@ class Graph extends Component {
 
 // depending on the current clicked graph, get the
 // corresponding data from the api and parse it
-async function getGraphData(country, url) {
+async function getGraphData(country, url, prediction) {
     if (country == "United States of America")
         country = "United States"
     const countryISO = lookup.byCountry(country).iso3;
 
-    var cURL = url + countryISO;
     
-    let resp = await fetch(cURL);
-    let respJSON = await resp.json();
+    var cURL = url + countryISO;
+    if (prediction) {
+        console.log(url + "&")
+    }
+    
+    let resp;
+    let respJSON;
+    try {
+        resp = await fetch(cURL);
+        respJSON = await resp.json();
+    } catch (e) {
+        return {};
+    }
 
     return JSON.parse(respJSON.body);
-
 }
 
 // parse the data depending on the graphType
 async function parseData(data, graphType, param) {
+    if (Object.keys(data).length == 0)
+        return {};
+
     switch (graphType) {
         case "Disease":
             return parseCovidData(data, param);
@@ -161,6 +213,7 @@ async function parseData(data, graphType, param) {
 async function parseUnemployData(data) {
     // dates
     var labels = Object.keys(data);
+    labels.sort((a, b) => sortDates(a, b));
     var dataset = [];
     labels.forEach(date => {
         dataset.push(data[date]['percOfUnempl']);

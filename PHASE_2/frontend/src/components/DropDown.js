@@ -58,7 +58,6 @@ function GraphDropDown({ graphType }) {
       options = ["Stocks", "Exchange Rate"];
       break;
     default:
-      //TODO: add jobs
       options = [ "Accounting & Finance Jobs",
         "Teaching Jobs",
         "Domestic Help & Cleaning Jobs",
