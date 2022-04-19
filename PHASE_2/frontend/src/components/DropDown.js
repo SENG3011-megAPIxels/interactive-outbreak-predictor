@@ -29,7 +29,7 @@ const Dropdown = ({ label, value, options, onChange }) => {
   return (
     <label>
       {label}
-      <select value={value} onChange={onChange}>
+      <select value={value} onChange={onChange} className="Dropdown">
         {options.map((option) => (
           <option value={option}>{option}</option>
         ))}
@@ -77,12 +77,14 @@ function GraphDropDown({ graphType }) {
   }
 
   return (
-    <Dropdown 
-      label="Focus"
-      options={options}
-      value={alignment}
-      onChange={handleChange}
-    />
+    <div style={{"whiteSpace": "pre-wrap", marginTop: "10px"}}>
+      <Dropdown 
+        label={"Focus\n"}
+        options={options}
+        value={alignment}
+        onChange={handleChange}
+      />
+    </div>
   );
 }
 
@@ -99,15 +101,17 @@ function CountryDropDown({ graphType }) {
   }
 
   return (
-    <Dropdown
-      label="Detailed View"
-      options={[
-        "Country",
-        "Subregions",
-      ]}
-      value={alignment}
-      onChange={handleChange}
-    />
+    <div style={{"whiteSpace": "pre-wrap", marginTop: "10px"}}>
+      <Dropdown
+        label={"Detailed View\n"}
+        options={[
+          "Country",
+          "Subregions",
+        ]}
+        value={alignment}
+        onChange={handleChange}
+      />
+    </div>
   )
 }
 

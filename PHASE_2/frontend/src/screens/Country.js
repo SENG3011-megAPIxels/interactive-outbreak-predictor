@@ -2,7 +2,7 @@ import React from "react";
 import { StoreContext } from '../Store';
 import { LinkButton } from '../components/LinkButton';
 import { GraphGrid } from '../components/GraphGrid';
-import { Container, Header, Footer, CountryMain, LogoImage, GraphMain, GraphSelect, GraphOptionsMain } from '../components/StyledComponents'
+import { Container, Header, Footer, CountryMain, LogoImage, GraphOptionsMain } from '../components/StyledComponents'
 import { GraphSwap } from "../components/ButtonRow";
 import GraphOptions from "../components/GraphOptions";
 import Logoimg from "./logo.png";
@@ -38,10 +38,10 @@ function Country () {
         </Header>
         <CountryMain>
           <GraphSwap/>
-          <GraphGrid/>
-          <GraphOptionsMain>
-            <GraphOptions/>
-          </GraphOptionsMain>
+          <div style={{width: "90%", height: 0}}>
+            <GraphGrid/>
+          </div>
+          <GraphOptions/>
         </CountryMain>
         <Footer>
           &copy; megAPIxels 2022

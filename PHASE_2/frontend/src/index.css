@@ -43,3 +43,34 @@ svg {
   border: 1px solid white;
   background: white;
 }
+
+.Button {
+  background-color: darkblue;
+  color: white;
+  padding: 10px;
+  border-radius: 10px;
+  font-size: 20pt;
+  margin: 10px;
+  cursor: pointer;
+  width: 200px;
+  text-align: center;
+  border: 1px solid darkblue;
+  height: 60px;
+  align-items: center;
+  display: flex;
+  justify-content: center;
+}
+
+.Button:hover {
+  background-color: #ff3333;
+  color: white;
+}
+
+.Dropdown {
+  background-color: darkblue;
+  color: white;
+  border-radius: 10px;
+  font-size: 18px;
+  cursor: pointer;
+  border: 1px solid darkblue;
+}

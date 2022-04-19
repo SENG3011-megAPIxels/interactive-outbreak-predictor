@@ -161,7 +161,6 @@ const StyledSelect = styled(Select)`
   color: white !important;
 
 `
-
 const ButtonRow = styled.div`
   display: inline-block;
   width: 85%;
@@ -169,10 +168,15 @@ const ButtonRow = styled.div`
 
 const GraphOptionsMain = styled.div`
   display: flex;
-  object-fit:contain;
-  margin-left:29.5vw;
+  object-fit: contain;
+  margin-left: 77vw;
   flex-direction: column;
-  width: 10vw;
+  border-style: solid;
+  border-width: medium;
+  border-color: rgb(176,196,222);
+  border-radius: 10px;
+  padding: 10px;
+  background-color: rgb(176,196,222);
 `
 
 const GraphSingleOption = styled.div`
@@ -291,7 +295,7 @@ export { Container,
          Footer,
          MapMain,
          CountryMain,
-         MapContainer,
+         MapContainer,  
          StyledSlider,
          StyledSliderDark,
          ModalContainer,
