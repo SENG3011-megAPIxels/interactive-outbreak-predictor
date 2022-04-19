@@ -246,6 +246,8 @@ async function parseUnemployData(data) {
 }
 
 async function parseCountryCovidData(data, param, country) {
+    if (country == "United States of America")
+        country = "United States"
     const countryISO = lookup.byCountry(country).iso3;
     data = data[countryISO];
     var labels = Object.keys(data);

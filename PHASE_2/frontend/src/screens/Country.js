@@ -24,7 +24,7 @@ function EndsWith() {
 }
 
 function Country () {
-  const { page, modal, country, graph } = React.useContext(StoreContext);
+  const { page, modal, country, graph, diseaseView } = React.useContext(StoreContext);
   const CountryName = country.country.NAME;
   const last = CountryName.charAt(CountryName.length - 1);
     return (
@@ -34,7 +34,7 @@ function Country () {
           <div style={{display: 'flex'}}>
             {EndsWith()}&nbsp;{graph.graph} Graphs
           </div>
-          <LinkButton to={'./map'} onClick={() => {modal.setModal(2); page.setPage(0)}} value="Back"/>
+          <LinkButton to={'./map'} onClick={() => {modal.setModal(2); page.setPage(0); diseaseView.setDiseaseView('Country')}} value="Back"/>
         </Header>
         <CountryMain>
           <GraphSwap/>
