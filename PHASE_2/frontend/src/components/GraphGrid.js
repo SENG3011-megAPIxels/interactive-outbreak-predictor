@@ -163,8 +163,14 @@ class Graph extends Component {
 
     render() {
         return (this.state.data && Object.keys(this.state.data).length == 0) ? (
-            <div>
-                No Data
+            <div className='Container'>
+                <Line options={this.state.options} data={{
+                    labels: [],
+                    datasets: []
+                }} className='Graph'/>
+                <div className='Overlay'>
+                    No Data
+                </div>
             </div>
         ) : (
             <div style={{width: "80%", height: 0}}>
@@ -176,23 +182,26 @@ class Graph extends Component {
 
 
 function getAxis(resp) {
-  var label = resp.datasets[0].label;
-  console.log(resp);
-  if (label.includes("Case Count")) {
-    return "Cases";
-  } else if (label.includes("Death Count")) {
-    return "Deaths";
-  } else if (label.includes("Jobs")) {
-    return "Average Salary";
-  } else if (label.includes("Exchange rate")) {
-    return "Relative to USD";
-  } else if (label.includes("BHP") || label.includes("AAPL")) {
-    return "Stock Price";
-  } else if (label.includes("Unemployed")) {
-    return "Percentage";
-  } else {
-    return "House Price Index";
-  }
+    
+    if (Object.keys(resp) == 0)
+        return "";
+
+    var label = resp.datasets[0].label;
+    if (label.includes("Case Count")) {
+        return "Cases";
+    } else if (label.includes("Death Count")) {
+        return "Deaths";
+    } else if (label.includes("Jobs")) {
+        return "Average Salary";
+    } else if (label.includes("Exchange rate")) {
+        return "Relative to USD";
+    } else if (label.includes("BHP") || label.includes("AAPL")) {
+        return "Stock Price";
+    } else if (label.includes("Unemployed")) {
+        return "Percentage";
+    } else {
+        return "House Price Index";
+    }
 }
 
 // depending on the current clicked graph, get the
