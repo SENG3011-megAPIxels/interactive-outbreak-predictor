@@ -152,9 +152,9 @@ function Help () {
         2.3. The Predictions Page
           </HelpSubHeading>
         <HelpBody>
-        Once you click on “See Predictions” after selecting a country, you will be directed to the predictions page. 
-        Here, you will see a large graph containing information about that country’s disease case count, jobs market, stocks, unemployment rates and real estate. 
-        Each graph can be toggled using the toolbar just above the graph. 
+        Once you click on “See Predictions” after selecting a country, you will be directed to the predictions page.
+        Here, you will see a large graph containing information about that country’s disease case count, jobs market, stocks, unemployment rates and real estate.
+        Each graph can be toggled using the toolbar just above the graph.
         </HelpBody><br></br>
         <HelpBody>
         <HelpImg1 src={PredImg}/><br></br><br></br>
@@ -163,7 +163,7 @@ function Help () {
         Hovering over each point in the graph will quickly reveal the exact value of the plot for that month.
         </HelpBody><br></br>
         <HelpBody>
-        On the modal located on the right-hand side of the screen, you will be able to see different options that will change how the graph will behave going into the future months. 
+        On the modal located on the right-hand side of the screen, you will be able to see different options that will change how the graph will behave going into the future months.
         These options are different for each graph type.
         For example, in the disease graph, tick any of the checkboxes and click “Predict!” to see how the to discover how the graph is affected based on the selected factors.
         Below the predict button, you can select the focus of the data you would like to see, such as cases or deaths in disease graphs.
@@ -176,7 +176,7 @@ function Help () {
         <br></br>
           <HelpBody>
             As this is still a work in progress, there may be visual bugs and inconsistensies as well as unimplemented features throughout the application.
-            If you would like to report a bug, give us feedback, make a suggestion, comment or otherwise submit a general enquiry, please send an email to <strong><u>z5309373@ad.unsw.edu.au</u></strong> and we will reply as soon as we can.
+            If you would like to report a bug, give us feedback, make a suggestion, comment or otherwise submit a general enquiry, please send an email to <strong><u>megapixelsseng3011@gmail.com</u></strong> and we will reply as soon as we can.
             Remember, any feedback will help us understand what users would like the API to improve in any way and is thus greatly appreciated.
           </HelpBody>
           <br></br>
