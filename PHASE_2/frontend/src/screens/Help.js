@@ -39,23 +39,23 @@ function Help () {
              2.1 <Link to = '#2.1' style = {{color: "#888"}} smooth>
              <u> The Home Page</u><br></br>
                </Link>
+               <HelpBody>
+                 2.1.1 <Link to = '#2.1.1' style = {{color: "#888"}} smooth>
+                 <u> Using the Slider</u> <br></br>
+                 </Link>
+                 2.1.2 <Link to = '#2.1.2' style = {{color: "#888"}} smooth>
+                 <u> Interacting with the Heat Map</u> <br></br>
+                   </Link>
+                 2.1.3 <Link to = '#2.1.3' style = {{color: "#888"}} smooth>
+                 <u> Interacting with the Modal</u> <br></br>
+                   </Link>
+                 2.1.4 <Link to = '#2.1.4' style = {{color: "#888"}} smooth>
+                 <u> Using the Dropdown</u> <br></br>
+                   </Link>
+               </HelpBody>
               2.2 <Link to = '#2.2' style = {{color: "#888"}} smooth>
               <u> The Preferences Page</u> <br></br>
               </Link>
-              <HelpBody>
-                2.1.1 <Link to = '#2.1.1' style = {{color: "#888"}} smooth>
-                <u> Using the Slider</u> <br></br>
-                </Link>
-                2.1.2 <Link to = '#2.1.2' style = {{color: "#888"}} smooth>
-                <u> Interacting with the Heat Map</u> <br></br>
-                  </Link>
-                2.1.3 <Link to = '#2.1.3' style = {{color: "#888"}} smooth>
-                <u> Interacting with the Modal</u> <br></br>
-                  </Link>
-                2.1.4 <Link to = '#2.1.4' style = {{color: "#888"}} smooth>
-                <u> Using the Dropdown</u> <br></br>
-                  </Link>
-              </HelpBody>
               2.3 <Link to = '#2.3' style = {{color: "#888"}} smooth>
               <u>The Predictions Page</u> <br></br>
               </Link>

@@ -92,12 +92,14 @@ const ModalContainer = styled.div`
   flex: 1;
   align-items: center;
   justify-content: center;
-  min-width: 320px;
-  max-width: 320px;
+  min-width: 20vw;
+  max-width: 20vw;
   position: relative;
   right: 20vw;
-  bottom: 10vh;
+  bottom: -8vh;
   pointer-events: none;
+  min-height: 50vh;
+  max-height: 50vh;
 `
 
 const ModalContent = styled.div`
@@ -295,7 +297,7 @@ export { Container,
          Footer,
          MapMain,
          CountryMain,
-         MapContainer,  
+         MapContainer,
          StyledSlider,
          StyledSliderDark,
          ModalContainer,
