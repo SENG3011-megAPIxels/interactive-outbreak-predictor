@@ -43,7 +43,7 @@ function GraphDropDown({ graphType }) {
   const [alignment, setAlignment] = React.useState(graphChoice.graphChoice);
   if (!["Disease", "Financial", "Jobs"].includes(graphType))
     return null;
-  
+
   const handleChange = (event) => {
     setAlignment(event.target.value)
     graphChoice.setGraphChoice(event.target.value)
@@ -65,7 +65,7 @@ function GraphDropDown({ graphType }) {
         "Trade & Construction Jobs",
         "IT Jobs",
         "Social Work Jobs",
-        "Hospitality & Catering Jobs",
+        "Hopitality & Catering Jobs",
         "Travel Jobs",
         "Manufacturing Jobs",
         "Engineering Jobs",
@@ -78,7 +78,7 @@ function GraphDropDown({ graphType }) {
 
   return (
     <div style={{"whiteSpace": "pre-wrap", marginTop: "10px"}}>
-      <Dropdown 
+      <Dropdown
         label={"Focus\n"}
         options={options}
         value={alignment}
