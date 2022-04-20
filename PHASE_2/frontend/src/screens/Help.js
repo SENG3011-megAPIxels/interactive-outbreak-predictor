@@ -159,7 +159,7 @@ function Help () {
         <br></br>
           <HelpBody>
             As this is still a work in progress, there may be visual bugs and inconsistensies as well as unimplemented features throughout the application.
-            If you would like to report a bug, give us feedback, make a suggestion, comment or otherwise submit a general enquiry, please send an email to (SomeZiD@ad.unsw.edu.au) and we will reply as soon as we can.
+            If you would like to report a bug, give us feedback, make a suggestion, comment or otherwise submit a general enquiry, please send an email to megapixelsseng3011@gmail.com and we will reply as soon as we can.
             Remember, any feedback will help us understand what users would like the API to improve in any way and is thus greatly appreciated.
           </HelpBody>
           <br></br>
