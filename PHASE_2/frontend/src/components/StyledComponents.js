@@ -92,42 +92,43 @@ const ModalContainer = styled.div`
   flex: 1;
   align-items: center;
   justify-content: center;
-  min-width: 320px;
-  max-width: 320px;
+  min-width: 20vw;
+  max-width: 20vw;
   position: relative;
   right: 20vw;
-  bottom: 10vh;
+  top: 8vh;
   pointer-events: none;
+  min-height: 60vh;
+  max-height: 60vh;
 `
 
 const ModalContent = styled.div`
   background-color: lightsteelblue;
-  width: 150%;
   display: flex;
   align-items: center;
   flex-direction: column;
   border-radius: 10px;
-  margin-top: 100px;
   padding: 5px;
   text-align: left;
   pointer-events: all;
-  min-height: 550px;
-  justify-content: space-around;
+  min-height: 60vh;
+  max-height: 60vh;
+  justify-content: center;
+  font-size: 13pt;
 `
 
 const ModalContent2 = styled.div`
   background-color: lightsteelblue;
-  width: 150%;
   display: flex;
   align-items: center;
   flex-direction: column;
   border-radius: 10px;
-  margin-top: 100px;
   padding: 10px;
   text-align: center;
   pointer-events: all;
-  min-height: 500px;
-  justify-content: space-around;
+  min-height: 60vh;
+  max-height: 60vh;
+  justify-content: center;
 `
 
 const ModalButtons = styled.div`
@@ -295,7 +296,7 @@ export { Container,
          Footer,
          MapMain,
          CountryMain,
-         MapContainer,  
+         MapContainer,
          StyledSlider,
          StyledSliderDark,
          ModalContainer,
