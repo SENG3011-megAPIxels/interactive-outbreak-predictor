@@ -4,8 +4,9 @@ import { Container, Header, Footer, LogoImage, HelpHeading, HelpBody, HelpSubHea
 import { LinkButton } from "../components/LinkButton";
 import Logoimg from "./logo.png";
 import ABCD from "./ABCD.png"
+import PredImg from "./Predictions.png"
 import { Typography } from "@mui/material";
-import { HelpImg1, HelpGif1, HelpGif2, HelpGif3 } from "../components/StyledComponents";
+import { HelpImg1, HelpGif1, HelpGif2, HelpGif3, } from "../components/StyledComponents";
 import Gif1 from "./Gif1.gif"
 import Gif2 from "./Gif2.gif"
 import Gif3 from "./Gif3.gif"
@@ -125,7 +126,7 @@ function Help () {
         <HelpGif3 src={Gif3}/>
         <br></br>
         <br></br>
-        Here, you will be given the option to see the predictions page for the selected country. The predictions page will be covered in section bla.blah
+        Here, you will be given the option to see the predictions page for the selected country. The predictions page will be covered in section 2.3.
         You can also select 'Back' to go back to the main screen, where you can access this 'Help' page and the 'Preferences' page.
         <br></br>
         <br></br>
@@ -151,15 +152,31 @@ function Help () {
         2.3. The Predictions Page
           </HelpSubHeading>
         <HelpBody>
-        Add info here
-        </HelpBody>
+        Once you click on “See Predictions” after selecting a country, you will be directed to the predictions page. 
+        Here, you will see a large graph containing information about that country’s disease case count, jobs market, stocks, unemployment rates and real estate. 
+        Each graph can be toggled using the toolbar just above the graph. 
+        </HelpBody><br></br>
+        <HelpBody>
+        <HelpImg1 src={PredImg}/><br></br><br></br>
+        The horizontal axis of the graph is plotted with the month and year (mm-yy) in 2-monthly increments, while the vertical axis is plotted with the data relevant to the selected graph.
+        The last four increments of the horizonal axis displays potential future data for up to 8 months in advance.
+        Hovering over each point in the graph will quickly reveal the exact value of the plot for that month.
+        </HelpBody><br></br>
+        <HelpBody>
+        On the modal located on the right-hand side of the screen, you will be able to see different options that will change how the graph will behave going into the future months. 
+        These options are different for each graph type.
+        For example, in the disease graph, tick any of the checkboxes and click “Predict!” to see how the to discover how the graph is affected based on the selected factors.
+        Below the predict button, you can select the focus of the data you would like to see, such as cases or deaths in disease graphs.
+        You can also select if you would like to show information for the entire country in general, or for individual subregions of the selected country. For Australia, this would show data for each individual state.
+        To go back to the home page, click on the ‘Back’ button on the top right corner of the screen.
+        </HelpBody><br></br>
         <HelpHeading id = "3">
         3. Contact the developers
         </HelpHeading>
         <br></br>
           <HelpBody>
             As this is still a work in progress, there may be visual bugs and inconsistensies as well as unimplemented features throughout the application.
-            If you would like to report a bug, give us feedback, make a suggestion, comment or otherwise submit a general enquiry, please send an email to (SomeZiD@ad.unsw.edu.au) and we will reply as soon as we can.
+            If you would like to report a bug, give us feedback, make a suggestion, comment or otherwise submit a general enquiry, please send an email to <strong><u>z5309373@ad.unsw.edu.au</u></strong> and we will reply as soon as we can.
             Remember, any feedback will help us understand what users would like the API to improve in any way and is thus greatly appreciated.
           </HelpBody>
           <br></br>
