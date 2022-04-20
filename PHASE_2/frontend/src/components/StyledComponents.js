@@ -92,8 +92,8 @@ const ModalContainer = styled.div`
   flex: 1;
   align-items: center;
   justify-content: center;
-  min-width: 20vw;
-  max-width: 20vw;
+  min-width: 18vw;
+  max-width: 18vw;
   position: relative;
   right: 20vw;
   top: 8vh;
@@ -113,6 +113,8 @@ const ModalContent = styled.div`
   pointer-events: all;
   min-height: 60vh;
   max-height: 60vh;
+  min-width: 18vw;
+  max-width: 18vw;
   justify-content: center;
   font-size: 13pt;
 `
@@ -128,6 +130,8 @@ const ModalContent2 = styled.div`
   pointer-events: all;
   min-height: 60vh;
   max-height: 60vh;
+  min-width: 18vw;
+  max-width: 18vw;
   justify-content: center;
 `
 
