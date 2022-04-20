@@ -65,7 +65,7 @@ function GraphDropDown({ graphType }) {
         "Trade & Construction Jobs",
         "IT Jobs",
         "Social Work Jobs",
-        "Hopitality & Catering Jobs",
+        "Hospitality & Catering Jobs",
         "Travel Jobs",
         "Manufacturing Jobs",
         "Engineering Jobs",
