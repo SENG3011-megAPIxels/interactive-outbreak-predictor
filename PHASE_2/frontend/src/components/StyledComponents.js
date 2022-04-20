@@ -108,7 +108,7 @@ const ModalContent = styled.div`
   align-items: center;
   flex-direction: column;
   border-radius: 10px;
-  padding: 5px;
+  padding: 10px;
   text-align: left;
   pointer-events: all;
   min-height: 60vh;

@@ -47,15 +47,15 @@ function GraphGrid() {
     switch (graph.graph) {
         case "Financial":
             if (graphChoice.graphChoice == "Exchange Rate")
-                return <Graph 
-                    country={country.country.NAME} 
-                    graphType={graph.graph} 
-                    url={cURL.Exchange} 
+                return <Graph
+                    country={country.country.NAME}
+                    graphType={graph.graph}
+                    url={cURL.Exchange}
                     param={'Exchange'}
                 />
             else
-                return <Graph 
-                    country={country.country.NAME} 
+                return <Graph
+                    country={country.country.NAME}
                     graphType={graph.graph}
                     url={cURL.Stocks}
                     param={'Stock'}
@@ -66,10 +66,10 @@ function GraphGrid() {
             else
                 cURL = cURL.Subregions;
             if (graphChoice.graphChoice == "Deaths")
-                return <Graph 
-                    country={country.country.NAME} 
-                    graphType={graph.graph} 
-                    url={cURL} 
+                return <Graph
+                    country={country.country.NAME}
+                    graphType={graph.graph}
+                    url={cURL}
                     param={'newDeaths'}
                     prediction={prediction.prediction}
                 />
@@ -91,7 +91,6 @@ class Graph extends Component {
             graph: this.props.graphType,
             url: this.props.url,
             graphChoice: this.props.param,
-            yAxis: 'Case Count',
             data: {},
         }
     }
@@ -113,8 +112,8 @@ class Graph extends Component {
                         scales: {
                             y: {
                                 title: {
-                                    display: false,
-                                    text: this.state.yAxis,
+                                    display: true,
+                                    text: getAxis(resp),
                                 },
                             },
                             x: {
@@ -123,13 +122,13 @@ class Graph extends Component {
                                     text: 'Months',
                                 },
                             }
-                        }     
+                        }
                     }
                 })
             })
         );
     }
-    
+
     // on state change - change data
     componentDidUpdate(prevProps) {
         if (prevProps !== this.props) {
@@ -139,7 +138,23 @@ class Graph extends Component {
                         graph: this.props.graphType,
                         url: this.props.url,
                         graphChoice: this.props.param,
-                        data: resp
+                        data: resp,
+                        options: {
+                          scales: {
+                              y: {
+                                  title: {
+                                      display: true,
+                                      text: getAxis(resp),
+                                  },
+                              },
+                              x: {
+                                  title: {
+                                      display: true,
+                                      text: 'Months',
+                                  },
+                              }
+                          }
+                        }
                     })
                 })
             )
@@ -157,6 +172,27 @@ class Graph extends Component {
             </div>
         );
     }
+}
+
+
+function getAxis(resp) {
+  var label = resp.datasets[0].label;
+  console.log(resp);
+  if (label.includes("Case Count")) {
+    return "Cases";
+  } else if (label.includes("Death Count")) {
+    return "Deaths";
+  } else if (label.includes("Jobs")) {
+    return "Average Salary";
+  } else if (label.includes("Exchange rate")) {
+    return "Relative to USD";
+  } else if (label.includes("BHP") || label.includes("AAPL")) {
+    return "Stock Price";
+  } else if (label.includes("Unemployed")) {
+    return "Percentage";
+  } else {
+    return "House Price Index";
+  }
 }
 
 // depending on the current clicked graph, get the
@@ -182,7 +218,7 @@ async function getGraphData(country, url, prediction) {
             preStr = preStr.replace('&', '?');
         cURL += preStr;
     }
-    
+
     let resp;
     let respJSON;
     try {
@@ -210,15 +246,15 @@ async function parseData(data, graphType, param, country) {
         case "Financial":
             if (param == 'Stock')
                 return parseStockData(data);
-            else 
+            else
                 return parseExchData(data);
         case "Real Estate":
             return parseRealEstateData(data);
         case "Jobs":
-            return parseJobData(data, param);    
+            return parseJobData(data, param);
     }
     return parseUnemployData(data);
-} 
+}
 
 
 // parse the unemployment data received from the api
@@ -339,7 +375,7 @@ async function parseStockData(data) {
             companySet[company].push(data[date][company]);
         });
     });
-    
+
     var dataR = [];
     Object.keys(companySet).forEach(key => {
         var colour = poolColors(companySet[key].length)
@@ -398,9 +434,9 @@ async function parseJobData(data, param) {
 
     if (!jobs.includes(param))
         param = "Accounting & Finance Jobs";
-    
 
-    var specJobData = [];    
+
+    var specJobData = [];
     labels.forEach(date => {
         Object.keys(data[date]).forEach(jobName => {
             if (data[date][jobName]['jobTitle'] == param)
