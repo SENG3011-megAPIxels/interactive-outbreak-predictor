@@ -1,12 +1,53 @@
-CREATE TABLE unemployment
+CREATE TABLE articles
 (
-    country_code text,
-    month_year text,
-    unemployment_value float,
-    PRIMARY KEY (country_code, month_year)
+    article_id text,
+    url text not null,
+    title text not null,
+    article_date timestamp not null,
+    key_terms text[],
+    raw_text text not null,
+    PRIMARY KEY (article_id)
 );
 
-CREATE TABLE future_unemployment
+CREATE TABLE reports
+(
+    report_id int,
+    article_id text not null,
+    report jsonb not null,
+    location text[] not null,
+    PRIMARY KEY (report_id),
+    FOREIGN KEY (article_id) REFERENCES articles (article_id)
+);
+
+CREATE TABLE countries
+(
+    iso_code text,
+    population int,
+    PRIMARY KEY (iso_code)
+);
+
+CREATE TABLE country_covid
+(
+    iso_code text,
+    month text,
+    subregion text,
+    new_cases int,
+    new_deaths int,
+    PRIMARY KEY (iso_code, month, subregion)
+);
+
+CREATE TABLE global_covid
+(
+    iso_code text,
+    month text,
+    new_cases int,
+    new_deaths int,
+    total_vax int,
+    perc_vax float,
+    PRIMARY KEY (iso_code, month)
+);
+
+CREATE TABLE unemployment
 (
     country_code text,
     month_year text,
@@ -60,6 +101,9 @@ CREATE TABLE real_estate
     PRIMARY KEY (country_code, region, month_year)
 );
 
+CREATE TABLE future_globalcovid AS
+SELECT * FROM global_covid;
+
 CREATE TABLE future_globalcovid_masks AS
 SELECT * FROM global_covid;
 
@@ -87,6 +131,18 @@ SELECT * FROM country_covid;
 CREATE TABLE future_countrycovid_masks_socialdistancing AS
 SELECT * FROM country_covid;
 
+CREATE TABLE future_real_estate AS
+SELECT * FROM real_estate;
+
+CREATE TABLE future_salaries AS
+SELECT * FROM salaries;
+
+CREATE TABLE future_stocks AS
+SELECT * FROM stocks;
+
+CREATE TABLE future_unemployment AS
+SELECT * FROM unemployment;
+
 -- CREATE TABLE future_globalcovid_masks
 -- (
 --     iso_code text,
@@ -97,9 +153,3 @@ SELECT * FROM country_covid;
 --     perc_vax float,
 --     PRIMARY KEY (iso_code, month)
 -- );
-
-SELECT new_cases, new_deaths, month
-FROM country_covid
-WHERE iso_code = 'AUS' and subregion = 'Queensland' and month <> '12-19'
-ORDER BY split_part(month, '-', 2), split_part(month, '-', 1)
-;
