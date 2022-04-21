@@ -1,4 +1,10 @@
-# Accessing the API
+# Interactive Outbreak Predictor (IOP)
+
+IOP was created for the SENG3011: Software Engineering Workshop 3 in T1 2022 by Samuel Thorley (z5257239), Lachlan Fraser (z5258840), Rubin Roy (z5168911), Austin Walsh (z5311341), Humza Saeed (z5309373).
+
+The project consists of two phases. Phase 1 involved creating a scraper and API for [ProMed](https://promedmail.org). Phase 2 involved creating an application using our API from Phase 1. The API (including additions for Phase 2) can be found under the `./PHASE_1` subdirectory and the frontend code can be found under the `./PHASE_2` subdirectory. Submitted reports for the course can be found under the `./Reports` subdirectory.
+
+The application is a data analytic and machine learning tool that allows users to visualise global COVID-19 data as a global heatmap or a country/sub-region specific graph and predict case and death numbers for the future. The user can also choose to implement certain restrictions and see their effect on the COVID-19 predictions. Other data such as unemployment, exchange rates, average salary by industry, value of the top 10 stocks, house price index, and their preditions for the future are also included.
 
 ## Swagger
 
