@@ -1,6 +1,6 @@
 # Interactive Outbreak Predictor (IOP)
 
-IOP was created for the SENG3011: Software Engineering Workshop 3 in T1 2022 by team _MegAPIxels_: Samuel Thorley (z5257239), Lachlan Fraser (z5258840), Rubin Roy (z5168911), Austin Walsh (z5311341), Humza Saeed (z5309373).
+IOP was created for the _SENG3011: Software Engineering Workshop 3_ in T1 2022 by team _MegAPIxels_: Samuel Thorley (z5257239), Lachlan Fraser (z5258840), Rubin Roy (z5168911), Austin Walsh (z5311341), Humza Saeed (z5309373).
 
 The project consists of two phases. Phase 1 involved creating a scraper and API for [ProMed](https://promedmail.org). Phase 2 involved creating an application using our API from Phase 1. The API (including additions for Phase 2) can be found under the `./PHASE_1` subdirectory and the frontend code can be found under the `./PHASE_2` subdirectory. Submitted reports for the course can be found under the `./Reports` subdirectory. Note the _Final Report_ contains updated versions of _Design Details_ and _Management Information_.
 
