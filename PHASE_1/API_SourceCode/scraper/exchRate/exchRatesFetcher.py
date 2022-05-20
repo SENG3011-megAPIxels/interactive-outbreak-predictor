@@ -1,7 +1,7 @@
 import requests
 import psycopg2
 
-access_key = 'b070df542265127d4c781478837a5cfe'
+access_key = 'REDACTED'
 
 # conn = psycopg2.connect(dbname="testing")
 
